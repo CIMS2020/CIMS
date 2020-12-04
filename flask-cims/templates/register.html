@@ -1,19 +1,16 @@
 {% extends "layout.html" %}
-{% import 'bootstrap/wtf.html' as wtf %}
-
 {% block content %}
 
 <div class="page-header">
     <h1>用户注册</h1>
 </div>
 
-<form class="form" method="POST">
-    {{ form.csrf_token }}
-    <p>{{ wtf.form_field(form.id) }}</p>
-    <p>{{ wtf.form_field(form.name) }}</p>
-    <p>{{ wtf.form_field(form.password) }}</p>
-    <p>{{ wtf.form_field(form.password2) }}</p>
-    <p>{{ wtf.form_field(form.register) }}</p>
-</form>
+     <form action="/cgi-bin/forms.py" method="get">
+         ID: <input type="text" name="user_name"></br>
+         姓名: <input type="text" name="user_age"></br>
+         密码: <input type="text" name="user_id"></br>
+         确认密码: <input type="text" name="user_tel"></br>
+         <input type="submit" value="确认">
+     </form>
 
 {% endblock %}

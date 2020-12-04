@@ -1,18 +1,34 @@
+
 {% extends "layout.html" %}
-{% import 'bootstrap/wtf.html' as wtf %}
 
 {% block content %}
 
-<div class="page-header">
-    <h1>用户登录</h1>
+   <div >
+                    <div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span12">
+			<form class="form-horizontal">
+				<div class="control-group">
+					 <label class="control-label" for="inputEmail">账号</label>
+					<div class="controls">
+						<input id="inputcount" type="text" name="inputcount"/>
+					</div>
+				</div>
+				<div class="control-group">
+					 <label class="control-label" for="inputPassword">密码</label>
+					<div class="controls">
+						<input id="inputPassword" type="password" name="inputPassword"/>
+					</div>
+				</div>
+				<div class="control-group">
+					<div class="controls">
+						 <label class="checkbox"><input type="checkbox" /> 记住我</label> <button type="submit" class="btn">登陆</button>
+                            <h><a class="btn btn-default" href="{{ url_for('register') }}">快速注册</a></h>
+                    </div>
+				</div>
+			</form>
+		</div>
+	</div>
 </div>
-
-<form class="form" method="POST">
-    {{ form.csrf_token }}
-    <p>{{ wtf.form_field(form.id) }}</p>
-    <p>{{ wtf.form_field(form.password) }}</p>
-    <p>{{ wtf.form_field(form.login) }}</p>
-</form>
-
-<h><a class="btn btn-default" href="{{ url_for('register') }}">快速注册</a></h>
+             </div>
 {% endblock %}

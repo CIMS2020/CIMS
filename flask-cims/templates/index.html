@@ -10,20 +10,22 @@
 var s= 2*2;
 </script>
 <div class="row">
+ <div class="col-md-4">
+        <h2>食堂管理</h2>
+        <p>模拟食堂管理员的各种业务</p>
+        <p><a class="btn btn-default" href=" {{ url_for('canteen') }}">前往 &raquo;</a></p>
+    </div>
+
     <div class="col-md-4">
-        <h2>消费者模拟</h2>
+        <h2>消费模拟</h2>
         <p>
             模拟食堂消费者的各种业务<span id="s"></span>
         </p>
         <p><a class="btn btn-default" href="{{ url_for('comsumers') }}">前往 &raquo;</a></p>
     </div>
+
     <div class="col-md-4">
-        <h2>食堂管理员</h2>
-        <p>模拟食堂管理员的各种业务</p>
-        <p><a class="btn btn-default" href=" {{ url_for('canteen') }}">前往 &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>店铺管理管理</h2>
+        <h2>店铺模拟</h2>
         <p>模拟店铺管理员的各种业务</p>
         <p><a class="btn btn-default" href="{{ url_for('shop') }}">前往&raquo;</a></p>
     </div>

@@ -38,17 +38,17 @@
                     <div class="container-fluid">
 	<div class="row-fluid">
 		<div class="span12">
-			<form class="form-horizontal">
+			<form class="form-horizontal" method="post">
 				<div class="control-group">
-					 <label class="control-label">账号</label>
+					 <label class="control-label">ID</label>
 					<div class="controls">
-						<input id="inputcount" type="text" name="inputcount"/>
+						<input type="text" name="userid" placeholder="请输入用户ID"><br/>
 					</div>
 				</div>
 				<div class="control-group">
 					 <label class="control-label" >密码</label>
 					<div class="controls">
-						<input id="inputPassword" type="password" name="inputPassword"/>
+						<input type="password" name="password" placeholder="请输入密码"><br/>
 					</div>
 				</div>
 				<div class="control-group">
@@ -63,15 +63,6 @@
 </div>
              </div>
 <div>
-
-<form method="post">
-    <label>用户名：</label><input type="text" name="username" placeholder="请输入用户名"><br/>
-    <label>密码：</label><input type="password" name="password" placeholder="请输入密码"><br/>
-    <label>确认密码：</label><input type="password" name="password2" placeholder="请输入确认密码"><br/>
-    <input type="submit" value="注册">
-</form>
-
-
 
 </div>
 {% endblock %}

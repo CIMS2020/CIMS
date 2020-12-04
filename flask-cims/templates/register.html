@@ -5,12 +5,11 @@
     <h1>用户注册</h1>
 </div>
 
-     <form action="/cgi-bin/forms.py" method="get">
-         ID: <input type="text" name="user_name"></br>
-         姓名: <input type="text" name="user_age"></br>
-         密码: <input type="text" name="user_id"></br>
-         确认密码: <input type="text" name="user_tel"></br>
-         <input type="submit" value="确认">
-     </form>
-
+<form method="post">
+    <label>ID：</label><input type="text" name="userid" placeholder="请输入用户名"><br/>
+    <label>用户名：</label><input type="text" name="username" placeholder="请输入用户名"><br/>
+    <label>密码：</label><input type="password" name="password" placeholder="请输入密码"><br/>
+    <label>确认密码：</label><input type="password" name="password2" placeholder="请输入确认密码"><br/>
+    <input type="submit" value="注册">
+</form>
 {% endblock %}

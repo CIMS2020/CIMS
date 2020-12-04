@@ -49,15 +49,22 @@ def about():
     )
 #add
 
-@app.route('/register')
+
+
+@app.route('/register', methods=["get", "post"])
 def register():
-    """Renders the about page."""
-    return render_template(
-        'register.html',
-        title='Register',
-        year=datetime.now().year,
-        message='Your application description page.'
-    )
+    if request.method == "POST":
+        # 取到表单中提交上来的三个参数
+        userid= request.form.get("userid")
+        username = request.form.get("username")
+        password = request.form.get("password")
+        password2 = request.form.get("password2")
+
+        print(userid,username, password, password2)
+
+    return render_template('register.html')
+
+
 @app.route('/canteen')
 def canteen():
     """Renders the canteen page."""
@@ -83,6 +90,7 @@ def comsumers():
 def login():
     if request.method == "POST":
         # 取到表单中提交上来的三个参数
+        userid= request.form.get("userid")
         username = request.form.get("username")
         password = request.form.get("password")
         password2 = request.form.get("password2")
@@ -93,7 +101,7 @@ def login():
             flash("两次密码不一致")
         else:
             # 假装做注册操作
-            print(username, password, password2)
+            print(userid,username, password, password2)
 
     return render_template('login.html')
     #10*2 选择题

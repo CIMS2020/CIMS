@@ -1,10 +1,222 @@
+<!--
+
+<h2>店铺拥有者</h2>
+<h3>业务操作</h3>
+
+<h>
+    1.流水查询
+    2.向仓库拿菜
+    3.添加菜
+    4.员工管理
+
+</h>
+
+//-->
 {% extends "layout.html" %}
 
 {% block content %}
 
-<h2>{{ title }}.</h2>
-<h3>{{ message }}</h3>
+    <style>
+        .nssb {
+            top: 10%;
+            z-index: 9999;
+            position: fixed;
+            left: 10px;
+        }
+        /*表*/
+        ul.nav-tabs {
+            width: 110px;
+            margin-top: 20px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.067);
+        }
 
-<p>Use this area to provide additional information.</p>
+            ul.nav-tabs li {
+                margin: 0;
+                border-top: 1px solid #ddd;
+            }
+
+                ul.nav-tabs li:first-child {
+                    border-top: none;
+                }
+
+                ul.nav-tabs li a {
+                    margin: 0;
+                    padding: 8px 16px;
+                    border-radius: 0;
+                }
+
+                ul.nav-tabs li.active a, ul.nav-tabs li.active a:hover {
+                    color: #fff;
+                    background: #0088cc;
+                    border: 1px solid #0088cc;
+                }
+
+                ul.nav-tabs li:first-child a {
+                    border-radius: 4px 4px 0 0;
+                }
+
+                ul.nav-tabs li:last-child a {
+                    border-radius: 0 0 4px 4px;
+                }
+
+            ul.nav-tabs.affix {
+                top: 10%; /* Set the top position of pinned element */
+
+            }
+    </style>
+<script>
+            function ck1(){
+                div1.style.display = "block";
+                div2.style.display = "none";
+                div3.style.display = "none";
+                 div4.style.display = "none";
+                li1.style.backgroundColor="#87CEFF";
+                li2.style.backgroundColor="azure";
+                li3.style.backgroundColor="azure";
+                li4.style.backgroundColor="azure";
+            }
+             function ck2(){
+                div1.style.display = "none";
+                div2.style.display = "block";
+                div3.style.display = "none";
+                div4.style.display = "none";
+                li1.style.backgroundColor="azure";
+                li2.style.backgroundColor="#87CEFF";
+                li3.style.backgroundColor="azure";
+                 li4.style.backgroundColor="azure";
+            }
+             function ck3(){
+                div1.style.display = "none";
+                div2.style.display = "none";
+                div3.style.display = "block";
+                div4.style.display = "none";
+                li1.style.backgroundColor="azure";
+                li2.style.backgroundColor="azure";
+                li3.style.backgroundColor="#87CEFF";
+                 li4.style.backgroundColor="azure";
+            }
+            function ck4(){
+                div1.style.display = "none";
+                div2.style.display = "none";
+                div4.style.display = "block";
+                div3.style.display = "none";
+                li1.style.backgroundColor="azure";
+                li2.style.backgroundColor="azure";
+                li4.style.backgroundColor="#87CEFF";
+                 li3.style.backgroundColor="azure";
+            }
+
+</script>
+    <div>
+            <div class="nssb" >
+                <br />
+                <br />
+                <br />
+                <ul class="nav nav-tabs nav-stacked"  >
+                    <li id="li2" style="background-color: azure"><a onclick="ck2()">流水查询</a></li>
+                    <li id="li3" style="background-color: azure"><a onclick="ck3()">员工管理</a></li>
+                     <li id="li4" style="background-color: azure"><a onclick="ck4()">上菜</a></li>
+                </ul>
+            </div>
+
+    </div>
+    <div id="div1" style="display: none">
+    </div>
+     <div id="div2" style="display: block">
+            <div >
+                 <form action="demo-form.php" novalidate>
+                   SID: <input type="number" name="user_email">
+                    <input type="submit" value="确定">
+                </form>
+                <h2>每日流水查询</h2>
+                 <div>
+                     <form action="demo-form.php" novalidate>选择日期: <input type="date" name="user_cho2">
+                        <input type="submit" value="确定">
+                     </form>
+                     <div>
+                         <ul>
+                             <li>流水记录1</li>
+                              <li>流水记录1</li>
+                              <li>流水记录1</li>
+                              <li>流水记录1</li>
+                              <li>流水记录1</li>
+                              <li>流水记录1</li>
+                         </ul>
+                     </div>
+                </div>
+             </div>
+    </div>
+     <div id="div3" style="display: none">
+            <div>
+                 <form action="demo-form.php" novalidate>
+                    SID: <input type="number" name="user_email">
+                    <input type="submit" value="确定">
+                </form>
+                <h2>添加员工</h2>
+                 <form action="demo-form.php" novalidate>
+                     员工姓名: <input type="text" name="user_cho1"></br>
+                     员工工号: <input type="text" name="user_cho2"></br>
+                     员工工资: <input type="text" name="user_cho3"></br>
+                     员工手机: <input type="text" name="user_cho4"></br>
+                     <input type="submit" value="确定">
+                 </form>
+            </div>
+         <div>
+                <h2>员工查询</h2>
+                 <form action="demo-form.php" novalidate>
+                     员工工号: <input type="text" name="user_cho2"></br>
+                     <input type="submit" value="查询">
+                 </form>
+                <div>
+                    <h3>查询结果</h3>
+                    <p>员工信息:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
+                </div>
+            </div>
+            <div>
+                <h2>删除员工</h2>
+                 <form action="demo-form.php" novalidate>
+                     员工工号: <input type="text" name="user_cho2"></br>
+                     <input type="submit" value="删除">
+                 </form>
+            </div>
+     <div>
+                <h2>修改员工信息</h2>
+                 <form action="demo-form.php" novalidate>
+                     被修改员工工号: <input type="text" name="user_cho2"></br>
+                     员工姓名: <input type="text" name="user_cho1"></br>
+                     员工工资: <input type="text" name="user_cho3"></br>
+                     员工手机: <input type="text" name="user_cho4"></br>
+                     <input type="submit" value="修改">
+                 </form>
+            </div>
+    </div>
+    <div id="div4" style="display: none">
+        <div>
+             <form action="demo-form.php" novalidate>
+                    SID: <input type="number" name="user_email">
+                    <input type="submit" value="确定">
+                </form>
+            <h2>上菜</h2>
+            <form action="demo-form.php" novalidate>
+                     菜名: <input type="text" name="user_cho2"></br>
+                     价格: <input type="text" name="user_cho1"></br>
+                    菜ID: <input type="text" name="user_cho3"></br>
+                     <input type="submit" value="确定">
+            </form>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
 
 {% endblock %}
+

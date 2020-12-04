@@ -207,12 +207,12 @@
         <div>
             <h1>创建消费者</h1>
                <div>
-                     <form action="demo-form.php" novalidate>
-                         姓名: <input type="text" name="user_cho1"></br>
-                         年龄: <input type="text" name="user_cho2"></br>
-                         UID: <input type="text" name="user_cho3"></br>
-                         手机号: <input type="text" name="user_cho4"></br>
-                         余额: <input type="text" name="user_cho5"></br>
+                     <form action="/cgi-bin/forms.py" method="get">
+                         姓名: <input type="text" name="user_name"></br>
+                         年龄: <input type="text" name="user_age"></br>
+                         UID: <input type="text" name="user_id"></br>
+                         手机号: <input type="text" name="user_tel"></br>
+                         余额: <input type="text" name="user_money"></br>
                           <input type="submit" value="添加">
                      </form>
                 </div>
@@ -222,7 +222,7 @@
             <div>
             <h1>查询消费者</h1>
                <div>
-                     <form action="demo-form.php" novalidate>
+                     <form action="forms.py" novalidate>
                          UID: <input type="text" name="user_cho3"></br>
                           <input type="submit" value="查询">
                      </form>

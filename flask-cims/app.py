@@ -8,7 +8,7 @@ import time
 import json
 from datetime import datetime , date , timedelta
 from flask import render_template,request,redirect,url_for,flash,session,jsonify,send_from_directory
-
+import datatype
 import  forms
 import requests
 import base64
@@ -59,8 +59,19 @@ def register():
         username = request.form.get("username")
         password = request.form.get("password")
         password2 = request.form.get("password2")
-
-        print(userid,username, password, password2)
+        if not all([username, password, password2]):
+            # 向前端界面弹出一条提示(闪现消息)
+            print("参数不足")
+            # flash("参数不足")
+        elif password != password2:
+            print("两次密码不一致")
+            # flash("两次密码不一致")
+        else:
+            # 假装做注册操作
+            # flash("注册成功！")
+            print("注册成功！")
+            print(userid,username, password, password2)
+        # print(userid,username, password, password2)
 
     return render_template('register.html')
 
@@ -96,13 +107,16 @@ def login():
         password2 = request.form.get("password2")
         if not all([username, password, password2]):
             # 向前端界面弹出一条提示(闪现消息)
-            flash("参数不足")
+            print("参数不足")
+            # flash("参数不足")
         elif password != password2:
-            flash("两次密码不一致")
+            print("两次密码不一致")
+            # flash("两次密码不一致")
         else:
             # 假装做注册操作
+            #flash("注册成功！")
+            print("注册成功！")
             print(userid,username, password, password2)
-
     return render_template('login.html')
     #10*2 选择题
 #名词解释 3*4题

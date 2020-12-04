@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, request
 from flask_sqlalchemy import SQLAlchemy
 import webbrowser
+
 from sqlalchemy.sql import func
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mssql+pyodbc://sa:asd@test'#(替换成自己的用户名，密码和dsn）
@@ -45,7 +46,7 @@ def add_data():
     return jsonify({'message': output})
 @app.route('/delete_data')
 def delete_data():
-    b = testflask.query.get(5)
+    b = testflask.query.get(1)
     db.session.delete(b)
     db.session.commit()
     myData = testflask.query.all()

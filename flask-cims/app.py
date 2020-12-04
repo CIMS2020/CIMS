@@ -1,7 +1,18 @@
 import webbrowser
 from datetime import datetime
 
-from flask import Flask, render_template
+from flask import Flask, render_template, request
+from flask_bootstrap import forms
+from wtforms import ValidationError
+import time
+import json
+from datetime import datetime , date , timedelta
+from flask import render_template,request,redirect,url_for,flash,session,jsonify,send_from_directory
+
+import  forms
+import requests
+import base64
+
 
 app = Flask(__name__)
 
@@ -26,6 +37,7 @@ def contact():
         message='Your contact page.'
     )
 
+
 @app.route('/about')
 def about():
     """Renders the about page."""
@@ -36,6 +48,16 @@ def about():
         message='Your application description page.'
     )
 #add
+
+@app.route('/register')
+def register():
+    """Renders the about page."""
+    return render_template(
+        'register.html',
+        title='Register',
+        year=datetime.now().year,
+        message='Your application description page.'
+    )
 @app.route('/canteen')
 def canteen():
     """Renders the canteen page."""
@@ -56,16 +78,25 @@ def comsumers():
         message='Your application description page.'
     )
 
-@app.route('/login')
+
+@app.route('/login', methods=["get", "post"])
 def login():
-    """Renders the login page."""
-    return render_template(
-        'login.html',
-        title='Login',
-        year=datetime.now().year,
-        message='Your application description page.'
-    )
-#10*2 选择题
+    if request.method == "POST":
+        # 取到表单中提交上来的三个参数
+        username = request.form.get("username")
+        password = request.form.get("password")
+        password2 = request.form.get("password2")
+        if not all([username, password, password2]):
+            # 向前端界面弹出一条提示(闪现消息)
+            flash("参数不足")
+        elif password != password2:
+            flash("两次密码不一致")
+        else:
+            # 假装做注册操作
+            print(username, password, password2)
+
+    return render_template('login.html')
+    #10*2 选择题
 #名词解释 3*4题
 #简答 7 30分
 #分析设计4 38分
@@ -86,6 +117,10 @@ def shop():
         year=datetime.now().year,
         message='Your application description page.'
     )
+
+
+
+
 
 if __name__ == '__main__':
     url = "http://127.0.0.1:5000"

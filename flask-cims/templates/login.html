@@ -2,6 +2,37 @@
 {% extends "layout.html" %}
 
 {% block content %}
+    <head>
+     <script src="static/scripts/jquery.js"></script>
+        <script src="static/scripts/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript" src="static/scripts/china.js"></script>
+    <script src="static/scripts/world.js"></script>
+
+    <script src="static/scripts/jquery.js"></script>
+
+    <script type="text/javascript" src="static/scripts/map/bootstrap.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+     <script type="text/javascript">
+    var data={
+        usr: $("#inputcount").val()
+        }
+    $.ajax=({
+        url:'/login',
+        data:data,
+        type:'post',
+        datatype:'json',
+        success :function(result) //如果/route路由对应的函数有返回值的话
+        {
+            alert(result)
+        },
+        eorr : function(result)
+        {
+            alert('eorr')
+        }
+    })
+    </script>
+    </head>
 
    <div >
                     <div class="container-fluid">
@@ -9,20 +40,20 @@
 		<div class="span12">
 			<form class="form-horizontal">
 				<div class="control-group">
-					 <label class="control-label" for="inputEmail">账号</label>
+					 <label class="control-label">账号</label>
 					<div class="controls">
 						<input id="inputcount" type="text" name="inputcount"/>
 					</div>
 				</div>
 				<div class="control-group">
-					 <label class="control-label" for="inputPassword">密码</label>
+					 <label class="control-label" >密码</label>
 					<div class="controls">
 						<input id="inputPassword" type="password" name="inputPassword"/>
 					</div>
 				</div>
 				<div class="control-group">
 					<div class="controls">
-						 <label class="checkbox"><input type="checkbox" /> 记住我</label> <button type="submit" class="btn">登陆</button>
+						<button type="submit" class="btn">登陆</button>
                             <h><a class="btn btn-default" href="{{ url_for('register') }}">快速注册</a></h>
                     </div>
 				</div>
@@ -31,4 +62,16 @@
 	</div>
 </div>
              </div>
+<div>
+
+<form method="post">
+    <label>用户名：</label><input type="text" name="username" placeholder="请输入用户名"><br/>
+    <label>密码：</label><input type="password" name="password" placeholder="请输入密码"><br/>
+    <label>确认密码：</label><input type="password" name="password2" placeholder="请输入确认密码"><br/>
+    <input type="submit" value="注册">
+</form>
+
+
+
+</div>
 {% endblock %}

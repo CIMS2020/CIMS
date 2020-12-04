@@ -115,6 +115,7 @@
                 <br />
                 <br />
                 <ul class="nav nav-tabs nav-stacked"  >
+                     <li id="li1" style="background-color: #87CEFF"><a onclick="ck1()">店铺登录</a></li>
                     <li id="li2" style="background-color: azure"><a onclick="ck2()">流水查询</a></li>
                     <li id="li3" style="background-color: azure"><a onclick="ck3()">员工管理</a></li>
                      <li id="li4" style="background-color: azure"><a onclick="ck4()">上菜</a></li>
@@ -122,17 +123,20 @@
             </div>
 
     </div>
-    <div id="div1" style="display: none">
+    <div id="div1" style="display: block">
+            <div>
+                 <form method="post">
+                         SID: <input type="text" name="shopid"></br>
+                        <input type="submit" value="确定">
+                 </form>
+            </div>
     </div>
-     <div id="div2" style="display: block">
+     <div id="div2" style="display: none">
             <div >
-                 <form action="demo-form.php" novalidate>
-                   SID: <input type="number" name="user_email">
-                    <input type="submit" value="确定">
-                </form>
                 <h2>每日流水查询</h2>
                  <div>
-                     <form action="demo-form.php" novalidate>选择日期: <input type="date" name="user_cho2">
+                    <form method="post">
+                         选择日期: <input type="date" name="date">
                         <input type="submit" value="确定">
                      </form>
                      <div>
@@ -150,62 +154,62 @@
     </div>
      <div id="div3" style="display: none">
             <div>
-                 <form action="demo-form.php" novalidate>
-                    SID: <input type="number" name="user_email">
-                    <input type="submit" value="确定">
-                </form>
                 <h2>添加员工</h2>
-                 <form action="demo-form.php" novalidate>
-                     员工姓名: <input type="text" name="user_cho1"></br>
-                     员工工号: <input type="text" name="user_cho2"></br>
-                     员工工资: <input type="text" name="user_cho3"></br>
-                     员工手机: <input type="text" name="user_cho4"></br>
+                 <form method="post">
+                     SID: <input type="text" name="shopid"></br></br>
+                     员工姓名: <input type="text" name="workname"></br>
+                     员工工号: <input type="text" name="workid"></br>
+                     员工工资: <input type="text" name="worksla"></br>
+                     员工手机: <input type="text" name="worktel"></br>
                      <input type="submit" value="确定">
                  </form>
             </div>
-         <div>
+             <div>
                 <h2>员工查询</h2>
-                 <form action="demo-form.php" novalidate>
-                     员工工号: <input type="text" name="user_cho2"></br>
+                 <form method="post">
+                     员工工号: <input type="text" name="workid"></br>
                      <input type="submit" value="查询">
                  </form>
                 <div>
                     <h3>查询结果</h3>
                     <p>员工信息:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
                 </div>
-            </div>
+             </div>
             <div>
                 <h2>删除员工</h2>
-                 <form action="demo-form.php" novalidate>
-                     员工工号: <input type="text" name="user_cho2"></br>
+                 <form method="post">
+                     员工工号: <input type="text" name="workid"></br>
                      <input type="submit" value="删除">
                  </form>
             </div>
-     <div>
+             <div>
                 <h2>修改员工信息</h2>
-                 <form action="demo-form.php" novalidate>
-                     被修改员工工号: <input type="text" name="user_cho2"></br>
-                     员工姓名: <input type="text" name="user_cho1"></br>
-                     员工工资: <input type="text" name="user_cho3"></br>
-                     员工手机: <input type="text" name="user_cho4"></br>
+                 <form method="post">
+                     被修改员工工号: <input type="text" name="workid"></br>
+                     员工姓名: <input type="text" name="workname"></br>
+                     员工工资: <input type="text" name="worksal"></br>
+                     员工手机: <input type="text" name="worltel"></br>
                      <input type="submit" value="修改">
                  </form>
             </div>
     </div>
     <div id="div4" style="display: none">
         <div>
-             <form action="demo-form.php" novalidate>
-                    SID: <input type="number" name="user_email">
-                    <input type="submit" value="确定">
-                </form>
             <h2>上菜</h2>
-            <form action="demo-form.php" novalidate>
-                     菜名: <input type="text" name="user_cho2"></br>
-                     价格: <input type="text" name="user_cho1"></br>
-                    菜ID: <input type="text" name="user_cho3"></br>
+            <form method="post">
+                     菜名: <input type="text" name="foodname"></br>
+                     价格: <input type="text" name="foodprice"></br>
+                     菜ID: <input type="text" name="foodid"></br>
                      <input type="submit" value="确定">
             </form>
         </div>
+    <div>
+        <h2>看菜</h2>
+         <form method="post">
+                     店名: <input type="text" name="shopname"></br>
+                     <input type="submit" value="确定">
+         </form>
+    </div>
     </div>
 
 

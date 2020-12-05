@@ -5,8 +5,8 @@ import webbrowser
 from sqlalchemy.sql import func
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mssql+pyodbc://sa:asd@test'#(替换成自己的用户名，密码和dsn）
-
 db = SQLAlchemy(app)
+
 class testflask(db.Model):  #创建model，对应数据库中的表
     PersonID = db.Column(db.Integer, primary_key=True,autoincrement=True)
     LastName = db.Column(db.String(255))
@@ -61,7 +61,7 @@ def delete_data():
         output.append(r_data)
     return jsonify({'message': output})
 if __name__ == '__main__':
-    # db.create_all()
+    db.create_all()
     url = "http://127.0.0.1:5000"
     webbrowser.open_new(url)
     app.run(debug=True)

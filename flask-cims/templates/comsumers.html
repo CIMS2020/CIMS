@@ -74,18 +74,17 @@
             function ck1(){
                 div1.style.display = "block";
                 div2.style.display = "none";
-                div3.style.display = "none";
                 li1.style.backgroundColor="#87CEFF";
                 li2.style.backgroundColor="azure";
-                li3.style.backgroundColor="azure";
+
             }
              function ck2(){
                 div1.style.display = "none";
                 div2.style.display = "block";
-                div3.style.display = "none";
+
                 li1.style.backgroundColor="azure";
                 li2.style.backgroundColor="#87CEFF";
-                li3.style.backgroundColor="azure";
+
             }
              function ck3(){
                 div1.style.display = "none";
@@ -105,114 +104,28 @@
                 <ul class="nav nav-tabs nav-stacked"  >
                     <li id="li1" style="background-color: #87CEFF"><a onclick="ck1()">充值</a></li>
                     <li id="li2" style="background-color: azure"><a onclick="ck2()">消费模拟</a></li>
-                    <li id="li3" style="background-color: azure"><a onclick="ck3()">消费查询</a></li>
                 </ul>
             </div>
 
     </div>
+   <body>
     <div id="div1" style="display: block">
            <div>
-                <form action="demo-form.php" novalidate>
-                    UID: <input type="number" name="user_email">
-                    <input type="submit" value="确定">
-                </form>
                <h2>充值</h2>
-                <form action="demo-form.php" novalidate>
-                    UID: <input type="number" name="user_email">
-                    金额: <input type="number" name="user_email">
+                <form method="post" novalidate>
+                    UID: <input type="number" name="userid">
+                    金额: <input type="number" name="usermoney">
                     <input type="submit" value="确定">
                 </form>
            </div>
-    </div>
-
-
-
-
-
-
-
-
-
-
-
-     <div id="div2" style="display: none">
-            <div>
-                    <h1>消费模拟</h1>
-                <form action="demo-form.php" novalidate>
-                    UID: <input type="number" name="user_email">
-                        <input type="submit" value="确定">
-
-                </form>
-               <div>
-                    <h2>食堂列表</h2>
-                <ul>
-                    <li>食堂1</li>
-                    <li>食堂2</li>
-                    <li>食堂3</li>
-                </ul>
-                <div>
-                     <form action="demo-form.php" novalidate>选择食堂: <input type="text" name="user_email">
-                        <input type="submit" value="确定">
-                     </form>
-                </div>
-               </div>
-
-                <div>
-
-                     <h2>店铺列表</h2>
-                <ul>
-                    <li>店铺1</li>
-                    <li>店铺2</li>
-                    <li>店铺3</li>
-                </ul>
-                <div>
-                     <form action="demo-form.php" novalidate>选择店铺: <input type="email" name="user_email">
-                        <input type="submit" value="确定">
-                     </form>
-                </div>
-                </div>
-                <div>
-                     <h2>菜品列表</h2>
-                <ul>
-                    <li>菜1:5yuan</li>
-                    <li>菜2:4yuan</li>
-                    <li>菜3:6yuan</li>
-                </ul>
-                <div>
-                     <form action="demo-form.php" novalidate>选择菜: <input type="email" name="user_email">
-                     </form>
-                    <div>
-                     <form action="demo-form.php" novalidate>选择日期: <input type="date" name="user_cho2">
-                        <input type="submit" value="确定">
-                     </form>
-                  </div>
-                </div>
-                    <p>消费后提示:你消费了10元</p>
-                </div>
-
-
-             </div>
-    </div>
-
-
-
-
-
-
-
-
-
-
-
-
-     <div id="div3" style="display: none">
-            <div>
-                 <form action="demo-form.php" novalidate>
-                    UID: <input type="number" name="user_email">
+          <div>
+              <h2>消费查询</h2>
+                 <form method="post">
+                    UID: <input type="text" name="userid">
                         <input type="submit" value="查询">
 
                 </form>
-            <h3> 你的余额还有100元</h3>
+            <h2> 你的余额还有100元</h2>
                 <h3>数据分析:</h3>
                 <p>最高消费:20元</p>
                 <p>平均消费:15元</p>
@@ -231,6 +144,82 @@
              </div>
     </div>
 
+
+
+
+
+
+
+
+
+
+
+     <div id="div2" style="display: none">
+            <div>
+                    <h1>消费模拟</h1>
+                <form method="post" novalidate>
+                    UID: <input type="number" name="userid">
+                        <input type="submit" value="确定">
+
+                </form>
+               <div>
+                    <h2>食堂列表</h2>
+                <ul>
+                    <li>食堂1</li>
+                    <li>食堂2</li>
+                    <li>食堂3</li>
+                </ul>
+                <div>
+                     <form method="post" novalidate>
+                         选择食堂: <input type="text" name="canteenname"><br>
+                        <input type="submit" value="确定">
+                     </form>
+                </div>
+               </div>
+
+                <div>
+
+                     <h2>店铺列表</h2>
+                <ul>
+                    <li>店铺1</li>
+                    <li>店铺2</li>
+                    <li>店铺3</li>
+                </ul>
+                <div>
+                     <form method="post" novalidate>
+                         选择店铺: <input type="email" name="shopname"><br>
+                        <input type="submit" value="确定">
+                     </form>
+                </div>
+                </div>
+                <div>
+                     <h2>菜品列表</h2>
+                <ul>
+                    <li>菜1:5yuan</li>
+                    <li>菜2:4yuan</li>
+                    <li>菜3:6yuan</li>
+                </ul>
+                <div>
+                     <form method="post" novalidate>
+                         选择菜: <input type="email" name="foodid"><br>
+                         选择日期: <input type="date" name="date">
+                        <input type="submit" value="确定">
+                     </form>
+                  </div>
+                </div>
+                    <p>消费后提示:你消费了10元</p>
+                </div>
+
+
+             </div>
+    </div>
+
+
+
+
+
+
+   </body>
 
 
 

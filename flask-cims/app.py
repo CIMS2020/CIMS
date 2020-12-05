@@ -1,6 +1,6 @@
 import webbrowser
 from datetime import datetime
-
+from flask import flash
 from flask import Flask, render_template, request
 from flask_bootstrap import forms
 from wtforms import ValidationError
@@ -8,7 +8,7 @@ import time
 import json
 from datetime import datetime , date , timedelta
 from flask import render_template,request,redirect,url_for,flash,session,jsonify,send_from_directory
-import datatype
+from flask import Flask,url_for,render_template,request,make_response,session,flash,get_flashed_messages
 import  forms
 import requests
 import base64
@@ -59,19 +59,18 @@ def register():
         username = request.form.get("username")
         password = request.form.get("password")
         password2 = request.form.get("password2")
+        test=""
         if not all([username, password, password2]):
             # 向前端界面弹出一条提示(闪现消息)
             print("参数不足")
-            # flash("参数不足")
+            return render_template('register.html',text="失败")
         elif password != password2:
             print("两次密码不一致")
-            # flash("两次密码不一致")
+            return render_template('register.html',text="失败")
         else:
             # 假装做注册操作
-            # flash("注册成功！")
-            print("注册成功！")
             print(userid,username, password, password2)
-        # print(userid,username, password, password2)
+            return render_template('register.html', text="成功")
 
     return render_template('register.html')
 
@@ -83,7 +82,7 @@ def canteen():
         'canteen.html',
         title='Canteen',
         year=datetime.now().year,
-        message='Your application description page.'
+        message='Your application description page.',
     )
 
 @app.route('/comsumers')
@@ -96,27 +95,27 @@ def comsumers():
         message='Your application description page.'
     )
 
+app.config["SECRET_KEY"] = 'TPmi4aLWRbyVq8zu9v82dWYW1'
 
 @app.route('/login', methods=["get", "post"])
 def login():
     if request.method == "POST":
         # 取到表单中提交上来的三个参数
         userid= request.form.get("userid")
-        username = request.form.get("username")
         password = request.form.get("password")
-        password2 = request.form.get("password2")
-        if not all([username, password, password2]):
+        flash('666')
+        if not all([userid, password]):
             # 向前端界面弹出一条提示(闪现消息)
-            print("参数不足")
-            # flash("参数不足")
-        elif password != password2:
-            print("两次密码不一致")
-            # flash("两次密码不一致")
+            return render_template(
+                'login.html',
+                title='Shop',
+                year=datetime.now().year,
+                message='信息不全'
+            )
         else:
             # 假装做注册操作
-            #flash("注册成功！")
-            print("注册成功！")
-            print(userid,username, password, password2)
+            print(userid, password)
+
     return render_template('login.html')
     #10*2 选择题
 #名词解释 3*4题

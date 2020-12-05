@@ -207,7 +207,7 @@
         <div>
             <h1>创建消费者</h1>
                <div>
-                     <form action="/flask-cims/forms.py" method="get">
+                     <form method="post" method="get">
                          姓名: <input type="text" name="user_name"></br>
                          年龄: <input type="text" name="user_age"></br>
                          UID: <input type="text" name="user_id"></br>
@@ -222,7 +222,7 @@
             <div>
             <h1>查询消费者</h1>
                <div>
-                     <form action="forms.py" novalidate>
+                     <form method="post" novalidate>
                          UID: <input type="text" name="user_cho3"></br>
                           <input type="submit" value="查询">
                      </form>
@@ -241,7 +241,7 @@
             <div>
             <h1>创建店铺</h1>
                <div>
-                     <form action="demo-form.php" novalidate>
+                     <form method="post" novalidate>
                          店名: <input type="text" name="user_cho1"></br>
                          地址: <input type="text" name="user_cho2"></br>
                          SID: <input type="text" name="user_cho3"></br>
@@ -254,7 +254,7 @@
                 <div>
             <h1>查询消费者</h1>
                <div>
-                     <form action="demo-form.php" novalidate>
+                     <form method="post" novalidate>
                          ID: <input type="text" name="user_cho3"></br>
                           <input type="submit" value="查询">
                      </form>
@@ -271,7 +271,7 @@
            <div>
                <h1>食堂流水查询</h1>
                <div>
-                     <form action="demo-form.php" novalidate>
+                     <form method="post" novalidate>
                          选择店铺: <input type="text" name="user_cho2"><br>
                          选择日期: <input type="date" name="user_cho2"><br>
                         <input type="submit" value="确定">
@@ -296,7 +296,7 @@
            <div>
                 <h1>用户流水查询</h1>
                <div>
-                     <form action="demo-form.php" novalidate>用户ID: <input type="number" name="user_cho1">
+                     <form method="post" novalidate>用户ID: <input type="number" name="user_cho1">
                         <input type="submit" value="确定">
                      </form>
                 </div>
@@ -325,11 +325,11 @@
                 <div>
                      <h3>进货</h3>
                <div>
-                     <form action="demo-form.php" novalidate>货品名称: <input type="text" name="user_cho2">
+                     <form method="post" novalidate>货品名称: <input type="text" name="user_cho2">
                      </form>
                 </div>
                      <div>
-                     <form action="demo-form.php" novalidate>货品数量: <input type="number" name="user_cho3">
+                     <form method="post" novalidate>货品数量: <input type="number" name="user_cho3">
                         <input type="submit" value="确定">
                      </form>
                 </div>
@@ -339,7 +339,7 @@
                 <div>
                     <h2>查询仓库</h2>
                      <div>
-                     <form action="demo-form.php" novalidate>选择食堂: <input type="text" name="user_cho1">
+                     <form method="post" novalidate>选择食堂: <input type="text" name="user_cho1">
                         <input type="submit" value="确定"><!-- 一个食堂有一个仓库//-->
                      </form>
                      </div>

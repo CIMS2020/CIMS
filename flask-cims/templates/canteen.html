@@ -196,9 +196,7 @@
                     <li id="li2" style="background-color: azure"><a onclick="ck2()">查询消费者</a></li>
                     <li id="li3" style="background-color: azure"><a onclick="ck3()">创建店铺</a></li>
                     <li id="li4" style="background-color: azure"><a onclick="ck4()">查询店铺</a></li>
-                    <li id="li5" style="background-color: #87CEFF"><a onclick="ck5()">食堂流水查询</a></li>
-                    <li id="li6" style="background-color: azure"><a onclick="ck6()">消费者流水查询</a></li>
-                     <li id="li7" style="background-color: azure"><a onclick="ck7()">仓库管理</a></li>
+                    <li id="li5" style="background-color: #87CEFF"><a onclick="ck5()">仓库管理</a></li>
                 </ul>
             </div>
 
@@ -252,74 +250,27 @@
     </div>
      <div id="div4" style="display: none">
                 <div>
-            <h1>查询消费者</h1>
+            <h1>查询店铺</h1>
                <div>
                      <form method="post" novalidate>
-                         UID: <input type="text" name="f4_userid">
                           <input type="submit" value="查询">
                      </form>
                 </div>
                 <div>
                     <ul>
-                        <li> 店名:小明的饭</li>
-                         <li> 地址:玫瑰园</li>
+                        <li> 店名:小明的饭 地址:玫瑰园</li>
+                         <li> 店名:小明的饭 地址:玫瑰园</li>
+                        <li> 店名:小明的饭 地址:玫瑰园</li>
+                        <li> 店名:小明的饭 地址:玫瑰园</li>
+                        <li> 店名:小明的饭 地址:玫瑰园</li>
+                        <li> 店名:小明的饭 地址:玫瑰园</li>
+                        <li> 店名:小明的饭 地址:玫瑰园</li>
                     </ul>
                 </div>
         </div>
     </div>
-     <div id="div5" style="display: block">
-           <div>
-               <h1>食堂流水查询</h1>
-               <div>
-                     <form method="post" novalidate>
-                         选择店铺: <input type="text" name="f5_shopname"><br>
-                         选择日期: <input type="date" name="f5_date"><br>
-                        <input type="submit" value="确定">
-                     </form>
-                </div>
-               <div>
-                   <h2> 查询结果</h2>
-                   <ul>
-                       <li>店铺1流水</li>
-                       <li>店铺1流水</li>
-                       <li>店铺1流水</li>
-                        <li>店铺1流水</li>
-                        <li>店铺1流水</li>
-                   </ul>
-                    <h3>最高流水:200</h3>
-                   <h3>平均流水:100</h3>
-                   <h3>最低流水:50</h3>
-               </div>
-           </div>
-    </div>
-     <div id="div6" style="display: none">
-           <div>
-                <h1>用户流水查询</h1>
-               <div>
-                     <form method="post" novalidate>
-                         用户ID: <input type="text" name="f6_user_id"><input type="submit" value="确定">
-                     </form>
-                </div>
-               <div>
-                   <h2>用户名:小明</h2>
-                   <h2>用户ID:031802300</h2>
-                   <h2>用户余额:200</h2>
-                   <h2>用户流水:</h2>
-                   <ul>
-                       <li>时间:食堂:店铺:菜名:价格</li>
-                       <li>时间:食堂:店铺:菜名:价格</li>
-                       <li>时间:食堂:店铺:菜名:价格</li>
-                       <li>时间:食堂:店铺:菜名:价格</li>
-                       <li>时间:食堂:店铺:菜名:价格</li>
-                       <li>时间:食堂:店铺:菜名:价格</li>
-                   </ul>
-                   <h3>最高消费:20</h3>
-                   <h3>平均消费:10</h3>
-                   <h3>最低消费:5</h3>
-               </div>
-           </div>
-    </div>
-    <div id="div7" style="display: none">
+
+    <div id="div5" style="display: block">
             <div>
                 <h2>仓库管理</h2>
                 <div>
@@ -337,7 +288,6 @@
                 <div>
                     <h2>查询仓库</h2>
                      <form method="post" novalidate>
-                          仓库名称: <input type="text" name="f7_ckname">
                         <input type="submit" value="查询">
                      </form>
                     <h4>查询结果</h4>

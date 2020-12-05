@@ -102,7 +102,7 @@
                 <br />
                 <br />
                 <ul class="nav nav-tabs nav-stacked"  >
-                    <li id="li1" style="background-color: #87CEFF"><a onclick="ck1()">充值</a></li>
+                    <li id="li1" style="background-color: #87CEFF"><a onclick="ck1()">充值与账单</a></li>
                     <li id="li2" style="background-color: azure"><a onclick="ck2()">消费模拟</a></li>
                 </ul>
             </div>
@@ -111,7 +111,7 @@
    <body>
     <div id="div1" style="display: block">
            <div>
-               <h2>充值</h2>
+               <h2>充值与账单</h2>
                 <form method="post" novalidate>
                     UID: <input type="number" name="f1_userid">
                     金额: <input type="number" name="f1_usermoney">
@@ -130,6 +130,7 @@
                 <p>最高消费:20元</p>
                 <p>平均消费:15元</p>
                 <p>最低消费:10元</p>
+              <p>总消费:200元</p>
                 <button> 流水查询</button>
                 <ul>
                     <li>时间:食堂:店铺:菜名:金额</li>
@@ -159,7 +160,7 @@
                     <h1>消费模拟</h1>
                 <form method="post" novalidate>
                     UID: <input type="number" name="f2_userid">
-                        <input type="submit" value="确定">
+                    <input type="submit" value="确定">
 
                 </form>
 
@@ -174,7 +175,7 @@
                 </ul>
                 <div>
                      <form method="post" novalidate>
-                         选择店铺: <input type="email" name="f2_shopname"><br>
+                         选择店铺: <input type="email" name="f2_shopname">
                         <input type="submit" value="确定">
                      </form>
                 </div>

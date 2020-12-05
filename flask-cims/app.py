@@ -1,10 +1,10 @@
 import webbrowser
 from datetime import datetime
-<<<<<<< HEAD
+
 from flask_sqlalchemy import SQLAlchemy
-=======
+
 from flask import flash
->>>>>>> fbf438db65a8cb2470d99b36d556d6a4dc478278
+
 from flask import Flask, render_template, request
 from flask_bootstrap import forms
 from wtforms import ValidationError
@@ -12,11 +12,10 @@ import time
 import json
 from datetime import datetime , date , timedelta
 from flask import render_template,request,redirect,url_for,flash,session,jsonify,send_from_directory
-<<<<<<< HEAD
-=======
+
 from flask import Flask,url_for,render_template,request,make_response,session,flash,get_flashed_messages
 import  forms
->>>>>>> fbf438db65a8cb2470d99b36d556d6a4dc478278
+
 import requests
 import base64
 
@@ -131,20 +130,11 @@ def register():
             return render_template('register.html',text="失败")
         elif password != password2:
             print("两次密码不一致")
-<<<<<<< HEAD
             #flash("两次密码不一致")
         else:
             # 假装做注册操作
             # flash("注册成功！")
-
             print("注册成功！")
-
-=======
-            return render_template('register.html',text="失败")
-        else:
-            # 假装做注册操作
->>>>>>> fbf438db65a8cb2470d99b36d556d6a4dc478278
-            print(userid,username, password, password2)
             return render_template('register.html', text="成功")
 
     return render_template('register.html')

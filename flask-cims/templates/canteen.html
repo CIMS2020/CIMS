@@ -208,11 +208,11 @@
             <h1>创建消费者</h1>
                <div>
                      <form method="post" method="get">
-                         姓名: <input type="text" name="user_name"></br>
-                         年龄: <input type="text" name="user_age"></br>
-                         UID: <input type="text" name="user_id"></br>
-                         手机号: <input type="text" name="user_tel"></br>
-                         余额: <input type="text" name="user_money"></br>
+                         姓名: <input type="text" name="f1_user_name"></br>
+                         年龄: <input type="text" name="f1_user_age"></br>
+                         UID: <input type="text" name="f1_user_id"></br>
+                         手机号: <input type="text" name="f1_user_tel"></br>
+                         余额: <input type="text" name="f1_user_money"></br>
                           <input type="submit" value="添加">
                      </form>
                 </div>
@@ -223,7 +223,7 @@
             <h1>查询消费者</h1>
                <div>
                      <form method="post" novalidate>
-                         UID: <input type="text" name="user_cho3"></br>
+                         UID: <input type="text" name="f2_user_id">
                           <input type="submit" value="查询">
                      </form>
                 </div>
@@ -242,9 +242,9 @@
             <h1>创建店铺</h1>
                <div>
                      <form method="post" novalidate>
-                         店名: <input type="text" name="user_cho1"></br>
-                         地址: <input type="text" name="user_cho2"></br>
-                         SID: <input type="text" name="user_cho3"></br>
+                         店名: <input type="text" name="f3_shopname"></br>
+                         地址: <input type="text" name="f3_shopadd"></br>
+                         SID: <input type="text" name="f3_shopid"></br>
                          <input type="submit" value="添加">
                      </form>
                 </div>
@@ -255,7 +255,7 @@
             <h1>查询消费者</h1>
                <div>
                      <form method="post" novalidate>
-                         ID: <input type="text" name="user_cho3"></br>
+                         UID: <input type="text" name="f4_userid">
                           <input type="submit" value="查询">
                      </form>
                 </div>
@@ -272,8 +272,8 @@
                <h1>食堂流水查询</h1>
                <div>
                      <form method="post" novalidate>
-                         选择店铺: <input type="text" name="user_cho2"><br>
-                         选择日期: <input type="date" name="user_cho2"><br>
+                         选择店铺: <input type="text" name="f5_shopname"><br>
+                         选择日期: <input type="date" name="f5_date"><br>
                         <input type="submit" value="确定">
                      </form>
                 </div>
@@ -296,8 +296,8 @@
            <div>
                 <h1>用户流水查询</h1>
                <div>
-                     <form method="post" novalidate>用户ID: <input type="number" name="user_cho1">
-                        <input type="submit" value="确定">
+                     <form method="post" novalidate>
+                         用户ID: <input type="text" name="f6_user_id"><input type="submit" value="确定">
                      </form>
                 </div>
                <div>
@@ -325,11 +325,9 @@
                 <div>
                      <h3>进货</h3>
                <div>
-                     <form method="post" novalidate>货品名称: <input type="text" name="user_cho2">
-                     </form>
-                </div>
-                     <div>
-                     <form method="post" novalidate>货品数量: <input type="number" name="user_cho3">
+                     <form method="post" novalidate>
+                         货品名称: <input type="text" name="f7_goodsname">
+                        货品数量: <input type="number" name="f7_goodsnum">
                         <input type="submit" value="确定">
                      </form>
                 </div>
@@ -338,12 +336,10 @@
 
                 <div>
                     <h2>查询仓库</h2>
-                     <div>
-                     <form method="post" novalidate>选择食堂: <input type="text" name="user_cho1">
-                        <input type="submit" value="确定"><!-- 一个食堂有一个仓库//-->
+                     <form method="post" novalidate>
+                          仓库名称: <input type="text" name="f7_ckname">
+                        <input type="submit" value="查询">
                      </form>
-                     </div>
-                    <button>查询</button>
                     <h4>查询结果</h4>
                     <ul>
                         <li>材料名:剩余数量</li>

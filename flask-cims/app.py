@@ -1,6 +1,6 @@
 import webbrowser
 from datetime import datetime
-
+from flask_sqlalchemy import SQLAlchemy
 from flask import Flask, render_template, request
 from flask_bootstrap import forms
 from wtforms import ValidationError
@@ -8,14 +8,70 @@ import time
 import json
 from datetime import datetime , date , timedelta
 from flask import render_template,request,redirect,url_for,flash,session,jsonify,send_from_directory
-import datatype
-import  forms
 import requests
 import base64
 
 
 app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mssql+pyodbc://sa:asd@test'#(替换成自己的用户名，密码和dsn）
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+db = SQLAlchemy(app)
 
+
+class testflask(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    canname = db.Column(db.String(30))
+
+class restaurant(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    rname = db.Column(db.String(30))
+    canno = db.Column(db.Integer)
+    cost = db.Column(db.FLOAT)
+
+class ingeredient(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    inname = db.Column(db.String(30))
+    price = db.Column(db.FLOAT)
+    amount = db.Column(db.Integer)
+    data = db.Column(db.String(30))
+    canno = db.Column(db.String(30))
+    Class = db.Column(db.String(30))
+
+class food(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    fname = db.Column(db.String(30))
+    price = db.Column(db.FLOAT)
+    rno = db.Column(db.String(30))
+
+class worker(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    wno = db.Column(db.String(30))
+    wsex = db.Column(db.String(30))
+    sale = db.Column(db.FLOAT)
+    wduring = db.Column(db.String(30))
+    rno = db.Column(db.String(30))
+
+class stu(db.Model):
+    sno = db.Column(db.Integer, primary_key=True)
+    sname = db.Column(db.String(30))
+    ssex = db.Column(db.String(30))
+    tel = db.Column(db.String(30))
+    dept = db.Column(db.String(30))
+
+class cost(db.Model):
+    sno = db.Column(db.String(30), primary_key=True)
+    date = db.Column(db.String(30))
+    cost = db.Column(db.FLOAT)
+    rno = db.Column(db.String(30))
+
+class card(db.Model):
+    sno = db.Column(db.String(30), primary_key=True)
+    money = db.Column(db.FLOAT)
+    tel = db.Column(db.String(30))
+
+class adm(db.Model):
+    id = db.Column(db.String(30), primary_key=True)
+    ano = db.Column(db.String(30))
 
 @app.route('/')
 @app.route('/home')
@@ -65,11 +121,13 @@ def register():
             # flash("参数不足")
         elif password != password2:
             print("两次密码不一致")
-            # flash("两次密码不一致")
+            #flash("两次密码不一致")
         else:
             # 假装做注册操作
             # flash("注册成功！")
+
             print("注册成功！")
+
             print(userid,username, password, password2)
         # print(userid,username, password, password2)
 
@@ -145,6 +203,7 @@ def shop():
 
 
 if __name__ == '__main__':
+    db.create_all()
     url = "http://127.0.0.1:5000"
     webbrowser.open_new(url)
     app.run()

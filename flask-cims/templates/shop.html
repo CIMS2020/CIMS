@@ -10,7 +10,7 @@
     4.员工管理
 
 </h>
-
+form1--form9
 //-->
 {% extends "layout.html" %}
 
@@ -123,24 +123,18 @@
             </div>
 
     </div>
-    <div id="div1" style="display: none">
-            <div>
-                 <form method="post">
-                         SID: <input type="text" name="f1_shopid"></br>
-                        <input type="submit" value="确定">
-                 </form>
-            </div>
-    </div>
+
      <div id="div2" style="display: block">
             <div >
                 <h2>每日销售查询</h2>
                  <div>
-                    <form method="post">
-                        SID: <input type="text" name="f2_shopid"></br>
-                         选择日期: <input type="date" name="f2_date">
-                        <input type="submit" value="确定">
-                     </form>
-                     <div>
+                        <form method="post">
+                            {{ form1.shopid.label }}{{ form1.shopid }}<br/> <!-- 店铺ID-->
+                            {{ form1.date.label }}{{ form1.date }}<br/><!-- 日期-->
+                            {{ form1.submit }}<!-- 提交-->
+                        </form>
+                  </div>
+
                          <ul>
                              <li>流水记录1</li>
                               <li>流水记录1</li>
@@ -149,28 +143,31 @@
                               <li>流水记录1</li>
                               <li>流水记录1</li>
                          </ul>
-                     </div>
-                </div>
-             </div>
-    </div>
+            </div>
+     </div>
+
      <div id="div3" style="display: none">
             <div>
                 <h2>添加员工</h2>
-                 <form method="post">
-                     SID: <input type="text" name="f3_shopid"></br></br>
-                     员工姓名: <input type="text" name="f3_workname"></br>
-                     员工工号: <input type="text" name="f3_workid"></br>
-                     员工工资: <input type="text" name="f3_worksla"></br>
-                     员工手机: <input type="text" name="f3_worktel"></br>
-                     <input type="submit" value="确定">
-                 </form>
+                 <div>
+                        <form method="post">
+                            {{ form2.shopid.label }}{{ form2.shopid }}<br/> <!-- 店铺ID-->
+                            {{ form2.workername.label }}{{ form2.workername }}<br/> <!-- 员工姓名-->
+                            {{ form2.workerid.label }}{{ form2.workerid }}<br/> <!-- 员工ID-->
+                            {{ form2.workertel.label }}{{ form2.workertel }}<br/> <!-- 员工手机-->
+                            {{ form2.workersal.label }}{{ form2.workersal }}<br/> <!-- 员工工资-->
+                            {{ form2.submit }}<!-- 提交-->
+                        </form>
+                  </div>
             </div>
              <div>
                 <h2>员工查询</h2>
-                 <form method="post">
-                     员工工号: <input type="text" name="f31_workid"></br>
-                     <input type="submit" value="查询">
-                 </form>
+                   <div>
+                        <form method="post">
+                            {{ form3.workerid.label }}{{ form3.workerid }}<br/> <!-- 员工ID-->
+                            {{ form3.submit }}<!-- 查询-->
+                        </form>
+                  </div>
                 <div>
                     <h3>查询结果</h3>
                     <p>员工信息:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
@@ -178,46 +175,77 @@
              </div>
             <div>
                 <h2>删除员工</h2>
-                 <form method="post">
-                     员工工号: <input type="text" name="f32_workid"></br>
-                     <input type="submit" value="删除">
-                 </form>
+                <div>
+                        <form method="post">
+                            {{ form4.shopid.label }}{{ form4.shopid }}<br/> <!-- 店铺ID-->
+                            {{ form4.workerid.label }}{{ form4.workerid }}<br/> <!-- 员工ID-->
+                            {{ form4.submit }}<!-- 删除-->
+                        </form>
+                  </div>
             </div>
              <div>
                 <h2>修改员工信息</h2>
-                 <form method="post">
-                     被修改员工工号: <input type="text" name="f33_workid"></br>
-                     员工姓名: <input type="text" name="f33_workname"></br>
-                     员工工资: <input type="text" name="f33_worksal"></br>
-                     员工手机: <input type="text" name="f33_worltel"></br>
-                     <input type="submit" value="修改">
-                 </form>
+                  <div>
+                        <form method="post">
+                            {{ form5.shopid.label }}{{ form5.shopid }}<br/> <!-- 店铺ID-->
+                            {{ form5.workerid.label }}{{ form5.workerid }}<br/> <!-- 被修改员工ID-->
+                            {{ form5.workername.label }}{{ form5.workerid }}<br/> <!-- 姓名-->
+                            {{ form5.workertel.label }}{{ form5.workerid }}<br/> <!-- 电话-->
+                            {{ form5.workersal.label }}{{ form5.workerid }}<br/> <!-- 工资-->
+                            {{ form5.submit }}<!-- 修改-->
+                        </form>
+                  </div>
             </div>
     </div>
+
     <div id="div4" style="display: none">
      <div>
             <h2>取材料</h2>
-            <form method="post">
-                     材料名: <input type="text" name="f4_foodname"></br>
-                     数量: <input type="text" name="f4_foodprice"></br>
-                     <input type="submit" value="确定">
-            </form>
+             <div>
+                    <h3>查询仓库</h3>
+                     <div>
+                         <form method="post">
+                            {{ form6.submit }}<!-- 查询仓库所有货物-->
+                        </form>
+                    </div>
+                    <h4>查询结果</h4>
+                    <ul>
+                        <li>材料名:剩余数量</li>
+                         <li>材料名:剩余数量</li>
+                         <li>材料名:剩余数量</li>
+                         <li>材料名:剩余数量</li>
+                         <li>材料名:剩余数量</li>
+                         <li>材料名:剩余数量</li>
+                    </ul>
+                </div>
+             <div>
+                 <form method="post">
+                            {{ form7.shopid.label }}{{ form7.shopid}}<br/> <!-- 店铺id-->
+                            {{ form7.goodsname.label }}{{ form7.goodsname}}<br/> <!-- 货物名-->
+                            {{ form7.goodsnum.label }}{{ form7.goodsnum}}<br/> <!-- 货物数量-->
+                            {{ form7.submit }}<!-- 确定-->
+                 </form>
+             </div>
         </div>
         <div>
             <h2>添加到菜单</h2>
-            <form method="post">
-                     菜名: <input type="text" name="f4_foodname"></br>
-                     价格: <input type="text" name="f4_foodprice"></br>
-                     菜ID: <input type="text" name="f4_foodid"></br>
-                     <input type="submit" value="确定">
-            </form>
+             <div>
+                 <form method="post">
+                            {{ form8.shopid.label }}{{ form8.shopid}}<br/> <!-- 店铺id-->
+                            {{ form8.foodname.label }}{{ form8.foodname}}<br/> <!-- 食物名-->
+                            {{ form8.price.label }}{{ form8.price}}<br/> <!-- 菜价格-->
+                            {{ form8.submit }}<!-- 添加-->
+                 </form>
+          </div>
         </div>
     <div>
         <h2>查看菜单</h2>
-         <form method="post">
-                     店名: <input type="text" name="f4_shopname"></br>
-                     <input type="submit" value="确定">
-         </form>
+         <div>
+                 <form method="post">
+                            {{ form9.shopid.label }}{{ form9.shopid}}<br/> <!-- 店铺id-->
+                            {{ form9.submit }}<!-- 查询-->
+                 </form>
+         </div>
     </div>
     </div>
 

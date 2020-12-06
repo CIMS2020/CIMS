@@ -18,6 +18,7 @@
         三种登录(三个页面各自一个登录?)?/通过输入消费者id模拟消费
     4.个人消费数据分析数据
 </h>
+form1--form5
 //-->
 
     <style>
@@ -112,19 +113,22 @@
     <div id="div1" style="display: block">
            <div>
                <h2>充值与账单</h2>
-                <form method="post" novalidate>
-                    UID: <input type="number" name="f1_userid">
-                    金额: <input type="number" name="f1_usermoney">
-                    <input type="submit" value="确定">
-                </form>
+                <div>
+                        <form method="post">
+                            {{ form1.userid.label }}{{ form1.userid }}<br/> <!-- UID-->
+                            {{ form1.recharge_amount.label }}{{ form1.recharge_amount }}<br/><!-- 充值金额-->
+                            {{ form1.submit }}<!-- 提交-->
+                        </form>
+                  </div>
            </div>
           <div>
               <h2>消费查询</h2>
-                 <form method="post">
-                    UID: <input type="text" name="f11_userid">
-                        <input type="submit" value="查询">
-
-                </form>
+               <div>
+                        <form method="post">
+                            {{ form2.userid.label }}{{ form2.userid }}<br/> <!-- UID-->
+                            {{ form2.submit }}<!-- 提交-->
+                        </form>
+                  </div>
             <h2> 你的余额还有100元</h2>
                 <h3>数据分析:</h3>
                 <p>最高消费:20元</p>
@@ -158,11 +162,11 @@
      <div id="div2" style="display: none">
             <div>
                     <h1>消费模拟</h1>
-                <form method="post" >
-                    UID: <input type="number" name="f2_userid">
-                    <input type="submit" value="确定">
-
-                </form>
+                    <div>
+                        <form method="post">
+                            {{ form3.submit }}<!-- 查询所有店铺-->
+                        </form>
+                   </div>
 
 
                 <div>
@@ -173,28 +177,31 @@
                     <li>店铺2</li>
                     <li>店铺3</li>
                 </ul>
-                <div>
-                     <form method="post" novalidate>
-                         选择店铺: <input type="email" name="f2_shopname">
-                        <input type="submit" value="确定">
-                     </form>
-                </div>
+                    <div>
+                        <form method="post">
+                            {{ form4.shopid.label }}{{ form4.shopid }}<br/> <!-- shopid 选择店铺-->
+                            {{ form4.submit }}<!-- 查询菜单-->
+                        </form>
+                  </div>
+
                 </div>
                 <div>
                      <h2>菜品列表</h2>
-                <ul>
-                    <li>菜1:5yuan</li>
-                    <li>菜2:4yuan</li>
-                    <li>菜3:6yuan</li>
-                </ul>
-                <div>
-                     <form method="post" novalidate>
-                         选择菜: <input type="email" name="f2_foodid"><br>
-                         选择日期: <input type="date" name="f2_date">
-                        <input type="submit" value="确定">
-                     </form>
-                  </div>
+                        <ul>
+                            <li>菜1:5yuan</li>
+                            <li>菜2:4yuan</li>
+                            <li>菜3:6yuan</li>
+                         </ul>
+
                 </div>
+                 <div>
+                        <form method="post">
+                            {{ form5.userid.label }}{{ form5.userid }}<br/> <!-- userid 消费者-->
+                            {{ form5.foodid.label }}{{ form5.foodid }}<br/> <!-- shopid 选择菜-->
+                            {{ form5.date.label }}{{ form5.date }}<br/> <!-- 消费日期-->
+                            {{ form5.submit }}<!-- 确定-->
+                        </form>
+                  </div>
                     <p>消费后提示:你消费了10元</p>
                 </div>
 

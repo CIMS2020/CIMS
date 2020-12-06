@@ -10,13 +10,11 @@
 ......
 4.仓库进货操作
 5.查询仓库数据
-
-
-
 </h>
+
+form1---form6
+
 //-->
-
-
 {% extends "layout.html" %}
 
 {% block content %}
@@ -194,33 +192,32 @@
     <div id="div1" style="display: none">
         <div>
             <h1>创建消费者</h1>
-               <div>
-                     <form method="post" >
-                         姓名: <input type="text" name="f1_user_name"></br>
-                         年龄: <input type="text" name="f1_user_age"></br>
-                         UID: <input type="text" name="f1_user_id"></br>
-                         手机号: <input type="text" name="f1_user_tel"></br>
-                         余额: <input type="text" name="f1_user_money"></br>
-                          <input type="submit" value="添加">
-                     </form>
-                </div>
+                  <div>
+                        <form method="post">
+                            {{ form1.username.label }}{{ form1.username }}<br/> <!-- 用户名-->
+                            {{ form1.userid.label }}{{ form1.userid }}<br/><!-- UID-->
+                            {{ form1.age.label }}{{ form1.age }}<br/><!-- 年龄-->
+                            {{ form1.tel.label }}{{ form1.tel }}<br/><!-- 手机号-->
+                            {{ form1.submit }}<!-- 提交-->
+                        </form>
+                  </div>
         </div>
     </div>
      <div id="div2" style="display: none">
             <div>
             <h1>查询消费者</h1>
-               <div>
-                     <form method="post" >
-                         UID: <input type="text" name="f2_user_id">
-                          <input type="submit" value="查询">
-                     </form>
+                <div>
+                        <form method="post">
+                            {{ form2.submit }}<!-- 查询所有消费者-->
+                        </form>
                 </div>
                 <div>
                     <ul>
-                        <li> 姓名:小明</li>
-                         <li> 年龄:20</li>
-                         <li> 手机:10086100861001</li>
-                         <li> 余额:100</li>
+                        <li> 姓名:小明;UID:1635465年龄:20;手机:10086100861001</li>
+                        <li> 姓名:小明;UID:1635465年龄:20;手机:10086100861001</li>
+                        <li> 姓名:小明;UID:1635465年龄:20;手机:10086100861001</li>
+                        <li> 姓名:小明;UID:1635465年龄:20;手机:10086100861001</li>
+
                     </ul>
                 </div>
         </div>
@@ -228,28 +225,31 @@
      <div id="div3" style="display: none">
             <div>
             <h1>创建店铺</h1>
-               <div>
-                     <form method="post" >
-                         店名: <input type="text" name="f3_shopname"></br>
-                         地址: <input type="text" name="f3_shopadd"></br>
-                         SID: <input type="text" name="f3_shopid"></br>
-                         <input type="submit" value="添加">
-                     </form>
-                </div>
+
+                <div>
+                        <form method="post">
+                            {{ form3.shopname.label }}{{ form3.shopname }}<br/> <!-- 店铺名-->
+                            {{ form3.shopid.label }}{{ form3.shopid }}<br/><!-- SID-->
+                            {{ form3.shopadd.label }}{{ form3.shopadd }}<br/><!-- 店铺地址-->
+                            {{ form3.submit }}<!-- 提交-->
+                        </form>
+                  </div>
+
+
         </div>
     </div>
      <div id="div4" style="display: none">
                 <div>
             <h1>查询店铺</h1>
-               <div>
-                     <form method="post" >
-                          <input type="submit" value="查询">
-                     </form>
-                </div>
+                    <div>
+                         <form method="post">
+                            {{ form4.submit }}<!-- 查询所有店铺-->
+                        </form>
+                    </div>
                 <div>
                     <ul>
                         <li> 店名:小明的饭 地址:玫瑰园</li>
-                         <li> 店名:小明的饭 地址:玫瑰园</li>
+                         <li>店名:小明的饭 地址:玫瑰园</li>
                         <li> 店名:小明的饭 地址:玫瑰园</li>
                         <li> 店名:小明的饭 地址:玫瑰园</li>
                         <li> 店名:小明的饭 地址:玫瑰园</li>
@@ -265,21 +265,23 @@
                 <h2>仓库管理</h2>
                 <div>
                      <h3>进货</h3>
-               <div>
-                     <form method="post" >
-                         货品名称: <input type="text" name="f7_goodsname">
-                        货品数量: <input type="number" name="f7_goodsnum">
-                        <input type="submit" value="确定">
-                     </form>
-                </div>
+                    <div>
+                        <form method="post">
+                            {{ form5.goodsname.label }}{{ form5.goodsname }}<br/> <!-- 货物名-->
+                            {{ form5.goodsnum.label }}{{ form5.goodsnum }}<br/> <!-- 货物数量-->
+                            {{ form5.submit }}<!-- 提交-->
+                        </form>
+                    </div>
                 </div>
 
 
                 <div>
                     <h2>查询仓库</h2>
-                     <form method="post" novalidate>
-                        <input type="submit" value="查询">
-                     </form>
+                     <div>
+                         <form method="post">
+                            {{ form6.submit }}<!-- 查询仓库所有货物-->
+                        </form>
+                    </div>
                     <h4>查询结果</h4>
                     <ul>
                         <li>材料名:剩余数量</li>

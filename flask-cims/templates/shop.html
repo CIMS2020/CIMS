@@ -68,41 +68,41 @@
     </style>
 <script>
             function ck1(){
-                div1.style.display = "block";
+
                 div2.style.display = "none";
                 div3.style.display = "none";
                  div4.style.display = "none";
-                li1.style.backgroundColor="#87CEFF";
+
                 li2.style.backgroundColor="azure";
                 li3.style.backgroundColor="azure";
                 li4.style.backgroundColor="azure";
             }
              function ck2(){
-                div1.style.display = "none";
+
                 div2.style.display = "block";
                 div3.style.display = "none";
                 div4.style.display = "none";
-                li1.style.backgroundColor="azure";
+
                 li2.style.backgroundColor="#87CEFF";
                 li3.style.backgroundColor="azure";
                  li4.style.backgroundColor="azure";
             }
              function ck3(){
-                div1.style.display = "none";
+
                 div2.style.display = "none";
                 div3.style.display = "block";
                 div4.style.display = "none";
-                li1.style.backgroundColor="azure";
+
                 li2.style.backgroundColor="azure";
                 li3.style.backgroundColor="#87CEFF";
                  li4.style.backgroundColor="azure";
             }
             function ck4(){
-                div1.style.display = "none";
+
                 div2.style.display = "none";
                 div4.style.display = "block";
                 div3.style.display = "none";
-                li1.style.backgroundColor="azure";
+
                 li2.style.backgroundColor="azure";
                 li4.style.backgroundColor="#87CEFF";
                  li3.style.backgroundColor="azure";
@@ -115,15 +115,15 @@
                 <br />
                 <br />
                 <ul class="nav nav-tabs nav-stacked"  >
-                     <li id="li1" style="background-color: #87CEFF"><a onclick="ck1()">店铺登录</a></li>
-                    <li id="li2" style="background-color: azure"><a onclick="ck2()">流水查询</a></li>
+
+                    <li id="li2" style="background-color: #87CEFF"><a onclick="ck2()">销售查询</a></li>
                     <li id="li3" style="background-color: azure"><a onclick="ck3()">员工管理</a></li>
-                     <li id="li4" style="background-color: azure"><a onclick="ck4()">上菜</a></li>
+                     <li id="li4" style="background-color: azure"><a onclick="ck4()">主要业务</a></li>
                 </ul>
             </div>
 
     </div>
-    <div id="div1" style="display: block">
+    <div id="div1" style="display: none">
             <div>
                  <form method="post">
                          SID: <input type="text" name="f1_shopid"></br>
@@ -131,11 +131,12 @@
                  </form>
             </div>
     </div>
-     <div id="div2" style="display: none">
+     <div id="div2" style="display: block">
             <div >
-                <h2>每日流水查询</h2>
+                <h2>每日销售查询</h2>
                  <div>
                     <form method="post">
+                        SID: <input type="text" name="f2_shopid"></br>
                          选择日期: <input type="date" name="f2_date">
                         <input type="submit" value="确定">
                      </form>
@@ -194,8 +195,16 @@
             </div>
     </div>
     <div id="div4" style="display: none">
+     <div>
+            <h2>取材料</h2>
+            <form method="post">
+                     材料名: <input type="text" name="f4_foodname"></br>
+                     数量: <input type="text" name="f4_foodprice"></br>
+                     <input type="submit" value="确定">
+            </form>
+        </div>
         <div>
-            <h2>上菜</h2>
+            <h2>添加到菜单</h2>
             <form method="post">
                      菜名: <input type="text" name="f4_foodname"></br>
                      价格: <input type="text" name="f4_foodprice"></br>
@@ -204,7 +213,7 @@
             </form>
         </div>
     <div>
-        <h2>看菜</h2>
+        <h2>查看菜单</h2>
          <form method="post">
                      店名: <input type="text" name="f4_shopname"></br>
                      <input type="submit" value="确定">

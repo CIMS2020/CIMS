@@ -10,7 +10,6 @@ import json
 from datetime import datetime , date , timedelta
 from flask import render_template,request,redirect,url_for,flash,session,jsonify,send_from_directory
 from flask import Flask,url_for,render_template,request,make_response,session,flash,get_flashed_messages
-import  forms
 import requests
 import base64
 
@@ -20,7 +19,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'mssql+pyodbc://sa:asd@test'#(替换成�
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 db = SQLAlchemy(app)
 
-
+# 数据库数据类型
 class testflask(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     canname = db.Column(db.String(30))
@@ -75,6 +74,9 @@ class card(db.Model):
 class adm(db.Model):
     id = db.Column(db.String(30), primary_key=True)
     ano = db.Column(db.String(30))
+    aname = db.Column(db.String(30))
+    password = db.Column(db.String(30))
+
 
 @app.route('/')
 @app.route('/home')

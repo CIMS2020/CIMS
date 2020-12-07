@@ -16,6 +16,14 @@ import base64
 from wtforms.validators import DataRequired, EqualTo
 from wtforms.fields import *
 from flask_wtf import FlaskForm
+from flask import Flask, render_template, request, flash, make_response
+from flask_wtf import FlaskForm
+from wtforms.fields import *
+from wtforms.validators import DataRequired, EqualTo
+
+
+
+
 
 app = Flask(__name__)
 bootstrap = Bootstrap(app)
@@ -26,15 +34,6 @@ db = SQLAlchemy(app)
 app.config["SECRET_KEY"] = 'TPmi4aLWRbyVq8zu9v82dWYW1'
 # app.config["SECRET_KEY"] = "abcd"
 app.config["WTF_CSRF_ENABLED"] = False
-
-
-
-
-from flask import Flask, render_template, request, flash, make_response
-from flask_wtf import FlaskForm
-from wtforms.fields import *
-from wtforms.validators import DataRequired, EqualTo
-
 
 
 # 数据库数据类型
@@ -79,9 +78,9 @@ class Cost(db.Model):
     shopno = db.Column(db.String(30))
 
 class Card(db.Model):
-    id = db.Column(db.Integer,primary_key= True)
+    id = db.Column(db.Integer, primary_key=True,autoincrement=True)
     sno = db.Column(db.String(30))
-    money = db.Column(db.FLOAT)
+    money = db.Column(db.String(30))
  #   tel = db.Column(db.String(30))
 
 class Adm(db.Model):
@@ -269,57 +268,41 @@ class Food(db.Model):
 @app.route('/create_consumer', methods=["get", "post"])
 def create_consumer():
     form1 = CreateCon()
-    form2 = SearchAllCon()
+    myData = stu.query.all()
     if form1.validate_on_submit():
-        card = Card(son=form1.userid.data, money=0)
+        userid = form1.userid.data
+        card = Card(sno=userid,money='0')
+        db.session.add(card)
+        db.session.commit()
         student = stu(sname=form1.username.data,sage=form1.age.data,sno=form1.userid.data,tel=form1.tel.data)
         db.session.add(student)
         db.session.commit()
-        db.session.add(card)
-        db.session.commit()
+
         flash("创建消费者成功！")
         return redirect(url_for('create_consumer'))
     """Renders the canteen page."""
-    if form2.validate_on_submit():
-        myData = stu.query.all()
-        return render_template(
-            'create_consumer.html',
-            title='Canteen',
-            year=datetime.now().year,
-            message='Your application description page.',
-            form1=form1,
-            form2=form2,
-            stu = myData
-        )
     return render_template(
         'create_consumer.html',
         title='Canteen',
         year=datetime.now().year,
         message='Your application description page.',
         form1=form1,
-        form2=form2,
+        con = myData
     )
 @app.route('/create_shop', methods=["get", "post"])
 def create_shop():
     form3 = CreateShop()
     form4 = SearchAllShops()
+    myData = Shop.query.all()
+    print('Shop:', myData)
+
     if form3.validate_on_submit():
         shop = Shop(shopname=form3.shopname.data,shopno=form3.shopid.data,shopaddr=form3.shopaddr.data)
         db.session.add(shop)
         db.session.commit()
         flash("创建店铺成功!")
         return redirect(url_for('create_shop'))
-    if form4.validate_on_submit():
-        myData = Shop.query.all()
-        return render_template(
-            'create_shop.html',
-            title='Canteen',
-            year=datetime.now().year,
-            message='Your application description page.',
-            form3=form3,
-            form4=form4,
-            stu=myData
-        )
+
     return render_template(
         'create_shop.html',
         title='Canteen',
@@ -327,6 +310,7 @@ def create_shop():
         message='Your application description page.',
         form3=form3,
         form4=form4,
+        shop=myData
     )
 
 @app.route('/ware_manage', methods=["get", "post"])
@@ -535,7 +519,7 @@ def shop():
 
 
 if __name__ == '__main__':
-    #db.drop_all()
+    db.drop_all()
     db.create_all()
     url = "http://127.0.0.1:5000"
     webbrowser.open_new(url)

@@ -1,0 +1,119 @@
+<!--
+
+<h2>店铺拥有者</h2>
+<h3>业务操作</h3>
+
+<h>
+    1.流水查询
+    2.向仓库拿菜
+    3.添加菜
+    4.员工管理
+
+</h>
+form1--form9
+//-->
+{% extends "layout.html" %}
+
+{% block content %}
+
+    <style>
+        .nssb {
+            top: 10%;
+            z-index: 9999;
+            position: fixed;
+            left: 10px;
+        }
+        /*表*/
+        ul.nav-tabs {
+            width: 110px;
+            margin-top: 20px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.067);
+        }
+
+            ul.nav-tabs li {
+                margin: 0;
+                border-top: 1px solid #ddd;
+            }
+
+                ul.nav-tabs li:first-child {
+                    border-top: none;
+                }
+
+                ul.nav-tabs li a {
+                    margin: 0;
+                    padding: 8px 16px;
+                    border-radius: 0;
+                }
+
+                ul.nav-tabs li.active a, ul.nav-tabs li.active a:hover {
+                    color: #fff;
+                    background: #0088cc;
+                    border: 1px solid #0088cc;
+                }
+
+                ul.nav-tabs li:first-child a {
+                    border-radius: 4px 4px 0 0;
+                }
+
+                ul.nav-tabs li:last-child a {
+                    border-radius: 0 0 4px 4px;
+                }
+
+            ul.nav-tabs.affix {
+                top: 10%; /* Set the top position of pinned element */
+
+            }
+    </style>
+    <div>
+            <div class="nssb" >
+                <br />
+                <br />
+                <br />
+                <ul class="nav nav-tabs nav-stacked"  >
+                    <li id="li2" style="background-color: #87CEFF"><a href="shop1.html">销售查询</a></li>
+                    <li id="li3" style="background-color: azure"><a href="shop2.html">员工管理</a></li>
+                     <li id="li4" style="background-color: azure"><a href="shop3.html">主要业务</a></li>
+                </ul>
+            </div>
+
+    </div>
+
+     <div id="div2" >
+            <div >
+                <h2>每日销售查询</h2>
+                 <div>
+                      <form method="post">
+                            <div style=" flex-direction:row;width: 100% ">
+                                <div style="display:inline-block;">
+                                    {{ form1.shopid.label }}<br><br><!-- 店铺ID-->
+                                    {{ form1.date.label }}<br><br><!-- 日期-->
+                                </div>
+                                <div style="width: 20%;display:inline-block;">
+                                    {{ form1.shopid(calss_="form-control") }}<br/><br>
+                                    {{ form1.date(calss_="form-control") }}<br/><br/>
+                                </div>
+                                <div>
+                                    {{ form1.submit(class_="btn btn-default") }}
+                                    <!-- 提交-->
+                                </div>
+                            </div>
+                        </form>
+                  </div>
+
+                         <ul>
+                             <li>流水记录1</li>
+                              <li>流水记录1</li>
+                              <li>流水记录1</li>
+                              <li>流水记录1</li>
+                              <li>流水记录1</li>
+                              <li>流水记录1</li>
+                         </ul>
+            </div>
+     </div>
+
+
+
+{% endblock %}
+

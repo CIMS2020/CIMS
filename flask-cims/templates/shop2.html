@@ -1,0 +1,190 @@
+<!--
+
+<h2>店铺拥有者</h2>
+<h3>业务操作</h3>
+
+<h>
+    1.流水查询
+    2.向仓库拿菜
+    3.添加菜
+    4.员工管理
+
+</h>
+form1--form9
+//-->
+{% extends "layout.html" %}
+
+{% block content %}
+
+    <style>
+        .nssb {
+            top: 10%;
+            z-index: 9999;
+            position: fixed;
+            left: 10px;
+        }
+        /*表*/
+        ul.nav-tabs {
+            width: 110px;
+            margin-top: 20px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.067);
+        }
+
+            ul.nav-tabs li {
+                margin: 0;
+                border-top: 1px solid #ddd;
+            }
+
+                ul.nav-tabs li:first-child {
+                    border-top: none;
+                }
+
+                ul.nav-tabs li a {
+                    margin: 0;
+                    padding: 8px 16px;
+                    border-radius: 0;
+                }
+
+                ul.nav-tabs li.active a, ul.nav-tabs li.active a:hover {
+                    color: #fff;
+                    background: #0088cc;
+                    border: 1px solid #0088cc;
+                }
+
+                ul.nav-tabs li:first-child a {
+                    border-radius: 4px 4px 0 0;
+                }
+
+                ul.nav-tabs li:last-child a {
+                    border-radius: 0 0 4px 4px;
+                }
+
+            ul.nav-tabs.affix {
+                top: 10%; /* Set the top position of pinned element */
+
+            }
+    </style>
+    <div>
+            <div class="nssb" >
+                <br />
+                <br />
+                <br />
+                <ul class="nav nav-tabs nav-stacked"  >
+                    <li id="li2" style="background-color: azure"><a href="shop1.html">销售查询</a></li>
+                    <li id="li3" style="background-color: #87CEFF"><a href="shop2.html">员工管理</a></li>
+                     <li id="li4" style="background-color: azure"><a href="shop3.html">主要业务</a></li>
+                </ul>
+            </div>
+
+    </div>
+
+    <div >
+            <div>
+
+                <h2>添加员工</h2>
+                 <div>
+                     <form method="post">
+                            <div style=" flex-direction:row;width: 100% ">
+                                <div style="display:inline-block;">
+                                    {{ form2.shopid.label }}<br><br><!-- 店铺ID-->
+                                    {{ form2.workername.label }}<br><br><!-- 员工姓名-->
+                                    {{ form2.workerid.label }}<br><br><!-- 员工ID-->
+                                    {{ form2.workertel.label }}<br><br><!-- 员工手机-->
+                                    {{ form2.workersal.label }}<br><br> <!-- 员工工资-->
+                                </div>
+                                <div style="width: 20%;display:inline-block;">
+                                    {{ form2.shopid(calss_="form-control") }}<br/><br>
+                                    {{ form2.workername(calss_="form-control") }}<br/><br>
+                                    {{ form2.workerid(calss_="form-control") }}<br/><br>
+                                    {{ form2.workertel(calss_="form-control") }}<br/><br>
+                                    {{ form2.workersal(calss_="form-control") }}<br/><br>
+                                    {{ form2.shopid(calss_="form-control") }}<br/><br>
+
+                                </div>
+                                <div>
+                                    {{ form2.submit(class_="btn btn-default") }}
+                                    <!-- 添加-->
+                                </div>
+                            </div>
+                     </form>
+                  </div>
+            </div>
+             <div>
+                <h2>员工查询</h2>
+                   <div>
+                         <form method="post">
+                            <div style=" flex-direction:row;width: 100% ">
+                                <div style="display:inline-block;">
+                                    {{ form3.workerid.label }}<br><br><!-- 员工ID-->
+                                </div>
+                                <div style="width: 20%;display:inline-block;">
+                                    {{ form3.workerid(calss_="form-control") }}<br/><br>
+                                </div>
+                                <div>
+                                    {{ form3.submit(class_="btn btn-default") }}
+                                    <!-- 查询-->
+                                </div>
+                            </div>
+                        </form>
+                  </div>
+                <div>
+                    <h3>查询结果</h3>
+                    <p>员工信息:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
+                </div>
+             </div>
+            <div>
+                <h2>删除员工</h2>
+                <div>
+                      <form method="post">
+                            <div style=" flex-direction:row;width: 100% ">
+                                <div style="display:inline-block;">
+                                    {{ form4.shopid.label }}<br><br><!-- 店铺ID-->
+                                    {{ form4.workerid.label }}<br><br><!-- 员工ID-->
+                                </div>
+                                <div style="width: 20%;display:inline-block;">
+                                    {{ form4.shopid(calss_="form-control") }}<br/><br>
+                                    {{ form4.workerid(calss_="form-control") }}<br/><br>
+                                </div>
+                                <div>
+                                    {{ form4.submit(class_="btn btn-default") }}
+                                    <!-- 删除-->
+                                </div>
+                            </div>
+                        </form>
+                  </div>
+            </div>
+             <div>
+                <h2>修改员工信息</h2>
+                  <div>
+                      <form method="post">
+                            <div style=" flex-direction:row;width: 100% ">
+                                <div style="display:inline-block;">
+                                    {{ form5.shopid.label }}<br><br><!-- 店铺ID-->
+                                    {{ form5.workerid.label }}<br><br><!-- id-->
+                                    {{ form5.workername.label }}<br><br><!-- 姓名-->
+                                    {{ form5.workertel.label }}<br><br><!-- 手机-->
+                                    {{ form5.workersal.label }}<br><br> <!-- 工资-->
+                                </div>
+                                <div style="width: 20%;display:inline-block;">
+                                    {{ form5.shopid(calss_="form-control") }}<br/><br>
+                                    {{ form5.workerid(calss_="form-control") }}<br/><br>
+                                    {{ form5.workername(calss_="form-control") }}<br/><br>
+                                    {{ form5.workertel(calss_="form-control") }}<br/><br>
+                                    {{ form5.workersal(calss_="form-control") }}<br/><br>
+                                </div>
+                                <div>
+                                    {{ form5.submit(class_="btn btn-default") }}
+                                    <!-- 修改-->
+                                </div>
+                            </div>
+                     </form>
+                  </div>
+            </div>
+    </div>
+
+
+
+{% endblock %}
+

@@ -3,7 +3,8 @@ from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
 from flask import flash
 from flask import Flask, render_template, request
-from flask_bootstrap import forms
+from flask_bootstrap import forms, Bootstrap
+from flask_bootstrap import Bootstrap   #导入
 from wtforms import ValidationError
 import time
 import json
@@ -17,9 +18,26 @@ from wtforms.fields import *
 from flask_wtf import FlaskForm
 
 app = Flask(__name__)
+bootstrap = Bootstrap(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mssql+pyodbc://sa:asd@test'#(替换成自己的用户名，密码和dsn）
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 db = SQLAlchemy(app)
+
+
+
+
+
+
+from flask import Flask, render_template, request, flash, make_response
+from flask_wtf import FlaskForm
+from wtforms.fields import *
+from wtforms.validators import DataRequired, EqualTo
+
+app = Flask(__name__)
+# 开启session
+app.secret_key = "aasdfsdf"
+# app.config["SECRET_KEY"] = "abcd"
+app.config["WTF_CSRF_ENABLED"] = False
 
 # 数据库数据类型
 class testflask(db.Model):
@@ -58,9 +76,9 @@ class worker(db.Model):
 class stu(db.Model):
     sno = db.Column(db.Integer, primary_key=True)
     sname = db.Column(db.String(30))
-    ssex = db.Column(db.String(30))
+    sage = db.Column(db.Integer)
     tel = db.Column(db.String(30))
-    dept = db.Column(db.String(30))
+
 
 class cost(db.Model):
     sno = db.Column(db.String(30), primary_key=True)
@@ -203,26 +221,29 @@ def comsumers():
 
 app.config["SECRET_KEY"] = 'TPmi4aLWRbyVq8zu9v82dWYW1'
 
-@app.route('/login', methods=["get", "post"])
-def login():
-    if request.method == "POST":
-        # 取到表单中提交上来的三个参数
-        userid= request.form.get("userid")
-        password = request.form.get("password")
-        flash('666')
-        if not all([userid, password]):
-            # 向前端界面弹出一条提示(闪现消息)
-            return render_template(
-                'login.html',
-                title='Shop',
-                year=datetime.now().year,
-                message='信息不全'
-            )
-        else:
-            # 假装做注册操作
-            print(userid, password)
 
-    return render_template('login.html')
+class Login(FlaskForm):
+    username = StringField(label="用户名", validators=[DataRequired("请输入用户名")])
+    password = PasswordField(label="密码", validators=[DataRequired("请输入密码")])
+    password2 = PasswordField(label="密码", validators=[DataRequired("请输入密码"), EqualTo('password', "密码输入不一致")])
+    submit = SubmitField(label="提交")
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+     login_form = Login()
+     if request.method == 'POST':
+         if login_form.validate_on_submit():
+             username = request.form.get("username")
+             password = request.form.get("password")
+             password2 = request.form.get("password2")
+             print(username, password, password2)
+             # return make_response("success")
+             return redirect(url_for('home'))
+         else:
+             flash("参数错误请重新输入")
+     return render_template("login.html", form=login_form)
+
+
     #10*2 选择题
 #名词解释 3*4题
 #简答 7 30分

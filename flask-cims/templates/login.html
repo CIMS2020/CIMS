@@ -1,6 +1,12 @@
 
 {% extends "layout.html" %}
 
+
+
+{% import 'bootstrap/wtf.html' as wtf %}
+
+
+
 {% block content %}
 
 
@@ -12,23 +18,28 @@
      {{ form.password.label }}{{ form.password }}<br/>
      {{ form.submit }}
  </form>
+<h><a class="btn btn-default" href="{{ url_for('register') }}">快速注册</a></h>
+</div>
 
 
 
 
+    <div class="container">
+	<div class="row clearfix">
+		<div class="col-md-12 column">
+			<form role="form" method="post">
+				<div class="form-group">
+					 <label for="exampleInputEmail1">{{ form.username.label }}</label><div class="form-control">{{ form.username }}</div>
+				</div>
+				<div class="form-group">
+					 <label for="exampleInputPassword1">密码:</label><input  class="form-control" type="password" name="password" placeholder="请输入密码" />
+				</div>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+                <button type="submit" class="btn btn-default">登录</button>  <h><a class="btn btn-default" href="{{ url_for('register') }}">快速注册</a></h>
+			</form>
+		</div>
+	</div>
 </div>
 {% endblock %}
+

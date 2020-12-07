@@ -22,8 +22,10 @@ bootstrap = Bootstrap(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mssql+pyodbc://sa:asd@test'#(替换成自己的用户名，密码和dsn）
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 db = SQLAlchemy(app)
-
-
+# 开启session
+app.config["SECRET_KEY"] = 'TPmi4aLWRbyVq8zu9v82dWYW1'
+# app.config["SECRET_KEY"] = "abcd"
+app.config["WTF_CSRF_ENABLED"] = False
 
 
 
@@ -33,17 +35,9 @@ from flask_wtf import FlaskForm
 from wtforms.fields import *
 from wtforms.validators import DataRequired, EqualTo
 
-app = Flask(__name__)
-# 开启session
-app.secret_key = "aasdfsdf"
-# app.config["SECRET_KEY"] = "abcd"
-app.config["WTF_CSRF_ENABLED"] = False
+
 
 # 数据库数据类型
-class testflask(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    canname = db.Column(db.String(30))
-
 class restaurant(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     rname = db.Column(db.String(30))
@@ -92,8 +86,8 @@ class card(db.Model):
     tel = db.Column(db.String(30))
 
 class adm(db.Model):
-    id = db.Column(db.String(30), primary_key=True)
-    ano = db.Column(db.String(30))
+    id = db.Column(db.Integer, primary_key=True)
+    #ano = db.Column(db.String(30))
     aname = db.Column(db.String(30))
     password = db.Column(db.String(30))
 
@@ -101,13 +95,13 @@ class adm(db.Model):
 class Login(FlaskForm):
     username = StringField(label="用户名", validators=[DataRequired("请输入用户名")])
     password = PasswordField(label="密码", validators=[DataRequired("请输入密码")])
-    submit = SubmitField(label="注册")
+    submit = SubmitField(label="登录")
 
 class Register(FlaskForm):
     username = StringField(label="用户名", validators=[DataRequired("请输入用户名")])
     password = PasswordField(label="密码", validators=[DataRequired("请输入密码")])
-    password2= PasswordField(label="确认密码", validators=[DataRequired("请输入密码")])
-    submit = SubmitField(label="登陆")
+    password2= PasswordField(label="确认密码", validators=[DataRequired("请输入密码"), EqualTo('password', "密码输入不一致")])
+    submit = SubmitField(label="注册")
 
 class CreateCon(FlaskForm):
     username = StringField(label="用户名", validators=[DataRequired("请输入用户名")])
@@ -126,6 +120,86 @@ class AddGoods(FlaskForm):
     goodsname = StringField(label="货物名", validators=[DataRequired("请输入货物名")])
     goodsnum = StringField(label="货物数量", validators=[DataRequired("请输入货物数量")])
     submit = SubmitField(label="添加")
+
+class SearchAllCon(FlaskForm):
+    submit = SubmitField(label="查询")
+
+class SearchAllShop(FlaskForm):
+    submit = SubmitField(label="查询")
+
+class SearchWare(FlaskForm):
+    submit = SubmitField(label="查询")
+
+#Shop.html
+class DailySearch(FlaskForm):
+    shopid = StringField(label="店铺ID", validators=[DataRequired("请输入店铺ID")])
+    date = StringField(label="日期", validators=[DataRequired("请选择日期")])
+    submit = SubmitField(label="添加")
+
+class AddWorker(FlaskForm):
+    shopid = StringField(label="店铺ID", validators=[DataRequired("请输入店铺ID")])
+    workername = StringField(label="员工姓名", validators=[DataRequired("请输入员工姓名")])
+    workerid = StringField(label="员工ID", validators=[DataRequired("请输入员工ID")])
+    workertel = StringField(label="员工电话", validators=[DataRequired("请输入员工电话")])
+    workersal = StringField(label="员工工资", validators=[DataRequired("请输入员工工资")])
+    submit = SubmitField(label="添加")
+
+class SearchWorker(FlaskForm):
+    workerid = StringField(label="员工ID", validators=[DataRequired("请输入员工ID")])
+    submit = SubmitField(label="查询")
+
+class DeleteWorker(FlaskForm):
+    shopid = StringField(label="店铺ID", validators=[DataRequired("请输入店铺ID")])
+    workerid = StringField(label="员工ID", validators=[DataRequired("请输入员工ID")])
+    submit = SubmitField(label="删除")
+
+class UpdateWorker(FlaskForm):
+    shopid = StringField(label="店铺ID", validators=[DataRequired("请输入店铺ID")])
+    workerid = StringField(label="员工ID", validators=[DataRequired("请输入员工ID")])
+    workername = StringField(label="员工姓名", validators=[DataRequired("请输入员工姓名")])
+    workertel = StringField(label="员工电话", validators=[DataRequired("请输入员工电话")])
+    workersal = StringField(label="员工工资", validators=[DataRequired("请输入员工工资")])
+    submit = SubmitField(label="添加")
+
+class GetStuff(FlaskForm):
+    shopid = StringField(label="店铺ID", validators=[DataRequired("请输入店铺ID")])
+    goodsname = StringField(label="货物名", validators=[DataRequired("请输入货物名")])
+    goodsnum = StringField(label="货物数量", validators=[DataRequired("请输入货物数量")])
+    submit = SubmitField(label="取出")
+
+class AddtoList(FlaskForm):
+    shopid = StringField(label="店铺ID", validators=[DataRequired("请输入店铺ID")])
+    foodname = StringField(label="食物名称", validators=[DataRequired("请输入食物名称")])
+    price = StringField(label="食物价格", validators=[DataRequired("请输入食物价格")])
+    submit = SubmitField(label="添加")
+
+class BrowseList(FlaskForm):
+    shopid = StringField(label="店铺ID", validators=[DataRequired("请输入店铺ID")])
+    submit = SubmitField(label="添加")
+
+#Consumer.html
+#充值
+class Invest(FlaskForm):
+    userid = StringField(label="UID", validators=[DataRequired("请输入UID")])
+    recharge_amount = StringField(label="金额", validators=[DataRequired("请输入金额")])
+    submit = SubmitField(label="充值")
+
+class SearchConsume(FlaskForm):
+    userid = StringField(label="UID", validators=[DataRequired("请输入UID")])
+    submit = SubmitField(label="充值")
+
+class SearchAllShops(FlaskForm):
+    submit = SubmitField(label="查询")
+
+class SearchList(FlaskForm):
+    shopid = StringField(label="店铺ID", validators=[DataRequired("请输入店铺ID")])
+    submit = SubmitField(label="查询菜单")
+
+class Consuming(FlaskForm):
+    userid = StringField(label="UID", validators=[DataRequired("请输入UID")])
+    foodid = StringField(label="食物序号", validators=[DataRequired("请输入食物序号")])
+    date = StringField(label="日期", validators=[DataRequired("请输入日期")])
+    submit = SubmitField(label="确定")
 
 
 @app.route('/')
@@ -164,31 +238,15 @@ def about():
 
 @app.route('/register', methods=["get", "post"])
 def register():
-    if request.method == "POST":
-        # 取到表单中提交上来的三个参数
-        userid= request.form.get("userid")
-        username = request.form.get("username")
-        password = request.form.get("password")
-        password2 = request.form.get("password2")
-        test=""
-        if not all([username, password, password2]):
-            # 向前端界面弹出一条提示(闪现消息)
-            print("参数不足")
-            return render_template('register.html',text="失败")
-        elif password != password2:
-            print("两次密码不一致")
-            #flash("两次密码不一致")
-        else:
-            # 假装做注册操作
-            # flash("注册成功！")
-
-            print("注册成功！")
-
-            return render_template('register.html',text="成功")
-            print(userid,username, password, password2)
-
-
-    return render_template('register.html')
+    form = Register()
+    if form.validate_on_submit():
+        admin = adm(aname=form.username.data, password=form.password.data)
+        db.session.add(admin)
+        db.session.commit()
+        return redirect(url_for('login'))
+    return render_template('register.html',
+                           title = 'Register',
+                           form = form)
 
 
 @app.route('/canteen')
@@ -213,12 +271,6 @@ def comsumers():
 
 app.config["SECRET_KEY"] = 'TPmi4aLWRbyVq8zu9v82dWYW1'
 
-
-class Login(FlaskForm):
-    username = StringField(label="用户名", validators=[DataRequired("请输入用户名")])
-    password = PasswordField(label="密码", validators=[DataRequired("请输入密码")])
-    password2 = PasswordField(label="密码", validators=[DataRequired("请输入密码"), EqualTo('password', "密码输入不一致")])
-    submit = SubmitField(label="提交")
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -263,7 +315,8 @@ def shop():
 
 
 if __name__ == '__main__':
+    db.drop_all()
     db.create_all()
     url = "http://127.0.0.1:5000"
     webbrowser.open_new(url)
-    app.run()
+    app.run(debug=True)

@@ -122,20 +122,61 @@ form1--form5
                             </div>
                 </form>
                   </div>
-            <h2> 你的余额还有100元</h2>
+                <h2> 余额:100元</h2>
                 <h3>数据分析:</h3>
                 <p>最高消费:20元</p>
                 <p>平均消费:15元</p>
                 <p>最低消费:10元</p>
               <p>总消费:200元</p>
-                <button> 流水查询</button>
-                <ul>
-                    <li>时间:食堂:店铺:菜名:金额</li>
-                     <li>时间:食堂:店铺:菜名:金额</li>
-                     <li>时间:食堂:店铺:菜名:金额</li>
-                     <li>时间:食堂:店铺:菜名:金额</li>
-                    <li>时间:食堂:店铺:菜名:金额</li>
-                </ul>
+
+              <h3>消费记录</h3>
+               <div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span12">
+			<table class="table">
+				<thead>
+					<tr class="info">
+						<th>
+							时间
+						</th>
+						<th>
+							消费者ID
+						</th>
+						<th>
+							店铺ID
+						</th>
+						<th>
+							金额
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+                {% if records %}
+                    {% for item in records %}
+                         <tr class="success">
+						<td>
+							{{ item.date }}
+						</td>
+						<td>
+							{{ item.sno }}
+						</td>
+						<td>
+							{{ item.rno }}
+						</td>
+						<td>
+							{{ item.cost }}
+						</td>
+					</tr>
+                    {% endfor %}
+                {% else %}
+                    <h3>还没有开始消费</h3>
+                {% endif %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+          </div>
 
              </div>
     </div>

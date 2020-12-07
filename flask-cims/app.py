@@ -343,7 +343,7 @@ def ware_manage():
     form5 = AddGoods()
     form6 = SearchWare()
     if form5.validate_on_submit():
-        goods = Goods(goodsname=form5.goodsname.data,amount=form5.goodsnum)
+        goods = Goods(goodsname=form5.goodsname.data,amount=form5.goodsnum.data)
         db.session.add(goods)
         db.session.commit()
         flash("添加食材成功！")

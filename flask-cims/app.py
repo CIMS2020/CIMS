@@ -71,7 +71,7 @@ class stu(db.Model):
     tel = db.Column(db.String(30))
 
 
-class cost(db.Model):
+class Cost(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     sno = db.Column(db.String(30))
     date = db.Column(db.String(30))
@@ -194,7 +194,7 @@ class Invest(FlaskForm):
 
 class SearchConsume(FlaskForm):
     userid = StringField(label="UID", validators=[DataRequired("请输入UID")])
-    submit = SubmitField(label="充值")
+    submit = SubmitField(label="查询")
 
 class SearchAllShops(FlaskForm):
     submit = SubmitField(label="查询")
@@ -220,26 +220,7 @@ def home():
         year=datetime.now().year,
     )
 
-@app.route('/contact')
-def contact():
-    """Renders the contact page."""
-    return render_template(
-        'contact.html',
-        title='Contact',
-        year=datetime.now().year,
-        message='Your contact page.'
-    )
 
-
-@app.route('/about')
-def about():
-    """Renders the about page."""
-    return render_template(
-        'about.html',
-        title='About',
-        year=datetime.now().year,
-        message='Your application description page.'
-    )
 #add
 
 
@@ -283,8 +264,11 @@ def create_consumer():
     form1 = CreateCon()
     form2 = SearchAllCon()
     if form1.validate_on_submit():
+        card = Card(son=form1.userid.data, money=0)
         student = stu(sname=form1.username.data,sage=form1.age.data,sno=form1.userid.data,tel=form1.tel.data)
         db.session.add(student)
+        db.session.commit()
+        db.session.add(card)
         db.session.commit()
         flash("创建消费者成功！")
         return redirect(url_for('create_consumer'))
@@ -386,23 +370,30 @@ class Card(db.Model):
     money = db.Column(db.FLOAT)
  #   tel = db.Column(db.String(30))
 '''
-@app.route('/comsumers')
-def comsumers():
+@app.route('/invest')
+def invest():
     form1 = Invest()
+    form2 = SearchConsume()
     if form1.validate_on_submit():
         card = Card(son=form1.userid.data,money=form1.recharge_amount.data)
         db.session.add(card)
         db.session.commit()
-
+        return render_template(
+            'Invest.html',
+            title='Comsumers',
+            year=datetime.now().year,
+            message='Your application description page.'
+        )
+    if form2.validate_on_submit():
+        userid = form2.userid.data
+        session.query(Cost)
     """Renders the comsumers page."""
     return render_template(
-        'comsumers.html',
+        'Invest.html',
         title='Comsumers',
         year=datetime.now().year,
         message='Your application description page.'
     )
-
-app.config["SECRET_KEY"] = 'TPmi4aLWRbyVq8zu9v82dWYW1'
 
 
 @app.route("/login", methods=["GET", "POST"])

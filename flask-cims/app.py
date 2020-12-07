@@ -49,13 +49,13 @@ class Goods(db.Model):
     goodsname = db.Column(db.String(30))
     amount = db.Column(db.Integer)
 
-class food(db.Model):
+class Food(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     fname = db.Column(db.String(30))
     price = db.Column(db.FLOAT)
     rno = db.Column(db.String(30))
 
-class worker(db.Model):
+class Worker(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     wno = db.Column(db.String(30))
     wsex = db.Column(db.String(30))
@@ -72,17 +72,19 @@ class stu(db.Model):
 
 
 class cost(db.Model):
-    sno = db.Column(db.String(30), primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
+    sno = db.Column(db.String(30))
     date = db.Column(db.String(30))
     cost = db.Column(db.FLOAT)
     rno = db.Column(db.String(30))
 
-class card(db.Model):
-    sno = db.Column(db.String(30), primary_key=True)
+class Card(db.Model):
+    id = db.Column(db.Integer,primary_key= True)
+    sno = db.Column(db.String(30))
     money = db.Column(db.FLOAT)
-    tel = db.Column(db.String(30))
+ #   tel = db.Column(db.String(30))
 
-class adm(db.Model):
+class Adm(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     #ano = db.Column(db.String(30))
     aname = db.Column(db.String(30))
@@ -93,7 +95,7 @@ class adm(db.Model):
 # 表单数据类型
 def PasswordChcek():
     def check(form, field):
-        user = adm.query.filter_by(aname=form.username.data).first()
+        user = Adm.query.filter_by(aname=form.username.data).first()
         if user is None :
             raise ValidationError('')
         if field.data != user.password :
@@ -246,7 +248,7 @@ def about():
 def register():
     form = Register()
     if form.validate_on_submit():
-        admin = adm(aname=form.username.data, password=form.password.data)
+        admin = Adm(aname=form.username.data, password=form.password.data)
         db.session.add(admin)
         db.session.commit()
         flash("注册成功！")
@@ -275,82 +277,123 @@ class Goods(db.Model):
     goodsname = db.Column(db.String(30))
     amount = db.Column(db.Integer)
 '''
-@app.route('/canteen', methods=["get", "post"])
-def canteen():
+# @app.route('/canteen', methods=["get", "post"])
+@app.route('/create_consumer', methods=["get", "post"])
+def create_consumer():
     form1 = CreateCon()
     form2 = SearchAllCon()
-    form3 = CreateShop()
-    form4 = SearchAllShops()
-    form5 = AddGoods()
-    form6 = SearchWare()
     if form1.validate_on_submit():
         student = stu(sname=form1.username.data,sage=form1.age.data,sno=form1.userid.data,tel=form1.tel.data)
         db.session.add(student)
         db.session.commit()
         flash("创建消费者成功！")
-        return redirect(url_for('canteen'))
+        return redirect(url_for('create_consumer'))
     """Renders the canteen page."""
     if form2.validate_on_submit():
         myData = stu.query.all()
         return render_template(
-            'canteen.html',
+            'create_consumer.html',
             title='Canteen',
             year=datetime.now().year,
             message='Your application description page.',
             form1=form1,
             form2=form2,
-            form3=form3,
-            form4=form4,
-            form5=form5,
-            form6=form6,
             stu = myData
         )
-    if form3.validate_on_submit():
-        shop = Shop(shopname=form3.shopname.data,shopno=form3.shopid.data,shopaddr=form3.shopaddr.data)
-        db.session.add(shop)
-        db.session.commit()
-        flash("创建店铺成功!")
-    if form4.validate_on_submit():
-        myData = Shop.query.all()
-        output = []
-        for record in myData:
-            data = {}
-            data['shopname'] = record.shopname
-            data['shopno'] = record.shopno
-            data['shopaddr'] = record.shopaddr
-            output.append(data)
-        return jsonify({'message': output})
-    if form5.validate_on_submit():
-        goods = Goods(goodsname=form5.goodsname.data,amount=form5.goodsnum)
-        db.session.add(goods)
-        db.session.commit()
-        flash("添加食材成功！")
-    if form6.validate_on_submit():
-        myData = Goods.query.all()
-        output = []
-        for record in myData:
-            data = {}
-            data['id'] = record.id
-            data['goodsname'] = record.goodsname
-            data['amount'] = record.amount
-            output.append(data)
-        print(output)
-        return jsonify({'message': output})
     return render_template(
-        'canteen.html',
+        'create_consumer.html',
         title='Canteen',
         year=datetime.now().year,
         message='Your application description page.',
         form1=form1,
         form2=form2,
+    )
+@app.route('/create_shop', methods=["get", "post"])
+def create_shop():
+    form3 = CreateShop()
+    form4 = SearchAllShops()
+    if form3.validate_on_submit():
+        shop = Shop(shopname=form3.shopname.data,shopno=form3.shopid.data,shopaddr=form3.shopaddr.data)
+        db.session.add(shop)
+        db.session.commit()
+        flash("创建店铺成功!")
+        return redirect(url_for('create_shop'))
+    if form4.validate_on_submit():
+        myData = Shop.query.all()
+        return render_template(
+            'create_shop.html',
+            title='Canteen',
+            year=datetime.now().year,
+            message='Your application description page.',
+            form3=form3,
+            form4=form4,
+            stu=myData
+        )
+    return render_template(
+        'create_shop.html',
+        title='Canteen',
+        year=datetime.now().year,
+        message='Your application description page.',
         form3=form3,
         form4=form4,
+    )
+
+@app.route('/ware_manage', methods=["get", "post"])
+def ware_manage():
+    form5 = AddGoods()
+    form6 = SearchWare()
+    if form5.validate_on_submit():
+        goods = Goods(goodsname=form5.goodsname.data,amount=form5.goodsnum)
+        db.session.add(goods)
+        db.session.commit()
+        flash("添加食材成功！")
+        return redirect(url_for('ware_manage'))
+    if form6.validate_on_submit():
+        myData = Goods.query.all()
+        return render_template(
+            'ware_manage.html',
+            title='Canteen',
+            year=datetime.now().year,
+            message='Your application description page.',
+            form5=form5,
+            form6=form6,
+            goods=myData
+        )
+    return render_template(
+        'ware_manage.html',
+        title='Canteen',
+        year=datetime.now().year,
+        message='Your application description page.',
         form5=form5,
         form6=form6,
     )
 
+
+'''
+class Invest(FlaskForm):
+    userid = StringField(label="UID", validators=[DataRequired("请输入UID")])
+    recharge_amount = StringField(label="金额", validators=[DataRequired("请输入金额")])
+    submit = SubmitField(label="充值")
+class Cost(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    sno = db.Column(db.String(30))
+    date = db.Column(db.String(30))
+    cost = db.Column(db.FLOAT)
+    rno = db.Column(db.String(30))
+class Card(db.Model):
+    id = db.Column(db.Integer,primary_key= True)
+    sno = db.Column(db.String(30))
+    money = db.Column(db.FLOAT)
+ #   tel = db.Column(db.String(30))
+'''
 @app.route('/comsumers')
 def comsumers():
+    form1 = Invest()
+    if form1.validate_on_submit():
+        card = Card(son=form1.userid.data,money=form1.recharge_amount.data)
+        db.session.add(card)
+        db.session.commit()
+
     """Renders the comsumers page."""
     return render_template(
         'comsumers.html',
@@ -377,7 +420,7 @@ def login():
 @app.context_processor
 def my_context_processor():
     aname = session.get('name')
-    user = adm.query.filter_by(aname=aname).first()
+    user = Adm.query.filter_by(aname=aname).first()
     if user:
         return {'user': user}
     return{}

@@ -60,52 +60,52 @@
                 <br />
                 <br />
                 <ul class="nav nav-tabs nav-stacked"  >
-                    <li id="li1" style="background-color: azure"><a href="canteen1.html">创建消费者</a></li>
-                    <li id="li3" style="background-color: azure"><a href="canteen2.html">创建店铺</a></li>
-                    <li id="li5" style="background-color: #87CEFF"><a href="canteen3.html">仓库管理</a></li>
+                    <li id="li1" style="background-color: #87CEFF"><a href="create_consumer">创建消费者</a></li>
+                    <li id="li3" style="background-color: azure"><a href="create_shop">创建店铺</a></li>
+                    <li id="li5" style="background-color: azure"><a href="ware_manage">仓库管理</a></li>
                 </ul>
             </div>
 
     </div>
-   <div >
-            <div>
-                <h2>仓库管理</h2>
-                <div>
-                     <h3>进货</h3>
-                    <div>
-                          <form method="post">
+    <div id="div1" >
+        <div>
+            <h1>创建消费者</h1>
+                  <div>
+                        <form method="post">
                             <div style=" flex-direction:row;width: 100% ">
                                 <div style="display:inline-block;">
-                                    {{ form5.goodsname.label }}<br><br><!-- 货物名-->
-                                    {{ form5.goodsnum.label }}<br><br><!-- 货物数量-->
+                                    {{ form1.username.label }}<br><br> <!-- 用户名-->
+                                    {{ form1.userid.label }}<br><br><!-- UID-->
+                                    {{ form1.age.label }}<br><br><!-- 年龄-->
+                                    {{ form1.tel.label }}<br><br><!-- 手机号-->
                                 </div>
                                 <div style="width: 20%;display:inline-block;">
-                                    {{ form5.goodsname(calss_="form-control") }}<br/><br>
-                                    {{ form5.goodsnum(calss_="form-control") }}<br/><br/>
+                                    {{ form1.username(calss_="form-control") }}<br/><br>
+                                    {{ form1.userid(calss_="form-control") }}<br/><br/>
+                                     {{ form1.age(calss_="form-control") }}<br/><br>
+                                    {{ form1.tel(calss_="form-control") }}<br/><br/>
                                 </div>
                                 <div>
-                                    {{ form5.submit(class_="btn btn-default") }}
-                                    <!-- 提交-->
+                                    {{ form1.submit(class_="btn btn-default") }}
                                 </div>
                             </div>
                         </form>
-                    </div>
-                </div>
-                <div>
-                    <h2>仓库</h2>
-                     <div>
-                         {% if Goods%}
-                             {% for item in Goods %}
-                                 {{ item.goodsname }}//{{ item.amount }}<br>
-                             {% endfor %}
-                         {% else %}
-                             <h3>仓库还没有物资</h3>Goods
-                         {% endif %}
-                </div>
-                </div>
-            </div>
-    </div>
+                  </div>
+        </div>
 
+         <div>
+            <h1>消费者列表</h1>
+                <div>
+                {% if stu %}
+                    {% for item in stu %}
+                       {{ item.sno }} //{{ item.sname }}//{{ item.sage }}//{{ item.tel }}<br>
+                    {% endfor %}
+                {% else %}
+                    <h3>还没有创建消费者</h3>
+                {% endif %}
+                </div>
+        </div>
+    </div>
 
 
 {% endblock %}

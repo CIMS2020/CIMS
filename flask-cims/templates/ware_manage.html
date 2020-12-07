@@ -1,20 +1,4 @@
-<!--
 
-<h2>食堂管理员</h2>
-<h3>业务范围</h3>
-
-<h>
-1. 食堂总流水查询(一个食堂多个店铺)--可视化???
-2.消费者消费记录查询
-3.食堂流水数据分析(某一天到某一天的流水查询)
-......
-4.仓库进货操作
-5.查询仓库数据
-</h>
-
-form1---form6
-
-//-->
 {% extends "layout.html" %}
 
 {% block content %}
@@ -76,51 +60,53 @@ form1---form6
                 <br />
                 <br />
                 <ul class="nav nav-tabs nav-stacked"  >
-                    <li id="li1" style="background-color: azure"><a href="canteen1.html">创建消费者</a></li>
-                    <li id="li3" style="background-color: #87CEFF"><a href="canteen2.html">创建店铺</a></li>
-                    <li id="li5" style="background-color: azure"><a href="canteen3.html">仓库管理</a></li>
+                    <li id="li1" style="background-color: #87CEFF"><a href="create_consumer">创建消费者</a></li>
+                    <li id="li3" style="background-color: azure"><a href="create_shop">创建店铺</a></li>
+                    <li id="li5" style="background-color: azure"><a href="ware_manage">仓库管理</a></li>
                 </ul>
             </div>
 
     </div>
-    <div>
+   <div >
             <div>
-            <h1>创建店铺</h1>
-
+                <h2>仓库管理</h2>
                 <div>
-                        <form method="post">
+                     <h3>进货</h3>
+                    <div>
+                          <form method="post">
                             <div style=" flex-direction:row;width: 100% ">
                                 <div style="display:inline-block;">
-                                    {{ form3.shopname.label }}<br><br> <!-- 店铺名-->
-                                    {{ form3.shopid.label }}<br><br><!-- SID-->
-                                    {{ form3.shopaddr.label }}<br><br><!-- 店铺地址-->
+                                    {{ form5.goodsname.label }}<br><br><!-- 货物名-->
+                                    {{ form5.goodsnum.label }}<br><br><!-- 货物数量-->
                                 </div>
                                 <div style="width: 20%;display:inline-block;">
-                                    {{ form3.shopname(calss_="form-control") }}<br/><br>
-                                    {{ form3.shopid(calss_="form-control") }}<br/><br/>
-                                     {{form3.shopaddr(calss_="form-control") }}<br/><br>
+                                    {{ form5.goodsname(calss_="form-control") }}<br/><br>
+                                    {{ form5.goodsnum(calss_="form-control") }}<br/><br/>
                                 </div>
                                 <div>
-                                    {{ form3.submit(class_="btn btn-default") }}
+                                    {{ form5.submit(class_="btn btn-default") }}
                                     <!-- 提交-->
                                 </div>
                             </div>
                         </form>
-
-                  </div>
-            </div>
-            <div>
-            <h1>店铺列表</h1>
+                    </div>
+                </div>
                 <div>
-                {% if shop %}
-                    {% for item in shop %}
-                        {{ item.shopname }}//{{ item.shopno }}//{{ item.shopaddr }}<br>
-                    {% endfor %}
-                {% else %}
-                    <h3>还没有创建店铺</h3>
-                {% endif %}
+                    <h2>仓库</h2>
+                     <div>
+                         {% if Goods%}
+                             {% for item in Goods %}
+                                 {{ item.goodsname }}//{{ item.amount }}<br>
+                             {% endfor %}
+                         {% else %}
+                             <h3>仓库还没有物资</h3>Goods
+                         {% endif %}
+                </div>
                 </div>
             </div>
     </div>
+
+
+
 {% endblock %}
 

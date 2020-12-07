@@ -53,7 +53,7 @@ class Food(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     fname = db.Column(db.String(30))
     price = db.Column(db.FLOAT)
-    rno = db.Column(db.String(30))
+    shopno = db.Column(db.String(30))
 
 class Worker(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -370,7 +370,7 @@ class Card(db.Model):
     money = db.Column(db.FLOAT)
  #   tel = db.Column(db.String(30))
 '''
-@app.route('/invest')
+@app.route('/invest',methods=["get", "post"])
 def invest():
     form1 = Invest()
     form2 = SearchConsume()
@@ -386,14 +386,63 @@ def invest():
         )
     if form2.validate_on_submit():
         userid = form2.userid.data
-        session.query(Cost)
+        records = session.query(Cost).get(userid)
+        return render_template(
+            'Invest.html',
+            title='Comsumers',
+            year=datetime.now().year,
+            message='Your application description page.',
+            records=records
+        )
     """Renders the comsumers page."""
     return render_template(
         'Invest.html',
         title='Comsumers',
         year=datetime.now().year,
-        message='Your application description page.'
+        message='Your application description page.',
+        form1=form1,
+        form2=form2,
     )
+
+@app.route('/mock_consume',methods=["get", "post"])
+def mock_consume():
+    form1 = SearchAllShops()
+    form2 = Consuming()
+    if form1.validate_on_submit():
+        myData = Shop.query.all()
+        return render_template(
+            'mock_consume.html',
+            title='Canteen',
+            year=datetime.now().year,
+            message='Your application description page.',
+            shop=myData
+        )
+    if form2.validate_on_submit():
+        cost = Cost(sno=form2.userid.data,date=form2.date.data,)
+
+    return render_template(
+        'mock_consume.html',
+        title='Canteen',
+        year=datetime.now().year,
+        message='Your application description page.',
+        form3=form1,
+        form4=form2,
+    )
+
+@app.route('/search_sales',methods=["get", "post"])
+def search_sales():
+    return render_template(
+        'search_sales.html',
+        title='Canteen',
+        year=datetime.now().year,
+        message='Your application description page.',
+    )
+
+
+
+
+
+
 
 
 @app.route("/login", methods=["GET", "POST"])

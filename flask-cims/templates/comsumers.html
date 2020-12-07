@@ -113,21 +113,40 @@ form1--form5
     <div id="div1" style="display: block">
            <div>
                <h2>充值与账单</h2>
-                <div>
-                        <form method="post">
-                            {{ form1.userid.label }}{{ form1.userid }}<br/> <!-- UID-->
-                            {{ form1.recharge_amount.label }}{{ form1.recharge_amount }}<br/><!-- 充值金额-->
-                            {{ form1.submit }}<!-- 提交-->
-                        </form>
-                  </div>
+                <form method="post">
+                            <div style=" flex-direction:row;width: 100% ">
+                                <div style="display:inline-block;">
+                                    {{ form1.userid.label }}<br><br><!-- UID-->
+                                    {{ form1.recharge_amount.label }}<br><br><!-- 充值金额-->
+                                </div>
+                                <div style="width: 20%;display:inline-block;">
+                                    {{ form1.userid(calss_="form-control") }}<br/><br>
+                                    {{ form1.recharge_amount(calss_="form-control") }}<br/><br/>
+                                </div>
+                                <div>
+                                    {{ form1.submit(class_="btn btn-default") }}
+                                    <!-- 提交-->
+                                </div>
+                            </div>
+                </form>
            </div>
           <div>
               <h2>消费查询</h2>
                <div>
-                        <form method="post">
-                            {{ form2.userid.label }}{{ form2.userid }}<br/> <!-- UID-->
-                            {{ form2.submit }}<!-- 提交-->
-                        </form>
+                   <form method="post">
+                            <div style=" flex-direction:row;width: 100% ">
+                                <div style="display:inline-block;">
+                                    {{ form2.userid.label }}<br><br><!-- UID-->
+                                </div>
+                                <div style="width: 20%;display:inline-block;">
+                                    {{ form2.userid(calss_="form-control") }}<br/><br>
+                                </div>
+                                <div>
+                                    {{ form2.submit(class_="btn btn-default") }}
+                                    <!-- 提交-->
+                                </div>
+                            </div>
+                </form>
                   </div>
             <h2> 你的余额还有100元</h2>
                 <h3>数据分析:</h3>
@@ -164,7 +183,7 @@ form1--form5
                     <h1>消费模拟</h1>
                     <div>
                         <form method="post">
-                            {{ form3.submit }}<!-- 查询所有店铺-->
+                            {{ form3.submit(class_="btn btn-default") }}<!-- 查询所有店铺-->
                         </form>
                    </div>
 
@@ -178,10 +197,19 @@ form1--form5
                     <li>店铺3</li>
                 </ul>
                     <div>
-                        <form method="post">
-                            {{ form4.shopid.label }}{{ form4.shopid }}<br/> <!-- shopid 选择店铺-->
-                            {{ form4.submit }}<!-- 查询菜单-->
-                        </form>
+                         <form method="post">
+                            <div style=" flex-direction:row;width: 100% ">
+                                <div style="display:inline-block;">
+                                    {{ form4.shopid.label }}<br><br><!-- shopid 选择店铺-->
+                                </div>
+                                <div style="width: 20%;display:inline-block;">
+                                    {{ form4.shopid(calss_="form-control") }}<br/><br>
+                                </div>
+                                <div>
+                                    {{ form4.submit(class_="btn btn-default") }}<!-- 查询菜单-->
+                                </div>
+                            </div>
+                         </form>
                   </div>
 
                 </div>
@@ -195,12 +223,23 @@ form1--form5
 
                 </div>
                  <div>
-                        <form method="post">
-                            {{ form5.userid.label }}{{ form5.userid }}<br/> <!-- userid 消费者-->
-                            {{ form5.foodid.label }}{{ form5.foodid }}<br/> <!-- shopid 选择菜-->
-                            {{ form5.date.label }}{{ form5.date }}<br/> <!-- 消费日期-->
-                            {{ form5.submit }}<!-- 确定-->
-                        </form>
+                     <form method="post">
+                            <div style=" flex-direction:row;width: 100% ">
+                                <div style="display:inline-block;">
+                                    {{ form5.userid.label }}<br><br><!-- userid 消费者-->
+                                    {{ form5.foodid.label }}<br><br><!-- shopid 选择菜-->
+                                    {{ form5.date.label }}<br><br><!-- 消费日期-->
+                                </div>
+                                <div style="width: 20%;display:inline-block;">
+                                    {{ form5.userid(calss_="form-control") }}<br/><br>
+                                    {{ form5.foodid(calss_="form-control") }}<br/><br>
+                                    {{ form5.date(calss_="form-control") }}<br/><br>
+                                </div>
+                                <div>
+                                    {{ form5.submit(class_="btn btn-default") }}<!-- 确定-->
+                                </div>
+                            </div>
+                         </form>
                   </div>
                     <p>消费后提示:你消费了10元</p>
                 </div>

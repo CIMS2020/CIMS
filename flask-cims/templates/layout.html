@@ -35,7 +35,11 @@
                      <li><a href="{{ url_for('comsumers') }}">消费者模拟</a></li>
 
                     <li><a href="{{ url_for('shop') }}">店铺模拟</a></li>
-                    <li style="float:right;width:auto;margin-right: 0px "><a href="{{ url_for('login') }}">登录</a></li>
+                    {% if user %}
+                    <li style="float:right;width:auto;margin-right: 0px "><a href="#">你好!{{ user.name }}</a></li>
+                        {% else %}
+                        <li style="float:right;width:auto;margin-right: 0px "><a href="{{ url_for('login') }}">登录</a></li>
+                    {% endif %}
                 </ul>
             </div>
         </div>

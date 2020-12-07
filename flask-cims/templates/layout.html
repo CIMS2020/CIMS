@@ -7,9 +7,17 @@
     <link rel="stylesheet" type="text/css" href="/static/content/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="/static/content/site.css" />
     <script src="/static/scripts/modernizr-2.6.2.js"></script>
+    <style>
+          .sbody {
+            background-image: url('/static/images/bg.jpg');
+            background-attachment: fixed;
+            background-size: 100% 100%;
+            opacity: 1;
+        }
+    </style>
 </head>
 
-<body>
+<body class="sbody">
 {% for message in get_flashed_messages() %}
 	 <div class="alert alert-success alert-dismissible" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span

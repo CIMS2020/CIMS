@@ -13,7 +13,9 @@ from flask import render_template,request,redirect,url_for,flash,session,jsonify
 from flask import Flask,url_for,render_template,request,make_response,session,flash,get_flashed_messages
 import requests
 import base64
-
+from wtforms.validators import DataRequired, EqualTo
+from wtforms.fields import *
+from flask_wtf import FlaskForm
 
 app = Flask(__name__)
 bootstrap = Bootstrap(app)
@@ -94,6 +96,36 @@ class adm(db.Model):
     ano = db.Column(db.String(30))
     aname = db.Column(db.String(30))
     password = db.Column(db.String(30))
+
+# 表单数据类型
+class Login(FlaskForm):
+    username = StringField(label="用户名", validators=[DataRequired("请输入用户名")])
+    password = PasswordField(label="密码", validators=[DataRequired("请输入密码")])
+    submit = SubmitField(label="注册")
+
+class Register(FlaskForm):
+    username = StringField(label="用户名", validators=[DataRequired("请输入用户名")])
+    password = PasswordField(label="密码", validators=[DataRequired("请输入密码")])
+    password2= PasswordField(label="确认密码", validators=[DataRequired("请输入密码")])
+    submit = SubmitField(label="登陆")
+
+class CreateCon(FlaskForm):
+    username = StringField(label="用户名", validators=[DataRequired("请输入用户名")])
+    userid = StringField(label="UID", validators=[DataRequired("请输入UID")])
+    age = StringField(label="年龄", validators=[DataRequired("请输入年龄")])
+    tel = StringField(label="手机号", validators=[DataRequired("请输入手机号")])
+    submit = SubmitField(label="添加")
+
+class CreateShop(FlaskForm):
+    shopname = StringField(label="店铺名", validators=[DataRequired("请输入店铺名")])
+    shopid = StringField(label="店铺ID", validators=[DataRequired("请输入店铺ID")])
+    shopaddr = StringField(label="店铺地址", validators=[DataRequired("请输入店铺地址")])
+    submit = SubmitField(label="添加")
+
+class AddGoods(FlaskForm):
+    goodsname = StringField(label="货物名", validators=[DataRequired("请输入货物名")])
+    goodsnum = StringField(label="货物数量", validators=[DataRequired("请输入货物数量")])
+    submit = SubmitField(label="添加")
 
 
 @app.route('/')

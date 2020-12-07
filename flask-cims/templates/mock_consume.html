@@ -89,11 +89,47 @@ form1--form5
                 <h1>消费模拟</h1>
                 <div>
                      <h2>店铺列表</h2>
-                    <ul>
-                        <li>店铺1</li>
-                        <li>店铺2</li>
-                        <li>店铺3</li>
-                    </ul>
+                    <div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span12">
+			<table class="table">
+				<thead>
+					<tr class="info">
+						<th>
+							店铺ID
+						</th>
+						<th>
+							店铺名
+						</th>
+						<th>
+							店铺地址
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+                {% if shop %}
+                    {% for item in shop %}
+                         <tr class="success">
+						<td>
+							{{ item.shopno }}
+						</td>
+						<td>
+							{{ item.shopname }}
+						</td>
+						<td>
+							{{ item.shopaddr }}
+						</td>
+					</tr>
+                    {% endfor %}
+                {% else %}
+                    <h3>还没有店铺</h3>
+                {% endif %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+          </div>
                     <div>
                          <form method="post">
                             <div style=" flex-direction:row;width: 100% ">
@@ -113,11 +149,45 @@ form1--form5
                 </div>
                 <div>
                      <h2>菜品列表</h2>
-                        <ul>
-                            <li>菜1:5yuan</li>
-                            <li>菜2:4yuan</li>
-                            <li>菜3:6yuan</li>
-                         </ul>
+                        <div class="row-fluid">
+		<div class="span12">
+			<table class="table">
+				<thead>
+					<tr class="info">
+						<th>
+							店铺ID
+						</th>
+						<th>
+							菜名
+						</th>
+						<th>
+							价格
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+                {% if shop %}
+                    {% for item in shop %}
+                         <tr class="success">
+						<td>
+							{{ item.shopno }}
+						</td>
+						<td>
+							{{ item.fname }}
+						</td>
+						<td>
+							{{ item.price }}
+						</td>
+					</tr>
+                    {% endfor %}
+                {% else %}
+                    <h3>还没有菜品</h3>
+                {% endif %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+                </div>
 
                 </div>
                  <div>

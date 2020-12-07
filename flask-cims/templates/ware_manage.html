@@ -99,7 +99,7 @@
 		            <div class="span12">
 			        <table class="table">
 				<thead>
-					<tr>
+					<tr class="info">
 						<th>
 							物资名称
 						</th>
@@ -111,7 +111,7 @@
 				<tbody>
                 {% if Goods %}
                     {% for item in Goods %}
-                         <tr>
+                         <tr class="success">
 						<td>
 							{{ item.goodsname }}
 						</td>

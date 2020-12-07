@@ -67,7 +67,7 @@ class stu(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     sno = db.Column(db.String(30))
     sname = db.Column(db.String(30))
-    sage = db.Column(db.Integer)
+    sage = db.Column(db.String(30))
     tel = db.Column(db.String(30))
 
 
@@ -275,7 +275,7 @@ class Goods(db.Model):
     goodsname = db.Column(db.String(30))
     amount = db.Column(db.Integer)
 '''
-@app.route('/canteen')
+@app.route('/canteen', methods=["get", "post"])
 def canteen():
     form1 = CreateCon()
     form2 = SearchAllCon()
@@ -284,25 +284,29 @@ def canteen():
     form5 = AddGoods()
     form6 = SearchWare()
     if form1.validate_on_submit():
-        student = stu(sname=form1.username.data,sage=form1.age.data,sno=form1.userid,tel=form1.tel)
+        student = stu(sname=form1.username.data,sage=form1.age.data,sno=form1.userid.data,tel=form1.tel.data)
         db.session.add(student)
         db.session.commit()
         flash("创建消费者成功！")
+        return redirect(url_for('canteen'))
     """Renders the canteen page."""
     if form2.validate_on_submit():
         myData = stu.query.all()
-        output = []
-        for record in myData:
-            data = {}
-            data['sno'] = record.sno
-            data['sname'] = record.sname
-            data['sage'] = record.sage
-            data['tel'] = record.tel
-            output.append(data)
-        print(output)
-        return jsonify({'message': output})
+        return render_template(
+            'canteen.html',
+            title='Canteen',
+            year=datetime.now().year,
+            message='Your application description page.',
+            form1=form1,
+            form2=form2,
+            form3=form3,
+            form4=form4,
+            form5=form5,
+            form6=form6,
+            stu = myData
+        )
     if form3.validate_on_submit():
-        shop = Shop(shopname=form3.shopname.data,shopno=form3.shopid,shopaddr=form3.shopaddr)
+        shop = Shop(shopname=form3.shopname.data,shopno=form3.shopid.data,shopaddr=form3.shopaddr.data)
         db.session.add(shop)
         db.session.commit()
         flash("创建店铺成功!")

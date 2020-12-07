@@ -227,6 +227,13 @@ form1---form6
                     </form>
                 </div>
                 <div>
+                {% if stu %}
+                    {% for item in stu %}
+                        {{ item.sname }}<br>
+                    {% endfor %}
+                {% else %}
+                    <h3>还没有创建消费者</h3>
+                {% endif %}
                     <ul>
                         <li> 姓名:小明;UID:1635465年龄:20;手机:10086100861001</li>
                         <li> 姓名:小明;UID:1635465年龄:20;手机:10086100861001</li>

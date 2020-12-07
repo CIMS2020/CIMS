@@ -209,7 +209,9 @@ form1--form5
                             </div>
                          </form>
                   </div>
-                    <p>消费后提示:你消费了10元</p>
+                 {% if price %}
+                        <h3>消费提示:你消费了{{ price }}元</h3>
+                 {% endif %}
                 </div>
 
 

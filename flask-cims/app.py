@@ -444,7 +444,8 @@ def mock_consume():
             message='Your application description page.',
             form4=form2,
             form5=form3,
-            shop=myData
+            shop=myData,
+            price=price
         )
     return render_template(
         'mock_consume.html',

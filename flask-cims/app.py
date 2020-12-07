@@ -38,20 +38,16 @@ from wtforms.validators import DataRequired, EqualTo
 
 
 # 数据库数据类型
-class restaurant(db.Model):
+class Shop(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    rname = db.Column(db.String(30))
-    canno = db.Column(db.Integer)
-    cost = db.Column(db.FLOAT)
+    shopname = db.Column(db.String(30))
+    shopno = db.Column(db.Integer)
+    shopaddr = db.Column(db.String(30))
 
-class ingeredient(db.Model):
+class Goods(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    inname = db.Column(db.String(30))
-    price = db.Column(db.FLOAT)
+    goodsname = db.Column(db.String(30))
     amount = db.Column(db.Integer)
-    data = db.Column(db.String(30))
-    canno = db.Column(db.String(30))
-    Class = db.Column(db.String(30))
 
 class food(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -68,9 +64,10 @@ class worker(db.Model):
     rno = db.Column(db.String(30))
 
 class stu(db.Model):
-    sno = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
+    sno = db.Column(db.String(30))
     sname = db.Column(db.String(30))
-    sage = db.Column(db.Integer)
+    sage = db.Column(db.String(30))
     tel = db.Column(db.String(30))
 
 
@@ -91,10 +88,20 @@ class adm(db.Model):
     aname = db.Column(db.String(30))
     password = db.Column(db.String(30))
 
+
+
 # 表单数据类型
+def PasswordChcek():
+    def check(form, field):
+        user = adm.query.filter_by(aname=form.username.data).first()
+        if user is None :
+            raise ValidationError('')
+        if field.data != user.password :
+            raise ValidationError('密码错误')
+    return check
 class Login(FlaskForm):
     username = StringField(label="用户名", validators=[DataRequired("请输入用户名")])
-    password = PasswordField(label="密码", validators=[DataRequired("请输入密码")])
+    password = PasswordField(label="密码", validators=[DataRequired("请输入密码"),PasswordChcek()])
     submit = SubmitField(label="登录")
 
 class Register(FlaskForm):
@@ -124,8 +131,7 @@ class AddGoods(FlaskForm):
 class SearchAllCon(FlaskForm):
     submit = SubmitField(label="查询")
 
-class SearchAllShop(FlaskForm):
-    submit = SubmitField(label="查询")
+
 
 class SearchWare(FlaskForm):
     submit = SubmitField(label="查询")
@@ -243,20 +249,104 @@ def register():
         admin = adm(aname=form.username.data, password=form.password.data)
         db.session.add(admin)
         db.session.commit()
+        flash("注册成功！")
         return redirect(url_for('login'))
+
     return render_template('register.html',
                            title = 'Register',
                            form = form)
-
-
-@app.route('/canteen')
+'''
+class stu(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    sno = db.Column(db.String(30))
+    sname = db.Column(db.String(30))
+    sage = db.Column(db.Integer)
+    tel = db.Column(db.String(30))
+    
+    
+class shop(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    shopname = db.Column(db.String(30))
+    shopno = db.Column(db.Integer)
+    shopaddr = db.Column(db.FLOAT)
+    
+class Goods(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    goodsname = db.Column(db.String(30))
+    amount = db.Column(db.Integer)
+'''
+@app.route('/canteen', methods=["get", "post"])
 def canteen():
+    form1 = CreateCon()
+    form2 = SearchAllCon()
+    form3 = CreateShop()
+    form4 = SearchAllShops()
+    form5 = AddGoods()
+    form6 = SearchWare()
+    if form1.validate_on_submit():
+        student = stu(sname=form1.username.data,sage=form1.age.data,sno=form1.userid.data,tel=form1.tel.data)
+        db.session.add(student)
+        db.session.commit()
+        flash("创建消费者成功！")
+        return redirect(url_for('canteen'))
     """Renders the canteen page."""
+    if form2.validate_on_submit():
+        myData = stu.query.all()
+        return render_template(
+            'canteen.html',
+            title='Canteen',
+            year=datetime.now().year,
+            message='Your application description page.',
+            form1=form1,
+            form2=form2,
+            form3=form3,
+            form4=form4,
+            form5=form5,
+            form6=form6,
+            stu = myData
+        )
+    if form3.validate_on_submit():
+        shop = Shop(shopname=form3.shopname.data,shopno=form3.shopid.data,shopaddr=form3.shopaddr.data)
+        db.session.add(shop)
+        db.session.commit()
+        flash("创建店铺成功!")
+    if form4.validate_on_submit():
+        myData = Shop.query.all()
+        output = []
+        for record in myData:
+            data = {}
+            data['shopname'] = record.shopname
+            data['shopno'] = record.shopno
+            data['shopaddr'] = record.shopaddr
+            output.append(data)
+        return jsonify({'message': output})
+    if form5.validate_on_submit():
+        goods = Goods(goodsname=form5.goodsname.data,amount=form5.goodsnum)
+        db.session.add(goods)
+        db.session.commit()
+        flash("添加食材成功！")
+    if form6.validate_on_submit():
+        myData = Goods.query.all()
+        output = []
+        for record in myData:
+            data = {}
+            data['id'] = record.id
+            data['goodsname'] = record.goodsname
+            data['amount'] = record.amount
+            output.append(data)
+        print(output)
+        return jsonify({'message': output})
     return render_template(
         'canteen.html',
         title='Canteen',
         year=datetime.now().year,
         message='Your application description page.',
+        form1=form1,
+        form2=form2,
+        form3=form3,
+        form4=form4,
+        form5=form5,
+        form6=form6,
     )
 
 @app.route('/comsumers')
@@ -274,19 +364,23 @@ app.config["SECRET_KEY"] = 'TPmi4aLWRbyVq8zu9v82dWYW1'
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
-     login_form = Login()
-     if request.method == 'POST':
-         if login_form.validate_on_submit():
-             username = request.form.get("username")
-             password = request.form.get("password")
-             password2 = request.form.get("password2")
-             print(username, password, password2)
-             # return make_response("success")
-             return redirect(url_for('home'))
-         else:
-             flash("参数错误请重新输入")
-     return render_template("login.html", form=login_form)
+     form = Login()
+     if form.validate_on_submit():
+         session['name'] = form.username.data
+         session.permanent = True  # 是否保存用户登录状态
+         flash("登录成功")
+         return redirect(url_for('home'))
+     return render_template('login.html',
+                            title='Login',
+                            form=form, )
 
+@app.context_processor
+def my_context_processor():
+    aname = session.get('name')
+    user = adm.query.filter_by(aname=aname).first()
+    if user:
+        return {'user': user}
+    return{}
 
     #10*2 选择题
 #名词解释 3*4题

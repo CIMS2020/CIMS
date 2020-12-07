@@ -57,11 +57,11 @@ class Food(db.Model):
 class Worker(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     wno = db.Column(db.String(30))
-    wsex = db.Column(db.String(30))
-    sale = db.Column(db.FLOAT)
-    wduring = db.Column(db.String(30))
-    rno = db.Column(db.String(30))
-
+    #wsex = db.Column(db.String(30))
+    sal = db.Column(db.String(30))
+    shopno = db.Column(db.String(30))
+    wname = db.Column(db.String(30))
+    wtel = db.Column(db.String(30))
 class stu(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     sno = db.Column(db.String(30))
@@ -463,17 +463,179 @@ def mock_consume():
 
 @app.route('/search_sales',methods=["get", "post"])
 def search_sales():
+    form1 = DailySearch()
+    if(form1.validate_on_submit()):
+        shopid = form1.shopid.data
+        date = form1.date.data
+        ans = Cost.query.filter(Cost.date==date and Cost.shopno==shopid)
+        return render_template(
+            'search_sales.html',
+            title='Canteen',
+            year=datetime.now().year,
+            message='Your application description page.',
+            from1=form1,
+            ans=ans
+        )
     return render_template(
         'search_sales.html',
         title='Canteen',
         year=datetime.now().year,
         message='Your application description page.',
+        form1=form1,
+    )
+
+
+'''class Worker(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    wno = db.Column(db.String(30))
+    wsex = db.Column(db.String(30))
+    sale = db.Column(db.FLOAT)
+    shopno = db.Column(db.String(30))'''
+@app.route('/worker_manage',methods=["get", "post"])
+def worker_manage():
+    form1 = AddWorker()
+    form2 = SearchWorker()
+    form3 = DeleteWorker()
+    form4 = UpdateWorker()
+    if form1.validate_on_submit():
+        shopid = form1.shopid.data
+        workername = form1.workername.data
+        workid = form1.workername.data
+        workertel = form1.workertel.data
+        workersal = form1.workersal.data
+        worker = Worker(wno=workid,sal=workersal,shopno=shopid,wname=workername,wtel=workertel)
+        db.session.add(worker)
+        db.session.commit()
+        flash("添加员工成功！")
+        return render_template(
+            'worker_manage.html',
+            title='Canteen',
+            year=datetime.now().year,
+            message='Your application description page.',
+            form2=form1,
+            form3=form2,
+            form4=form3,
+            form5=form4,
+        )
+    if form2.validate_on_submit():
+        workid = form2.workerid.data
+        ans = Worker.query.filter(Worker.wno==workid)
+        return render_template(
+            'worker_manage.html',
+            title='Canteen',
+            year=datetime.now().year,
+            message='Your application description page.',
+            form2=form1,
+            form3=form2,
+            form4=form3,
+            form5=form4,
+            ans=ans,
+        )
+    if form3.validate_on_submit():
+        shopid = form3.shopid.data
+        workerid = form3.workerid.data
+        ans = Worker.query.filter(Worker.shopno==shopid and Worker.wno==workerid)
+        db.session.delete(ans)
+        db.session.commit()
+        flash("删除员工成功！")
+        return render_template(
+            'worker_manage.html',
+            title='Canteen',
+            year=datetime.now().year,
+            message='Your application description page.',
+            form2=form1,
+            form3=form2,
+            form4=form3,
+            form5=form4,
+        )
+    if form4.validate_on_submit():
+        shopid = form4.shopid.data
+        workername = form4.workername.data
+        workid = form4.workername.data
+        workertel = form4.workertel.data
+        workersal = form4.workersal.data
+
+    return render_template(
+        'worker_manage.html',
+        title='Canteen',
+        year=datetime.now().year,
+        message='Your application description page.',
+        form2=form1,
+        form3=form2,
+        form4=form3,
+        form5=form4,
     )
 
 
 
 
+@app.route('/main_task', methods=["get", "post"])
+def main_task():
+    myData = Goods.query.all()
+    form1 = GetStuff()
+    form2 = AddtoList()
+    form3 = SearchList()
+    if form1.validate_on_submit():
+        shopid = form1.shopid.data
+        goodsname = form1.goodsname.data
+        goodsnum = form1.goodsnum.data
+        ware = Goods.query.filter(Goods.goodsname==goodsname)
+        ware.amount -= goodsnum
+        db.session.commit()
+        flash("取出成功！")
+        return render_template(
+            'main_task.html',
+            title='Canteen',
+            year=datetime.now().year,
+            message='Your application description page.',
+            ans=myData,
+            form7=form1,
+            form8=form2,
+            form9=form3
+        )
+    if form2.validate_on_submit():
+        shopid = form2.shopid.data
+        foodname = form2.foodname.data
+        price = form2.price.data
+        food = Food(fname=foodname,price=price,shopno=shopid)
+        db.session.add(food)
+        db.session.commit()
+        flash("添加成功！")
+        return render_template(
+            'main_task.html',
+            title='Canteen',
+            year=datetime.now().year,
+            message='Your application description page.',
+            ans=myData,
+            form7=form1,
+            form8=form2,
+            form9=form3
+        )
+    if form3.validate_on_submit():
+        shopid = form3.shopid.data
+        list = Food.query.all()
+        return render_template(
+            'main_task.html',
+            title='Canteen',
+            year=datetime.now().year,
+            message='Your application description page.',
+            ans=myData,
+            form7=form1,
+            form8=form2,
+            form9=form3,
+            list = list,
+        )
 
+    return render_template(
+        'main_task.html',
+        title='Canteen',
+        year=datetime.now().year,
+        message='Your application description page.',
+        ans = myData,
+        form7=form1,
+        form8=form2,
+        form9=form3
+    )
 
 
 

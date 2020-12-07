@@ -116,7 +116,7 @@ form1---form6
 		<div class="span12">
 			<table class="table">
 				<thead>
-					<tr>
+					<tr class="info">
 						<th>
 							店铺名
 						</th>
@@ -131,7 +131,7 @@ form1---form6
 				<tbody>
                 {% if shop %}
                     {% for item in shop %}
-                         <tr>
+                         <tr class="success">
 						<td>
 							{{ item.shopname }}
 						</td>
@@ -152,6 +152,7 @@ form1---form6
 		</div>
 	</div>
 </div>
+    </div>
     </div>
 {% endblock %}
 

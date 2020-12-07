@@ -22,9 +22,8 @@ bootstrap = Bootstrap(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mssql+pyodbc://sa:asd@test'#(替换成自己的用户名，密码和dsn）
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 db = SQLAlchemy(app)
-
 # 开启session
-app.secret_key = "aasdfsdf"
+app.config["SECRET_KEY"] = 'TPmi4aLWRbyVq8zu9v82dWYW1'
 # app.config["SECRET_KEY"] = "abcd"
 app.config["WTF_CSRF_ENABLED"] = False
 
@@ -87,8 +86,8 @@ class card(db.Model):
     tel = db.Column(db.String(30))
 
 class adm(db.Model):
-    id = db.Column(db.String(30), primary_key=True)
-    ano = db.Column(db.String(30))
+    id = db.Column(db.Integer, primary_key=True)
+    #ano = db.Column(db.String(30))
     aname = db.Column(db.String(30))
     password = db.Column(db.String(30))
 
@@ -96,13 +95,13 @@ class adm(db.Model):
 class Login(FlaskForm):
     username = StringField(label="用户名", validators=[DataRequired("请输入用户名")])
     password = PasswordField(label="密码", validators=[DataRequired("请输入密码")])
-    submit = SubmitField(label="注册")
+    submit = SubmitField(label="登录")
 
 class Register(FlaskForm):
     username = StringField(label="用户名", validators=[DataRequired("请输入用户名")])
     password = PasswordField(label="密码", validators=[DataRequired("请输入密码")])
-    password2= PasswordField(label="确认密码", validators=[DataRequired("请输入密码")])
-    submit = SubmitField(label="登陆")
+    password2= PasswordField(label="确认密码", validators=[DataRequired("请输入密码"), EqualTo('password', "密码输入不一致")])
+    submit = SubmitField(label="注册")
 
 class CreateCon(FlaskForm):
     username = StringField(label="用户名", validators=[DataRequired("请输入用户名")])
@@ -239,31 +238,15 @@ def about():
 
 @app.route('/register', methods=["get", "post"])
 def register():
-    if request.method == "POST":
-        # 取到表单中提交上来的三个参数
-        userid= request.form.get("userid")
-        username = request.form.get("username")
-        password = request.form.get("password")
-        password2 = request.form.get("password2")
-        test=""
-        if not all([username, password, password2]):
-            # 向前端界面弹出一条提示(闪现消息)
-            print("参数不足")
-            return render_template('register.html',text="失败")
-        elif password != password2:
-            print("两次密码不一致")
-            #flash("两次密码不一致")
-        else:
-            # 假装做注册操作
-            # flash("注册成功！")
-
-            print("注册成功！")
-
-            return render_template('register.html',text="成功")
-            print(userid,username, password, password2)
-
-
-    return render_template('register.html')
+    form = Register()
+    if form.validate_on_submit():
+        admin = adm(aname=form.username.data, password=form.password.data)
+        db.session.add(admin)
+        db.session.commit()
+        return redirect(url_for('login'))
+    return render_template('register.html',
+                           title = 'Register',
+                           form = form)
 
 
 @app.route('/canteen')
@@ -288,12 +271,6 @@ def comsumers():
 
 app.config["SECRET_KEY"] = 'TPmi4aLWRbyVq8zu9v82dWYW1'
 
-
-class Login(FlaskForm):
-    username = StringField(label="用户名", validators=[DataRequired("请输入用户名")])
-    password = PasswordField(label="密码", validators=[DataRequired("请输入密码")])
-    password2 = PasswordField(label="密码", validators=[DataRequired("请输入密码"), EqualTo('password', "密码输入不一致")])
-    submit = SubmitField(label="提交")
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -338,7 +315,8 @@ def shop():
 
 
 if __name__ == '__main__':
+    db.drop_all()
     db.create_all()
     url = "http://127.0.0.1:5000"
     webbrowser.open_new(url)
-    app.run()
+    app.run(debug=True)

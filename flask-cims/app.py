@@ -41,7 +41,7 @@ from wtforms.validators import DataRequired, EqualTo
 class Shop(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     shopname = db.Column(db.String(30))
-    shopno = db.Column(db.Integer)
+    shopno = db.Column(db.String(30))
     shopaddr = db.Column(db.String(30))
 
 class Goods(db.Model):
@@ -76,7 +76,7 @@ class Cost(db.Model):
     sno = db.Column(db.String(30))
     date = db.Column(db.String(30))
     cost = db.Column(db.FLOAT)
-    rno = db.Column(db.String(30))
+    shopno = db.Column(db.String(30))
 
 class Card(db.Model):
     id = db.Column(db.Integer,primary_key= True)
@@ -207,6 +207,7 @@ class Consuming(FlaskForm):
     userid = StringField(label="UID", validators=[DataRequired("请输入UID")])
     foodid = StringField(label="食物序号", validators=[DataRequired("请输入食物序号")])
     date = StringField(label="日期", validators=[DataRequired("请输入日期")])
+    shopid = StringField(label="日期", validators=[DataRequired("请输入日期")])
     submit = SubmitField(label="确定")
 
 
@@ -257,6 +258,12 @@ class Goods(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     goodsname = db.Column(db.String(30))
     amount = db.Column(db.Integer)
+
+class Food(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    fname = db.Column(db.String(30))
+    price = db.Column(db.FLOAT)
+    shopno = db.Column(db.String(30))
 '''
 # @app.route('/canteen', methods=["get", "post"])
 @app.route('/create_consumer', methods=["get", "post"])
@@ -369,6 +376,12 @@ class Card(db.Model):
     sno = db.Column(db.String(30))
     money = db.Column(db.FLOAT)
  #   tel = db.Column(db.String(30))
+ 
+class Food(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    fname = db.Column(db.String(30))
+    price = db.Column(db.FLOAT)
+    shopno = db.Column(db.String(30))
 '''
 @app.route('/invest',methods=["get", "post"])
 def invest():
@@ -406,28 +419,58 @@ def invest():
 
 @app.route('/mock_consume',methods=["get", "post"])
 def mock_consume():
-    form1 = SearchAllShops()
-    form2 = Consuming()
-    if form1.validate_on_submit():
-        myData = Shop.query.all()
+    form2 = SearchList()
+    form3 = Consuming()
+    myData = Shop.query.all()
+    if form2.validate_on_submit():
+        shopid = form2.shopid.data
+        list = Food.query.get(shopid=shopid)
         return render_template(
             'mock_consume.html',
             title='Canteen',
             year=datetime.now().year,
             message='Your application description page.',
+            form4=form2,
+            shop=myData,
+            list=list
+        )
+    if form3.validate_on_submit():
+        userid=form3.userid.data
+        foodid=form3.userid.data
+        date=form3.date.data
+        shopid =Food.query.get(foodid)
+        price = shopid['price']
+        shopid = shopid['shopno']
+        cost = Cost(sno=userid,date=date,cost=price,shopno=shopid)
+        db.session.add(cost)
+        db.session.commit()
+        now = Card.query.get(sno=userid)
+        now.money-=price
+        db.session.commit()
+        flash("消费成功！")
+        return render_template(
+            'mock_consume.html',
+            title='Canteen',
+            year=datetime.now().year,
+            message='Your application description page.',
+            form4=form2,
+            form5=form3,
             shop=myData
         )
-    if form2.validate_on_submit():
-        cost = Cost(sno=form2.userid.data,date=form2.date.data,)
-
     return render_template(
         'mock_consume.html',
         title='Canteen',
         year=datetime.now().year,
         message='Your application description page.',
-        form3=form1,
         form4=form2,
+        form5=form3,
+        shop=myData
     )
+
+
+
+
+
 
 @app.route('/search_sales',methods=["get", "post"])
 def search_sales():

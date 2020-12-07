@@ -128,10 +128,21 @@ form1--form9
             <div >
                 <h2>每日销售查询</h2>
                  <div>
-                        <form method="post">
-                            {{ form1.shopid.label }}{{ form1.shopid }}<br/> <!-- 店铺ID-->
-                            {{ form1.date.label }}{{ form1.date }}<br/><!-- 日期-->
-                            {{ form1.submit }}<!-- 提交-->
+                      <form method="post">
+                            <div style=" flex-direction:row;width: 100% ">
+                                <div style="display:inline-block;">
+                                    {{ form1.shopid.label }}<br><br><!-- 店铺ID-->
+                                    {{ form1.date.label }}<br><br><!-- 日期-->
+                                </div>
+                                <div style="width: 20%;display:inline-block;">
+                                    {{ form1.shopid(calss_="form-control") }}<br/><br>
+                                    {{ form1.date(calss_="form-control") }}<br/><br/>
+                                </div>
+                                <div>
+                                    {{ form1.submit(class_="btn btn-default") }}
+                                    <!-- 提交-->
+                                </div>
+                            </div>
                         </form>
                   </div>
 
@@ -150,22 +161,48 @@ form1--form9
             <div>
                 <h2>添加员工</h2>
                  <div>
-                        <form method="post">
-                            {{ form2.shopid.label }}{{ form2.shopid }}<br/> <!-- 店铺ID-->
-                            {{ form2.workername.label }}{{ form2.workername }}<br/> <!-- 员工姓名-->
-                            {{ form2.workerid.label }}{{ form2.workerid }}<br/> <!-- 员工ID-->
-                            {{ form2.workertel.label }}{{ form2.workertel }}<br/> <!-- 员工手机-->
-                            {{ form2.workersal.label }}{{ form2.workersal }}<br/> <!-- 员工工资-->
-                            {{ form2.submit }}<!-- 提交-->
-                        </form>
+                     <form method="post">
+                            <div style=" flex-direction:row;width: 100% ">
+                                <div style="display:inline-block;">
+                                    {{ form2.shopid.label }}<br><br><!-- 店铺ID-->
+                                    {{ form2.workername.label }}<br><br><!-- 员工姓名-->
+                                    {{ form2.workerid.label }}<br><br><!-- 员工ID-->
+                                    {{ form2.workertel.label }}<br><br><!-- 员工手机-->
+                                    {{ form2.workersal.label }}<br><br> <!-- 员工工资-->
+                                </div>
+                                <div style="width: 20%;display:inline-block;">
+                                    {{ form2.shopid(calss_="form-control") }}<br/><br>
+                                    {{ form2.workername(calss_="form-control") }}<br/><br>
+                                    {{ form2.workerid(calss_="form-control") }}<br/><br>
+                                    {{ form2.workertel(calss_="form-control") }}<br/><br>
+                                    {{ form2.workersal(calss_="form-control") }}<br/><br>
+                                    {{ form2.shopid(calss_="form-control") }}<br/><br>
+
+                                </div>
+                                <div>
+                                    {{ form2.submit(class_="btn btn-default") }}
+                                    <!-- 添加-->
+                                </div>
+                            </div>
+                     </form>
                   </div>
             </div>
              <div>
                 <h2>员工查询</h2>
                    <div>
-                        <form method="post">
-                            {{ form3.workerid.label }}{{ form3.workerid }}<br/> <!-- 员工ID-->
-                            {{ form3.submit }}<!-- 查询-->
+                         <form method="post">
+                            <div style=" flex-direction:row;width: 100% ">
+                                <div style="display:inline-block;">
+                                    {{ form3.workerid.label }}<br><br><!-- 员工ID-->
+                                </div>
+                                <div style="width: 20%;display:inline-block;">
+                                    {{ form3.workerid(calss_="form-control") }}<br/><br>
+                                </div>
+                                <div>
+                                    {{ form3.submit(class_="btn btn-default") }}
+                                    <!-- 查询-->
+                                </div>
+                            </div>
                         </form>
                   </div>
                 <div>
@@ -176,24 +213,49 @@ form1--form9
             <div>
                 <h2>删除员工</h2>
                 <div>
-                        <form method="post">
-                            {{ form4.shopid.label }}{{ form4.shopid }}<br/> <!-- 店铺ID-->
-                            {{ form4.workerid.label }}{{ form4.workerid }}<br/> <!-- 员工ID-->
-                            {{ form4.submit }}<!-- 删除-->
+                      <form method="post">
+                            <div style=" flex-direction:row;width: 100% ">
+                                <div style="display:inline-block;">
+                                    {{ form4.shopid.label }}<br><br><!-- 店铺ID-->
+                                    {{ form4.workerid.label }}<br><br><!-- 员工ID-->
+                                </div>
+                                <div style="width: 20%;display:inline-block;">
+                                    {{ form4.shopid(calss_="form-control") }}<br/><br>
+                                    {{ form4.workerid(calss_="form-control") }}<br/><br>
+                                </div>
+                                <div>
+                                    {{ form4.submit(class_="btn btn-default") }}
+                                    <!-- 删除-->
+                                </div>
+                            </div>
                         </form>
                   </div>
             </div>
              <div>
                 <h2>修改员工信息</h2>
                   <div>
-                        <form method="post">
-                            {{ form5.shopid.label }}{{ form5.shopid }}<br/> <!-- 店铺ID-->
-                            {{ form5.workerid.label }}{{ form5.workerid }}<br/> <!-- 被修改员工ID-->
-                            {{ form5.workername.label }}{{ form5.workerid }}<br/> <!-- 姓名-->
-                            {{ form5.workertel.label }}{{ form5.workerid }}<br/> <!-- 电话-->
-                            {{ form5.workersal.label }}{{ form5.workerid }}<br/> <!-- 工资-->
-                            {{ form5.submit }}<!-- 修改-->
-                        </form>
+                      <form method="post">
+                            <div style=" flex-direction:row;width: 100% ">
+                                <div style="display:inline-block;">
+                                    {{ form5.shopid.label }}<br><br><!-- 店铺ID-->
+                                    {{ form5.workerid.label }}<br><br><!-- id-->
+                                    {{ form5.workername.label }}<br><br><!-- 姓名-->
+                                    {{ form5.workertel.label }}<br><br><!-- 手机-->
+                                    {{ form5.workersal.label }}<br><br> <!-- 工资-->
+                                </div>
+                                <div style="width: 20%;display:inline-block;">
+                                    {{ form5.shopid(calss_="form-control") }}<br/><br>
+                                    {{ form5.workerid(calss_="form-control") }}<br/><br>
+                                    {{ form5.workername(calss_="form-control") }}<br/><br>
+                                    {{ form5.workertel(calss_="form-control") }}<br/><br>
+                                    {{ form5.workersal(calss_="form-control") }}<br/><br>
+                                </div>
+                                <div>
+                                    {{ form5.submit(class_="btn btn-default") }}
+                                    <!-- 修改-->
+                                </div>
+                            </div>
+                     </form>
                   </div>
             </div>
     </div>
@@ -205,7 +267,7 @@ form1--form9
                     <h3>查询仓库</h3>
                      <div>
                          <form method="post">
-                            {{ form6.submit }}<!-- 查询仓库所有货物-->
+                            {{ form6.submit(class_="btn btn-default")  }}<!-- 查询仓库所有货物-->
                         </form>
                     </div>
                     <h4>查询结果</h4>
@@ -219,32 +281,66 @@ form1--form9
                     </ul>
                 </div>
              <div>
-                 <form method="post">
-                            {{ form7.shopid.label }}{{ form7.shopid}}<br/> <!-- 店铺id-->
-                            {{ form7.goodsname.label }}{{ form7.goodsname}}<br/> <!-- 货物名-->
-                            {{ form7.goodsnum.label }}{{ form7.goodsnum}}<br/> <!-- 货物数量-->
-                            {{ form7.submit }}<!-- 确定-->
-                 </form>
+                  <form method="post">
+                            <div style=" flex-direction:row;width: 100% ">
+                                <div style="display:inline-block;">
+                                    {{ form7.shopid.label }}<br><br><!-- 货物数量-->
+                                    {{ form7.goodsname.label }}<br><br><!-- 货物名-->
+                                    {{ form7.goodsnum.label }}<br><br><!-- 货物数量-->
+                                </div>
+                                <div style="width: 20%;display:inline-block;">
+                                    {{ form7.shopid(calss_="form-control") }}<br/><br>
+                                    {{ form7.goodsname(calss_="form-control") }}<br/><br>
+                                    {{ form7.goodsnum(calss_="form-control") }}<br/><br>
+                                </div>
+                                <div>
+                                    {{ form7.submit(class_="btn btn-default") }}
+                                    <!-- 确定-->
+                                </div>
+                            </div>
+                        </form>
              </div>
         </div>
         <div>
             <h2>添加到菜单</h2>
              <div>
                  <form method="post">
-                            {{ form8.shopid.label }}{{ form8.shopid}}<br/> <!-- 店铺id-->
-                            {{ form8.foodname.label }}{{ form8.foodname}}<br/> <!-- 食物名-->
-                            {{ form8.price.label }}{{ form8.price}}<br/> <!-- 菜价格-->
-                            {{ form8.submit }}<!-- 添加-->
-                 </form>
+                            <div style=" flex-direction:row;width: 100% ">
+                                <div style="display:inline-block;">
+                                    {{ form8.shopid.label }}<br><br><!-- 货物数量-->
+                                    {{ form8.foodname.label }}<br><br><!-- 食物名-->
+                                    {{  form8.price.label }}<br><br><!-- 价格-->
+                                </div>
+                                <div style="width: 20%;display:inline-block;">
+                                    {{ form8.shopid(calss_="form-control") }}<br/><br>
+                                    {{ form8.foodname(calss_="form-control") }}<br/><br>
+                                    {{  form8.price(calss_="form-control") }}<br/><br>
+                                </div>
+                                <div>
+                                    {{ form8.submit(class_="btn btn-default") }}
+                                    <!-- 添加-->
+                                </div>
+                            </div>
+                        </form>
           </div>
         </div>
     <div>
         <h2>查看菜单</h2>
          <div>
-                 <form method="post">
-                            {{ form9.shopid.label }}{{ form9.shopid}}<br/> <!-- 店铺id-->
-                            {{ form9.submit }}<!-- 查询-->
-                 </form>
+               <form method="post">
+                            <div style=" flex-direction:row;width: 100% ">
+                                <div style="display:inline-block;">
+                                    {{ form9.shopid.label }}<br><br><!-- 店铺ID-->
+                                </div>
+                                <div style="width: 20%;display:inline-block;">
+                                    {{ form9.shopid(calss_="form-control") }}<br/><br>
+                                </div>
+                                <div>
+                                    {{ form9.submit(class_="btn btn-default") }}
+                                    <!-- 查询-->
+                                </div>
+                            </div>
+                        </form>
          </div>
     </div>
     </div>

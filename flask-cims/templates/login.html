@@ -8,38 +8,39 @@
 
 
 {% block content %}
-
+<style>
+#input1{
+    background-color: yellow;
+}
+</style>
 
 <div class="page-header">
     <h1>用户登录</h1>
 </div>
   <form method="post">
-      {{ form.username.label }}{{ form.username }}<br/>
-     {{ form.password.label }}{{ form.password }}<br/>
-     {{ form.submit }}
+  <div style=" flex-direction:row;width: 100% ">
+      <div style="width: 4%;display:inline-block;">
+          {{ form.username.label }}<br>
+          <br>
+          {{ form.password.label }}<br>
+          <br/>
+
+      </div>
+       <div style="width: 20%;display:inline-block;">
+           {{ form.username(calss_="form-control") }}<br/>
+           <br>
+            {{ form.password(calss_="form-control") }}<br/>
+           <br/>
+
+      </div>
+      <div>
+           {{ form.submit(class_="btn btn-default") }}  <h><a class="btn btn-default" href="{{ url_for('register') }}">快速注册</a></h>
+      </div>
+  </div>
+
  </form>
-<h><a class="btn btn-default" href="{{ url_for('register') }}">快速注册</a></h>
+
 </div>
 
-
-
-
-    <div class="container">
-	<div class="row clearfix">
-		<div class="col-md-12 column">
-			<form role="form" method="post">
-				<div class="form-group">
-					 <label for="exampleInputEmail1">{{ form.username.label }}</label><div class="form-control">{{ form.username }}</div>
-				</div>
-				<div class="form-group">
-					 <label for="exampleInputPassword1">密码:</label><input  class="form-control" type="password" name="password" placeholder="请输入密码" />
-				</div>
-
-
-                <button type="submit" class="btn btn-default">登录</button>  <h><a class="btn btn-default" href="{{ url_for('register') }}">快速注册</a></h>
-			</form>
-		</div>
-	</div>
-</div>
 {% endblock %}
 

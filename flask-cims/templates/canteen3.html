@@ -1,0 +1,112 @@
+
+{% extends "layout.html" %}
+
+{% block content %}
+
+    <style>
+        .nssb {
+            top: 10%;
+            z-index: 9999;
+            position: fixed;
+            left: 10px;
+        }
+        /*表*/
+        ul.nav-tabs {
+            width: 110px;
+            margin-top: 20px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.067);
+        }
+
+            ul.nav-tabs li {
+                margin: 0;
+                border-top: 1px solid #ddd;
+            }
+
+                ul.nav-tabs li:first-child {
+                    border-top: none;
+                }
+
+                ul.nav-tabs li a {
+                    margin: 0;
+                    padding: 8px 16px;
+                    border-radius: 0;
+                }
+
+                ul.nav-tabs li.active a, ul.nav-tabs li.active a:hover {
+                    color: #fff;
+                    background: #0088cc;
+                    border: 1px solid #0088cc;
+                }
+
+                ul.nav-tabs li:first-child a {
+                    border-radius: 4px 4px 0 0;
+                }
+
+                ul.nav-tabs li:last-child a {
+                    border-radius: 0 0 4px 4px;
+                }
+
+            ul.nav-tabs.affix {
+                top: 10%; /* Set the top position of pinned element */
+
+            }
+    </style>
+
+    <div>
+            <div class="nssb" >
+                <br />
+                <br />
+                <br />
+                <ul class="nav nav-tabs nav-stacked"  >
+                    <li id="li1" style="background-color: azure"><a href="canteen1.html">创建消费者</a></li>
+                    <li id="li3" style="background-color: azure"><a href="canteen2.html">创建店铺</a></li>
+                    <li id="li5" style="background-color: #87CEFF"><a href="canteen3.html">仓库管理</a></li>
+                </ul>
+            </div>
+
+    </div>
+   <div >
+            <div>
+                <h2>仓库管理</h2>
+                <div>
+                     <h3>进货</h3>
+                    <div>
+                          <form method="post">
+                            <div style=" flex-direction:row;width: 100% ">
+                                <div style="display:inline-block;">
+                                    {{ form5.goodsname.label }}<br><br><!-- 货物名-->
+                                    {{ form5.goodsnum.label }}<br><br><!-- 货物数量-->
+                                </div>
+                                <div style="width: 20%;display:inline-block;">
+                                    {{ form5.goodsname(calss_="form-control") }}<br/><br>
+                                    {{ form5.goodsnum(calss_="form-control") }}<br/><br/>
+                                </div>
+                                <div>
+                                    {{ form5.submit(class_="btn btn-default") }}
+                                    <!-- 提交-->
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div>
+                    <h2>仓库</h2>
+                     <div>
+                         {% if Goods%}
+                             {% for item in Goods %}
+                                 {{ item.goodsname }}//{{ item.amount }}<br>
+                             {% endfor %}
+                         {% else %}
+                             <h3>仓库还没有物资</h3>Goods
+                         {% endif %}
+                </div>
+                </div>
+            </div>
+    </div>
+
+
+
+{% endblock %}
+

@@ -23,7 +23,10 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'mssql+pyodbc://sa:asd@test'#(替换成�
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 db = SQLAlchemy(app)
 
-
+# 开启session
+app.secret_key = "aasdfsdf"
+# app.config["SECRET_KEY"] = "abcd"
+app.config["WTF_CSRF_ENABLED"] = False
 
 
 
@@ -33,17 +36,9 @@ from flask_wtf import FlaskForm
 from wtforms.fields import *
 from wtforms.validators import DataRequired, EqualTo
 
-app = Flask(__name__)
-# 开启session
-app.secret_key = "aasdfsdf"
-# app.config["SECRET_KEY"] = "abcd"
-app.config["WTF_CSRF_ENABLED"] = False
+
 
 # 数据库数据类型
-class testflask(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    canname = db.Column(db.String(30))
-
 class restaurant(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     rname = db.Column(db.String(30))
@@ -135,6 +130,78 @@ class SearchAllShop(FlaskForm):
 
 class SearchWare(FlaskForm):
     submit = SubmitField(label="查询")
+
+#Shop.html
+class DailySearch(FlaskForm):
+    shopid = StringField(label="店铺ID", validators=[DataRequired("请输入店铺ID")])
+    date = StringField(label="日期", validators=[DataRequired("请选择日期")])
+    submit = SubmitField(label="添加")
+
+class AddWorker(FlaskForm):
+    shopid = StringField(label="店铺ID", validators=[DataRequired("请输入店铺ID")])
+    workername = StringField(label="员工姓名", validators=[DataRequired("请输入员工姓名")])
+    workerid = StringField(label="员工ID", validators=[DataRequired("请输入员工ID")])
+    workertel = StringField(label="员工电话", validators=[DataRequired("请输入员工电话")])
+    workersal = StringField(label="员工工资", validators=[DataRequired("请输入员工工资")])
+    submit = SubmitField(label="添加")
+
+class SearchWorker(FlaskForm):
+    workerid = StringField(label="员工ID", validators=[DataRequired("请输入员工ID")])
+    submit = SubmitField(label="查询")
+
+class DeleteWorker(FlaskForm):
+    shopid = StringField(label="店铺ID", validators=[DataRequired("请输入店铺ID")])
+    workerid = StringField(label="员工ID", validators=[DataRequired("请输入员工ID")])
+    submit = SubmitField(label="删除")
+
+class UpdateWorker(FlaskForm):
+    shopid = StringField(label="店铺ID", validators=[DataRequired("请输入店铺ID")])
+    workerid = StringField(label="员工ID", validators=[DataRequired("请输入员工ID")])
+    workername = StringField(label="员工姓名", validators=[DataRequired("请输入员工姓名")])
+    workertel = StringField(label="员工电话", validators=[DataRequired("请输入员工电话")])
+    workersal = StringField(label="员工工资", validators=[DataRequired("请输入员工工资")])
+    submit = SubmitField(label="添加")
+
+class GetStuff(FlaskForm):
+    shopid = StringField(label="店铺ID", validators=[DataRequired("请输入店铺ID")])
+    goodsname = StringField(label="货物名", validators=[DataRequired("请输入货物名")])
+    goodsnum = StringField(label="货物数量", validators=[DataRequired("请输入货物数量")])
+    submit = SubmitField(label="取出")
+
+class AddtoList(FlaskForm):
+    shopid = StringField(label="店铺ID", validators=[DataRequired("请输入店铺ID")])
+    foodname = StringField(label="食物名称", validators=[DataRequired("请输入食物名称")])
+    price = StringField(label="食物价格", validators=[DataRequired("请输入食物价格")])
+    submit = SubmitField(label="添加")
+
+class BrowseList(FlaskForm):
+    shopid = StringField(label="店铺ID", validators=[DataRequired("请输入店铺ID")])
+    submit = SubmitField(label="添加")
+
+#Consumer.html
+#充值
+class Invest(FlaskForm):
+    userid = StringField(label="UID", validators=[DataRequired("请输入UID")])
+    recharge_amount = StringField(label="金额", validators=[DataRequired("请输入金额")])
+    submit = SubmitField(label="充值")
+
+class SearchConsume(FlaskForm):
+    userid = StringField(label="UID", validators=[DataRequired("请输入UID")])
+    submit = SubmitField(label="充值")
+
+class SearchAllShops(FlaskForm):
+    submit = SubmitField(label="查询")
+
+class SearchList(FlaskForm):
+    shopid = StringField(label="店铺ID", validators=[DataRequired("请输入店铺ID")])
+    submit = SubmitField(label="查询菜单")
+
+class Consuming(FlaskForm):
+    userid = StringField(label="UID", validators=[DataRequired("请输入UID")])
+    foodid = StringField(label="食物序号", validators=[DataRequired("请输入食物序号")])
+    date = StringField(label="日期", validators=[DataRequired("请输入日期")])
+    submit = SubmitField(label="确定")
+
 
 @app.route('/')
 @app.route('/home')

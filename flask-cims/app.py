@@ -109,6 +109,14 @@ class AddGoods(FlaskForm):
     goodsnum = StringField(label="货物数量", validators=[DataRequired("请输入货物数量")])
     submit = SubmitField(label="添加")
 
+class SearchAllCon(FlaskForm):
+    submit = SubmitField(label="查询")
+
+class SearchAllShop(FlaskForm):
+    submit = SubmitField(label="查询")
+
+class SearchWare(FlaskForm):
+    submit = SubmitField(label="查询")
 
 @app.route('/')
 @app.route('/home')

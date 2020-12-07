@@ -287,7 +287,7 @@ def create_consumer():
         year=datetime.now().year,
         message='Your application description page.',
         form1=form1,
-        con = myData
+        stu = myData
     )
 @app.route('/create_shop', methods=["get", "post"])
 def create_shop():
@@ -372,24 +372,28 @@ def invest():
     form1 = Invest()
     form2 = SearchConsume()
     if form1.validate_on_submit():
-        card = Card(son=form1.userid.data,money=form1.recharge_amount.data)
+        card = Card(sno=form1.userid.data,money=form1.recharge_amount.data)
         db.session.add(card)
         db.session.commit()
         return render_template(
             'Invest.html',
             title='Comsumers',
             year=datetime.now().year,
-            message='Your application description page.'
+            message='Your application description page.',
+            form1=form1,
+            form2=form2
         )
     if form2.validate_on_submit():
         userid = form2.userid.data
-        records = session.query(Cost).get(userid)
+        records = Cost.query.filter(Cost.sno==userid).first()
         return render_template(
             'Invest.html',
             title='Comsumers',
             year=datetime.now().year,
             message='Your application description page.',
-            records=records
+            records=records,
+            form1=form1,
+            form2=form2,
         )
     """Renders the comsumers page."""
     return render_template(
@@ -408,13 +412,14 @@ def mock_consume():
     myData = Shop.query.all()
     if form2.validate_on_submit():
         shopid = form2.shopid.data
-        list = Food.query.get(shopid=shopid)
+        list = Food.query.filter(Food.shopno==shopid)
         return render_template(
             'mock_consume.html',
             title='Canteen',
             year=datetime.now().year,
             message='Your application description page.',
             form4=form2,
+            form5=form3,
             shop=myData,
             list=list
         )

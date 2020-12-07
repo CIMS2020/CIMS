@@ -60,9 +60,9 @@
                 <br />
                 <br />
                 <ul class="nav nav-tabs nav-stacked"  >
-                    <li id="li1" style="background-color: #87CEFF"><a href="create_consumer">创建消费者</a></li>
+                    <li id="li1" style="background-color: azure"><a href="create_consumer">创建消费者</a></li>
                     <li id="li3" style="background-color: azure"><a href="create_shop">创建店铺</a></li>
-                    <li id="li5" style="background-color: azure"><a href="ware_manage">仓库管理</a></li>
+                    <li id="li5" style="background-color: #87CEFF"><a href="ware_manage">仓库管理</a></li>
                 </ul>
             </div>
 
@@ -93,18 +93,61 @@
                 </div>
                 <div>
                     <h2>仓库</h2>
-                     <div>
-                         {% if Goods%}
-                             {% for item in Goods %}
-                                 {{ item.goodsname }}//{{ item.amount }}<br>
-                             {% endfor %}
-                         {% else %}
-                             <h3>仓库还没有物资</h3>Goods
-                         {% endif %}
-                </div>
+
+                  <div class="container-fluid">
+	                <div class="row-fluid">
+		            <div class="span12">
+			        <table class="table">
+				<thead>
+					<tr>
+						<th>
+							物资名称
+						</th>
+						<th>
+							数量
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+                {% if Goods %}
+                    {% for item in Goods %}
+                         <tr>
+						<td>
+							{{ item.goodsname }}
+						</td>
+						<td>
+							{{ item.amount }}
+						</td>
+
+					</tr>
+                    {% endfor %}
+                {% else %}
+                    <h3>仓库还没有物资</h3>
+                {% endif %}
+			        <tr>
+						<td>
+							1
+						</td>
+						<td>
+							TB - Monthly
+						</td>
+						<td>
+							01/04/2012
+						</td>
+						<td>
+							Default
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
                 </div>
             </div>
-    </div>
+
+   </div>
+
 
 
 

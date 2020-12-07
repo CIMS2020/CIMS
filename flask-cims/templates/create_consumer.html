@@ -95,15 +95,67 @@
 
          <div>
             <h1>消费者列表</h1>
-                <div>
+         <div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span12">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>
+							ID
+						</th>
+						<th>
+							用户名
+						</th>
+						<th>
+							年龄
+						</th>
+						<th>
+							电话
+						</th>
+					</tr>
+				</thead>
+				<tbody>
                 {% if stu %}
                     {% for item in stu %}
-                       {{ item.sno }} //{{ item.sname }}//{{ item.sage }}//{{ item.tel }}<br>
+                         <tr>
+						<td>
+							{{ item.sno }}
+						</td>
+						<td>
+							{{ item.sname }}
+						</td>
+						<td>
+							{{ item.sage }}
+						</td>
+						<td>
+							{{ item.tel }}
+						</td>
+					</tr>
                     {% endfor %}
                 {% else %}
                     <h3>还没有创建消费者</h3>
                 {% endif %}
-                </div>
+			        <tr>
+						<td>
+							1
+						</td>
+						<td>
+							TB - Monthly
+						</td>
+						<td>
+							01/04/2012
+						</td>
+						<td>
+							Default
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
         </div>
     </div>
 

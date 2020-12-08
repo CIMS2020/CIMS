@@ -614,7 +614,8 @@ def main_task():
         )
     if form3.validate_on_submit():
         shopid = form3.shopid.data
-        list = Food.query.all()
+        #list = Food.query.all()
+        list = Food.query.filter(Food.shopno == shopid)
         return render_template(
             'main_task.html',
             title='Canteen',

@@ -206,7 +206,7 @@ class Consuming(FlaskForm):
     userid = StringField(label="UID", validators=[DataRequired("请输入UID")])
     foodid = StringField(label="食物序号", validators=[DataRequired("请输入食物序号")])
     date = StringField(label="日期", validators=[DataRequired("请输入日期")])
-    shopid = StringField(label="", validators=[DataRequired("请输入日期")])
+    #shopid = StringField(label="", validators=[DataRequired("请输入日期")])
     submit = SubmitField(label="确定")
 
 
@@ -376,17 +376,17 @@ def invest():
             message='Your application description page.',
             form1=form1,
             form2=form2,
-            rest=now_money
         )
     if form2.validate_on_submit():
         userid = form2.userid.data
-        records = Cost.query.filter(Cost.sno==userid).all()
+        nowmoney = Card.query.filter(Card.sno==userid).first()
+        nowmoney = nowmoney.money
         return render_template(
             'Invest.html',
             title='Comsumers',
             year=datetime.now().year,
             message='Your application description page.',
-            records=records,
+            rest=nowmoney,
             form1=form1,
             form2=form2,
         )
@@ -430,14 +430,13 @@ def mock_consume():
             list=list
         )
     if form3.validate_on_submit():
-        #userid=form3.userid.data
-        #foodid=form3.foodid.data
-        #date=form3.date.data
-        #shopid =Food.query.filter(Food.id==foodid)
-
-        # price = shopid.price
-        # shopid = shopid.shopno
-        cost = Cost(sno='0',date='0',cost='0',shopno='0')
+        userid=form3.userid.data
+        foodid=form3.foodid.data
+        date=form3.date.data
+        shopid =Food.query.filter(Food.id==foodid).first()
+        price = shopid.price
+        shopid = shopid.shopno
+        cost = Cost(sno=userid,date=date,cost=price,shopno=shopid)
         db.session.add(cost)
         db.session.commit()
         flash("消费成功！")
@@ -449,7 +448,7 @@ def mock_consume():
             form4=form2,
             form5=form3,
             shop=myData,
-
+            price=price
         )
     return render_template(
         'mock_consume.html',
@@ -692,8 +691,8 @@ def shop():
 
 
 if __name__ == '__main__':
-    db.drop_all()
-    db.create_all()
+    # db.drop_all()
+    # db.create_all()
     url = "http://127.0.0.1:5000"
     webbrowser.open_new(url)
     app.run(debug=True)

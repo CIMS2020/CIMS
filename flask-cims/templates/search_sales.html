@@ -101,6 +101,8 @@ form1--form9
                             </div>
                         </form>
                   </div>
+
+                {% if ans %}
                       <div class="row-fluid">
 		<div class="span12">
 			<table class="table">
@@ -121,9 +123,8 @@ form1--form9
 					</tr>
 				</thead>
 				<tbody>
-                {% if ans %}
                     {% for item in ans %}
-                         <tr class="success">
+                         <tr class="warning">
 						<td>
 							{{ item.date }}
 						</td>
@@ -138,13 +139,14 @@ form1--form9
 						</td>
 					</tr>
                     {% endfor %}
-                {% else %}
-                    <h3>还没有销售记录</h3>
-                {% endif %}
+
 				</tbody>
 			</table>
 		</div>
 	</div>
+            {% else %}
+                    <h3>还没有销售记录</h3>
+                {% endif %}
 
             </div>
      </div>

@@ -109,7 +109,7 @@ form1--form5
 				<tbody>
                 {% if shop %}
                     {% for item in shop %}
-                         <tr class="success">
+                         <tr class="warning">
 						<td>
 							{{ item.shopno }}
 						</td>
@@ -149,13 +149,14 @@ form1--form5
                 </div>
                 <div>
                      <h2>菜品列表</h2>
+                {% if list %}
                         <div class="row-fluid">
 		<div class="span12">
 			<table class="table">
 				<thead>
 					<tr class="info">
 						<th>
-							店铺ID
+							菜ID
 						</th>
 						<th>
 							菜名
@@ -166,11 +167,11 @@ form1--form5
 					</tr>
 				</thead>
 				<tbody>
-                {% if list %}
+
                     {% for item in list %}
-                         <tr class="success">
+                         <tr class="warning">
 						<td>
-							{{ item.shopno }}
+							{{ item.id }}
 						</td>
 						<td>
 							{{ item.fname }}
@@ -180,13 +181,17 @@ form1--form5
 						</td>
 					</tr>
                     {% endfor %}
-                {% else %}
-                    <h3>还没有菜品</h3>
-                {% endif %}
+
 				</tbody>
 			</table>
 		</div>
 	</div>
+                {% else %}
+                    <div style="text-align: center">
+
+                    <h3>还没有菜品</h3>
+                    </div>
+                {% endif %}
                 </div>
 
                 </div>

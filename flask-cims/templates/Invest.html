@@ -122,7 +122,8 @@ form1--form5
                             </div>
                 </form>
                   </div>
-                <h2> 余额:100元</h2>
+                <h2> 余额:{{ rest }}元</h2>
+
                 <h3>数据分析:</h3>
                 <p>最高消费:20元</p>
                 <p>平均消费:15元</p>
@@ -130,6 +131,7 @@ form1--form5
               <p>总消费:200元</p>
 
               <h3>消费记录</h3>
+           {% if records %}
                <div class="container-fluid">
 	<div class="row-fluid">
 		<div class="span12">
@@ -151,9 +153,9 @@ form1--form5
 					</tr>
 				</thead>
 				<tbody>
-                {% if records %}
+
                     {% for item in records %}
-                         <tr class="success">
+                         <tr class="warning">
 						<td>
 							{{ item.date }}
 						</td>
@@ -168,14 +170,18 @@ form1--form5
 						</td>
 					</tr>
                     {% endfor %}
-                {% else %}
-                    <h3>还没有开始消费</h3>
-                {% endif %}
+
 				</tbody>
 			</table>
 		</div>
 	</div>
 </div>
+          {% else %}
+               <div style="text-align: center">
+               <h3>还没有开始消费</h3>
+               </div>
+
+           {% endif %}
           </div>
 
              </div>

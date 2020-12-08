@@ -95,6 +95,7 @@
 
          <div>
             <h1>消费者列表</h1>
+         {% if stu %}
          <div class="container-fluid">
 	<div class="row-fluid">
 		<div class="span12">
@@ -116,9 +117,9 @@
 					</tr>
 				</thead>
 				<tbody>
-                {% if stu %}
+
                     {% for item in stu %}
-                         <tr class="success">
+                         <tr class="warning">
 						<td>
 							{{ item.sno }}
 						</td>
@@ -133,15 +134,17 @@
 						</td>
 					</tr>
                     {% endfor %}
-                {% else %}
-                    <h3>还没有创建消费者</h3>
-                {% endif %}
+
 				</tbody>
 			</table>
 		</div>
 	</div>
 </div>
-
+         {% else %}
+             <div style="text-align: center">
+              <h3>还没有创建消费者</h3>
+             </div>
+         {% endif %}
         </div>
     </div>
 

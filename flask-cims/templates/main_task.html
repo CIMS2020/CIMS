@@ -86,6 +86,7 @@ form1--form9
             <h2>取材料</h2>
              <div>
                     <h3>仓库材料列表</h3>
+             {% if ans %}
                    <div class="row-fluid">
 		<div class="span12">
 			<table class="table">
@@ -100,9 +101,9 @@ form1--form9
 					</tr>
 				</thead>
 				<tbody>
-                {% if ans %}
+
                     {% for item in ans %}
-                         <tr class="success">
+                         <tr class="warning">
 						<td>
 							{{ item.goodsname }}
 						</td>
@@ -111,13 +112,17 @@ form1--form9
 						</td>
 					</tr>
                     {% endfor %}
-                {% else %}
-                    <h3>仓库还没有物品</h3>
-                {% endif %}
+
 				</tbody>
 			</table>
 		</div>
 	</div>
+             {% else %}
+                 <div style="text-align: center">
+                 <h3>仓库还没有物品</h3>
+                 </div>
+
+                {% endif %}
                 </div>
              <div>
                   <form method="post">
@@ -181,6 +186,7 @@ form1--form9
                             </div>
                         </form>
          </div>
+    {% if list %}
          <div class="row-fluid">
 		<div class="span12">
 			<table class="table">
@@ -198,7 +204,7 @@ form1--form9
 					</tr>
 				</thead>
 				<tbody>
-                {% if list %}
+
                     {% for item in list %}
                          <tr class="success">
 						<td>
@@ -212,14 +218,14 @@ form1--form9
 						</td>
 					</tr>
                     {% endfor %}
-                {% else %}
-                    <h3>仓库还没有物品</h3>
-                {% endif %}
+
 				</tbody>
 			</table>
 		</div>
 	</div>
-
+ {% else %}
+                    <h3>仓库还没有物品</h3>
+                {% endif %}
     </div>
     </div>
 

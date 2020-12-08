@@ -111,6 +111,7 @@ form1---form6
             </div>
             <div>
             <h1>店铺列表</h1>
+             {% if shop %}
              <div class="container-fluid">
 	<div class="row-fluid">
 		<div class="span12">
@@ -129,9 +130,9 @@ form1---form6
 					</tr>
 				</thead>
 				<tbody>
-                {% if shop %}
+
                     {% for item in shop %}
-                         <tr>
+                         <tr class="warning">
 						<td>
 							{{ item.shopname }}
 						</td>
@@ -144,15 +145,16 @@ form1---form6
 
 					</tr>
                     {% endfor %}
-                {% else %}
-                    <h3>还没有创建店铺</h3>
-                {% endif %}
 				</tbody>
 			</table>
 		</div>
 	</div>
 </div>
-
+             {% else %}
+                 <div style="text-align: center;">
+                                     <h3>还没有创建店铺</h3>
+                 </div>
+                {% endif %}
             </div>    </div>
 {% endblock %}
 

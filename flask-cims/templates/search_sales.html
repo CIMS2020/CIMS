@@ -101,15 +101,51 @@ form1--form9
                             </div>
                         </form>
                   </div>
+                      <div class="row-fluid">
+		<div class="span12">
+			<table class="table">
+				<thead>
+					<tr class="info">
+						<th>
+							日期
+						</th>
+						<th>
+							店铺ID
+						</th>
+						<th>
+							消费者ID
+						</th>
+                        <th>
+							金额
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+                {% if ans %}
+                    {% for item in ans %}
+                         <tr class="success">
+						<td>
+							{{ item.date }}
+						</td>
+						<td>
+							{{ item.rno }}
+						</td>
+						<td>
+							{{ item.sno }}
+						</td>
+                         <td>
+							{{ item.cost }}
+						</td>
+					</tr>
+                    {% endfor %}
+                {% else %}
+                    <h3>还没有销售记录</h3>
+                {% endif %}
+				</tbody>
+			</table>
+		</div>
+	</div>
 
-                         <ul>
-                             <li>流水记录1</li>
-                              <li>流水记录1</li>
-                              <li>流水记录1</li>
-                              <li>流水记录1</li>
-                              <li>流水记录1</li>
-                              <li>流水记录1</li>
-                         </ul>
             </div>
      </div>
 

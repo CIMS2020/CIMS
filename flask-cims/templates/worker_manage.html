@@ -131,7 +131,54 @@ form1--form9
                   </div>
                 <div>
                     <h3>查询结果</h3>
-                    <p>员工信息:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
+                       <div class="row-fluid">
+		<div class="span12">
+			<table class="table">
+				<thead>
+					<tr class="info">
+						<th>
+							员工ID
+						</th>
+						<th>
+							姓名
+						</th>
+						<th>
+							工资
+						</th>
+                        <th>
+							手机
+						</th>
+                         <th>
+							所在店铺ID
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+                {% if ans %}
+                         <tr class="success">
+						<td>
+							{{ ans.wno }}
+						</td>
+						<td>
+							{{ ans.wname }}
+						</td>
+						<td>
+							{{ ans.sal }}
+						</td>
+                         <td>
+							{{ ans.wtel }}
+						</td>
+                         <td>
+							{{ ans.shopno }}
+						</td>
+					</tr>
+                {% else %}
+                    <h3>没有该员工</h3>
+                {% endif %}
+				</tbody>
+			</table>
+		</div>
+	</div>
                 </div>
              </div>
             <div>

@@ -51,7 +51,7 @@ class Goods(db.Model):
 class Food(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     fname = db.Column(db.String(30))
-    price = db.Column(db.FLOAT)
+    price = db.Column(db.String(30))
     shopno = db.Column(db.String(30))
 
 class Worker(db.Model):
@@ -74,7 +74,7 @@ class Cost(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     sno = db.Column(db.String(30))
     date = db.Column(db.String(30))
-    cost = db.Column(db.FLOAT)
+    cost = db.Column(db.String(30))
     shopno = db.Column(db.String(30))
 
 class Card(db.Model):
@@ -206,7 +206,7 @@ class Consuming(FlaskForm):
     userid = StringField(label="UID", validators=[DataRequired("请输入UID")])
     foodid = StringField(label="食物序号", validators=[DataRequired("请输入食物序号")])
     date = StringField(label="日期", validators=[DataRequired("请输入日期")])
-    shopid = StringField(label="日期", validators=[DataRequired("请输入日期")])
+    shopid = StringField(label="", validators=[DataRequired("请输入日期")])
     submit = SubmitField(label="确定")
 
 
@@ -317,23 +317,13 @@ def create_shop():
 def ware_manage():
     form5 = AddGoods()
     form6 = SearchWare()
+    myData = Goods.query.all()
     if form5.validate_on_submit():
         goods = Goods(goodsname=form5.goodsname.data,amount=form5.goodsnum.data)
         db.session.add(goods)
         db.session.commit()
         flash("添加食材成功！")
         return redirect(url_for('ware_manage'))
-    if form6.validate_on_submit():
-        myData = Goods.query.all()
-        return render_template(
-            'ware_manage.html',
-            title='Canteen',
-            year=datetime.now().year,
-            message='Your application description page.',
-            form5=form5,
-            form6=form6,
-            goods=myData
-        )
     return render_template(
         'ware_manage.html',
         title='Canteen',
@@ -341,6 +331,7 @@ def ware_manage():
         message='Your application description page.',
         form5=form5,
         form6=form6,
+        Goods=myData
     )
 
 
@@ -372,8 +363,11 @@ def invest():
     form1 = Invest()
     form2 = SearchConsume()
     if form1.validate_on_submit():
-        card = Card(sno=form1.userid.data,money=form1.recharge_amount.data)
-        db.session.add(card)
+        add_money = form1.recharge_amount.data
+        card = Card.query.filter(Card.sno ==form1.userid.data).first()
+        now_money = int(card.money)
+        now_money +=int(add_money)
+        card.money =str(now_money)
         db.session.commit()
         return render_template(
             'Invest.html',
@@ -381,11 +375,12 @@ def invest():
             year=datetime.now().year,
             message='Your application description page.',
             form1=form1,
-            form2=form2
+            form2=form2,
+            rest=now_money
         )
     if form2.validate_on_submit():
         userid = form2.userid.data
-        records = Cost.query.filter(Cost.sno==userid).first()
+        records = Cost.query.filter(Cost.sno==userid).all()
         return render_template(
             'Invest.html',
             title='Comsumers',
@@ -404,7 +399,18 @@ def invest():
         form1=form1,
         form2=form2,
     )
-
+'''class Food(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    fname = db.Column(db.String(30))
+    price = db.Column(db.String(30))
+    shopno = db.Column(db.String(30))
+    
+class Cost(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    sno = db.Column(db.String(30))
+    date = db.Column(db.String(30))
+    cost = db.Column(db.String(30))
+    shopno = db.Column(db.String(30))'''
 @app.route('/mock_consume',methods=["get", "post"])
 def mock_consume():
     form2 = SearchList()
@@ -424,17 +430,15 @@ def mock_consume():
             list=list
         )
     if form3.validate_on_submit():
-        userid=form3.userid.data
-        foodid=form3.userid.data
-        date=form3.date.data
-        shopid =Food.query.get(foodid)
-        price = shopid['price']
-        shopid = shopid['shopno']
-        cost = Cost(sno=userid,date=date,cost=price,shopno=shopid)
+        #userid=form3.userid.data
+        #foodid=form3.foodid.data
+        #date=form3.date.data
+        #shopid =Food.query.filter(Food.id==foodid)
+
+        # price = shopid.price
+        # shopid = shopid.shopno
+        cost = Cost(sno='0',date='0',cost='0',shopno='0')
         db.session.add(cost)
-        db.session.commit()
-        now = Card.query.get(sno=userid)
-        now.money-=price
         db.session.commit()
         flash("消费成功！")
         return render_template(
@@ -445,7 +449,7 @@ def mock_consume():
             form4=form2,
             form5=form3,
             shop=myData,
-            price=price
+
         )
     return render_template(
         'mock_consume.html',
@@ -580,8 +584,8 @@ def main_task():
         shopid = form1.shopid.data
         goodsname = form1.goodsname.data
         goodsnum = form1.goodsnum.data
-        ware = Goods.query.filter(Goods.goodsname==goodsname)
-        ware.amount -= goodsnum
+        ware = Goods.query.filter(Goods.goodsname==goodsname).first()
+        ware.amount -= int(goodsnum)
         db.session.commit()
         flash("取出成功！")
         return render_template(

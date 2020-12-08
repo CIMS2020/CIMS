@@ -94,6 +94,7 @@
                 <div>
                     <h2>仓库</h2>
 
+                {% if Goods %}
                   <div class="container-fluid">
 	                <div class="row-fluid">
 		            <div class="span12">
@@ -109,7 +110,6 @@
 					</tr>
 				</thead>
 				<tbody>
-                {% if Goods %}
                     {% for item in Goods %}
                          <tr class="warning">
 						<td>
@@ -121,14 +121,15 @@
 
 					</tr>
                     {% endfor %}
-                {% else %}
-                    <h3>仓库还没有物资</h3>
-                {% endif %}
+
 				</tbody>
 			</table>
 		</div>
 	</div>
 </div>
+                 {% else %}
+                    <h3>仓库还没有物资</h3>
+                {% endif %}
                 </div>
             </div>
 

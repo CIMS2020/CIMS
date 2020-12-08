@@ -130,6 +130,7 @@ form1--form9
                   </div>
                 <div>
                     <h3>查询结果</h3>
+                    {% if ans %}
                        <div class="row-fluid">
 		<div class="span12">
 			<table class="table">
@@ -153,7 +154,7 @@ form1--form9
 					</tr>
 				</thead>
 				<tbody>
-                {% if ans %}
+
                          <tr class="warning">
 						<td>
 							{{ ans.wno }}
@@ -171,13 +172,14 @@ form1--form9
 							{{ ans.shopno }}
 						</td>
 					</tr>
-                {% else %}
-                    <h3>没有该员工</h3>
-                {% endif %}
 				</tbody>
 			</table>
 		</div>
 	</div>
+                                    {% else %}
+                    <h3>没有该员工</h3>
+                {% endif %}
+
                 </div>
              </div>
             <div>

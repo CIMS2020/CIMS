@@ -149,16 +149,16 @@ class AddWorker(FlaskForm):
     workerid = StringField(label="员工ID", validators=[DataRequired("请输入员工ID")])
     workertel = StringField(label="员工电话", validators=[DataRequired("请输入员工电话")])
     workersal = StringField(label="员工工资", validators=[DataRequired("请输入员工工资")])
-    submit = SubmitField(label="添加")
+    submit2 = SubmitField(label="添加")
 
 class SearchWorker(FlaskForm):
     workerid = StringField(label="员工ID", validators=[DataRequired("请输入员工ID")])
-    submit = SubmitField(label="查询")
+    submit3 = SubmitField(label="查询")
 
 class DeleteWorker(FlaskForm):
-    shopid = StringField(label="店铺ID", validators=[DataRequired("请输入店铺ID")])
-    workerid = StringField(label="员工ID", validators=[DataRequired("请输入员工ID")])
-    submit = SubmitField(label="删除")
+    shopid4 = StringField(label="店铺ID", validators=[DataRequired("请输入店铺ID")])
+    workerid4 = StringField(label="员工ID", validators=[DataRequired("请输入员工ID")])
+    submit4 = SubmitField(label="删除")
 
 class UpdateWorker(FlaskForm):
     shopid = StringField(label="店铺ID", validators=[DataRequired("请输入店铺ID")])
@@ -497,17 +497,17 @@ def search_sales():
     shopno = db.Column(db.String(30))'''
 @app.route('/worker_manage',methods=["get", "post"])
 def worker_manage():
-    form1 = AddWorker()
-    form2 = SearchWorker()
-    form3 = DeleteWorker()
-    form4 = UpdateWorker()
-    if form1.validate_on_submit():
-        shopid = form1.shopid.data
-        workername = form1.workername.data
-        workid = form1.workername.data
-        workertel = form1.workertel.data
-        workersal = form1.workersal.data
+    form2 = AddWorker()
+    form3 = SearchWorker()
+    form4 = DeleteWorker()
+    if form2.validate_on_submit():
+        shopid = form2.shopid.data
+        workername = form2.workername.data
+        workid = form2.workerid.data
+        workertel = form2.workertel.data
+        workersal = form2.workersal.data
         worker = Worker(wno=workid,sal=workersal,shopno=shopid,wname=workername,wtel=workertel)
+        # print(shopid,workername,workertel,workersal)
         db.session.add(worker)
         db.session.commit()
         flash("添加员工成功！")
@@ -516,30 +516,30 @@ def worker_manage():
             title='Canteen',
             year=datetime.now().year,
             message='Your application description page.',
-            form2=form1,
-            form3=form2,
-            form4=form3,
-            form5=form4,
+            form2=form2,
+            form3=form3,
+            form4=form4,
         )
-    if form2.validate_on_submit():
-        workid = form2.workerid.data
-        ans = Worker.query.filter(Worker.wno==workid)
+    if form3.validate_on_submit():
+        workid = form3.workerid.data
+        ans = Worker.query.filter(Worker.wno==workid).first()
+        # print(ans.wno)
+        flash("查询员工成功！")
         return render_template(
             'worker_manage.html',
             title='Canteen',
             year=datetime.now().year,
             message='Your application description page.',
-            form2=form1,
-            form3=form2,
-            form4=form3,
-            form5=form4,
+            form2=form2,
+            form3=form3,
+            form4=form4,
             ans=ans,
         )
-    if form3.validate_on_submit():
-        shopid = form3.shopid.data
-        workerid = form3.workerid.data
-        ans = Worker.query.filter(Worker.shopno==shopid and Worker.wno==workerid)
-        db.session.delete(ans)
+    if form4.validate_on_submit():
+        shopid = form4.shopid4.data
+        worker = form4.workerid4.data
+        tem = Worker.query.filter(Worker.wno==worker).first()
+        db.session.delete(tem)
         db.session.commit()
         flash("删除员工成功！")
         return render_template(
@@ -547,27 +547,20 @@ def worker_manage():
             title='Canteen',
             year=datetime.now().year,
             message='Your application description page.',
-            form2=form1,
-            form3=form2,
-            form4=form3,
-            form5=form4,
+            form2=form2,
+            form3=form3,
+            form4=form4,
         )
-    if form4.validate_on_submit():
-        shopid = form4.shopid.data
-        workername = form4.workername.data
-        workid = form4.workername.data
-        workertel = form4.workertel.data
-        workersal = form4.workersal.data
+
 
     return render_template(
         'worker_manage.html',
         title='Canteen',
         year=datetime.now().year,
         message='Your application description page.',
-        form2=form1,
-        form3=form2,
-        form4=form3,
-        form5=form4,
+        form2=form2,
+        form3=form3,
+        form4=form4,
     )
 
 

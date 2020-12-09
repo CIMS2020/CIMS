@@ -433,9 +433,9 @@ def mock_consume():
         userid=form3.userid.data
         foodid=form3.foodid.data
         date=form3.date.data
-        shopid =Food.query.filter(Food.id==foodid).first()
-        price = shopid.price
-        shopid = shopid.shopno
+        ans =Food.query.filter(Food.id==foodid).first()
+        price = ans.price
+        shopid = ans.shopno
         cost = Cost(sno=userid,date=date,cost=price,shopno=shopid)
         db.session.add(cost)
         db.session.commit()
@@ -691,8 +691,8 @@ def shop():
 
 
 if __name__ == '__main__':
-    # db.drop_all()
-    # db.create_all()
+    db.drop_all()
+    db.create_all()
     url = "http://127.0.0.1:5000"
     webbrowser.open_new(url)
     app.run(debug=True)

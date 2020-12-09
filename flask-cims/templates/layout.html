@@ -39,10 +39,10 @@
                 <ul class="nav navbar-nav" style="width: 85%">
                     <li style=" margin:0 20px 0 0px;"><a href="{{ url_for('home') }}">首页</a></li>
                     <li><a href="{{ url_for('create_consumer') }}">食堂管理</a></li>
-
+                    <li><a href="{{ url_for('search_sales') }}">店铺模拟</a></li>
                      <li><a href="{{ url_for('invest') }}">消费者模拟</a></li>
 
-                    <li><a href="{{ url_for('search_sales') }}">店铺模拟</a></li>
+
                     {% if user %}
                     <li style="float:right;width:auto;margin-right: 0px "><a href="#">你好!{{ user.aname }}</a></li>
                         {% else %}

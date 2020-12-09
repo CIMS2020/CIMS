@@ -433,9 +433,9 @@ def mock_consume():
         userid=form3.userid.data
         foodid=form3.foodid.data
         date=form3.date.data
-        shopid =Food.query.filter(Food.id==foodid).first()
-        price = shopid.price
-        shopid = shopid.shopno
+        ans =Food.query.filter(Food.id==foodid).first()
+        price = ans.price
+        shopid = ans.shopno
         cost = Cost(sno=userid,date=date,cost=price,shopno=shopid)
         db.session.add(cost)
         db.session.commit()

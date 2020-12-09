@@ -86,7 +86,9 @@ form1--form5
    <body>
     <div id="div1" style="display: block">
            <div>
+               <br>
                <h2>充值与账单</h2>
+               <br><hr>
                 <form method="post">
                             <div style=" flex-direction:row;width: 100% ">
                                 <div style="display:inline-block;">
@@ -105,7 +107,9 @@ form1--form5
                 </form>
            </div>
           <div>
+          <br>
               <h2>消费查询</h2>
+          <br><hr>
                <div>
                    <form method="post">
                             <div style=" flex-direction:row;width: 100% ">
@@ -123,14 +127,17 @@ form1--form5
                 </form>
                   </div>
           {% if rest %}
-                <h2> 余额:{{ rest }}元</h2>
+                <h3> 余额:{{ rest }}元</h3>
           {% endif %}
 
 
-
+<br>
+          <br>
 
            {% if records %}
-               <h3>消费记录</h3>
+               <br>
+               <h2>消费记录</h2>
+               <br><hr>
                <div class="container-fluid">
 	<div class="row-fluid">
 		<div class="span12">

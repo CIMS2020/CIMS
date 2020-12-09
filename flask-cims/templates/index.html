@@ -16,6 +16,13 @@ var s= 2*2;
         <p><a class="btn btn-info" href=" {{ url_for('create_consumer') }}">前往 &raquo;</a></p>
     </div>
 
+
+     <div class="col-md-4">
+        <h2>店铺模拟</h2>
+        <p>模拟店铺管理员的各种业务</p>
+        <p><a class="btn btn-info" href="{{ url_for('search_sales') }}">前往&raquo;</a></p>
+    </div>
+
     <div class="col-md-4">
         <h2>消费模拟</h2>
         <p>
@@ -24,11 +31,7 @@ var s= 2*2;
         <p><a class="btn btn-info" href="{{ url_for('invest') }}">前往 &raquo;</a></p>
     </div>
 
-    <div class="col-md-4">
-        <h2>店铺模拟</h2>
-        <p>模拟店铺管理员的各种业务</p>
-        <p><a class="btn btn-info" href="{{ url_for('search_sales') }}">前往&raquo;</a></p>
-    </div>
+
 </div>
 
 {% endblock %}

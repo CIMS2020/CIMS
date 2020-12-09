@@ -84,23 +84,23 @@ form1--form9
             <div>
 <br>
                 <h2>添加员工</h2>
-                <br><hr>
+                <br><HR align=center width=300 color=#987cb9 SIZE=1>
                  <div>
                      <form method="post">
                             <div style=" flex-direction:row;width: 100% ">
                                 <div style="display:inline-block;">
-                                    {{ form2.shopid.label }}<br><br><!-- 店铺ID-->
-                                    {{ form2.workername.label }}<br><br><!-- 员工姓名-->
-                                    {{ form2.workerid.label }}<br><br><!-- 员工ID-->
-                                    {{ form2.workertel.label }}<br><br><!-- 员工手机-->
-                                    {{ form2.workersal.label }}<br><br> <!-- 员工工资-->
+                                    {{ form2.shopid2.label }}<br><br><!-- 店铺ID-->
+                                    {{ form2.workername2.label }}<br><br><!-- 员工姓名-->
+                                    {{ form2.workerid2.label }}<br><br><!-- 员工ID-->
+                                    {{ form2.workertel2.label }}<br><br><!-- 员工手机-->
+                                    {{ form2.workersal2.label }}<br><br> <!-- 员工工资-->
                                 </div>
                                 <div style="width: 20%;display:inline-block;">
-                                    {{ form2.shopid(calss_="form-control") }}<br/><br>
-                                    {{ form2.workername(calss_="form-control") }}<br/><br>
-                                    {{ form2.workerid(calss_="form-control") }}<br/><br>
-                                    {{ form2.workertel(calss_="form-control") }}<br/><br>
-                                    {{ form2.workersal(calss_="form-control") }}<br/><br>
+                                    {{ form2.shopid2(calss_="form-control") }}<br/><br>
+                                    {{ form2.workername2(calss_="form-control") }}<br/><br>
+                                    {{ form2.workerid2(calss_="form-control") }}<br/><br>
+                                    {{ form2.workertel2(calss_="form-control") }}<br/><br>
+                                    {{ form2.workersal2(calss_="form-control") }}<br/><br>
 
                                 </div>
                                 <div>
@@ -122,10 +122,10 @@ form1--form9
                          <form method="post">
                             <div style=" flex-direction:row;width: 100% ">
                                 <div style="display:inline-block;">
-                                    {{ form3.workerid.label }}<br><br><!-- 员工ID-->
+                                    {{ form3.workerid3.label }}<br><br><!-- 员工ID-->
                                 </div>
                                 <div style="width: 20%;display:inline-block;">
-                                    {{ form3.workerid(calss_="form-control") }}<br/><br>
+                                    {{ form3.workerid3(calss_="form-control") }}<br/><br>
                                 </div>
                                 <div>
                                     {{ form3.submit3(class_="btn btn-default") }}
@@ -190,11 +190,42 @@ form1--form9
                 </div>
              </div>
      <br>
+    <div>
+                 <br>
+                <h2>修改员工信息</h2>
+                 <br>
+        <HR align=center width=300 color=#987cb9 SIZE=1>
+                  <div>
+                      <form method="post">
+                            <div style=" flex-direction:row;width: 100% ">
+                                <div style="display:inline-block;">
+                                    {{ form5.shopid5.label }}<br><br><!-- 店铺ID-->
+                                    {{ form5.workerid5.label }}<br><br><!-- id-->
+                                    {{ form5.workername5.label }}<br><br><!-- 姓名-->
+                                    {{ form5.workertel5.label }}<br><br><!-- 手机-->
+                                    {{ form5.workersal5.label }}<br><br> <!-- 工资-->
+                                </div>
+                                <div style="width: 20%;display:inline-block;">
+                                    {{ form5.shopid(calss_="form-control") }}<br/><br>
+                                    {{ form5.workerid(calss_="form-control") }}<br/><br>
+                                    {{ form5.workername(calss_="form-control") }}<br/><br>
+                                    {{ form5.workertel(calss_="form-control") }}<br/><br>
+                                    {{ form5.workersal(calss_="form-control") }}<br/><br>
+                                </div>
+                                <div>
+                                    {{ form5.submit(class_="btn btn-default") }}
+                                    <!-- 修改-->
+                                </div>
+                            </div>
+                     </form>
+                  </div>
+            </div>
     <br>
     <br>
             <div><br>
                 <h2>删除员工</h2>
                 <br>
+                <HR align=center width=300 color=#987cb9 SIZE=1>
                 <div>
                       <form method="post">
                             <div style=" flex-direction:row;width: 100% ">
@@ -217,7 +248,6 @@ form1--form9
      <br>
     <br>
     <br>
-
     </div>
 
 

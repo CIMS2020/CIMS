@@ -69,7 +69,6 @@ class stu(db.Model):
     sage = db.Column(db.String(30))
     tel = db.Column(db.String(30))
 
-
 class Cost(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     sno = db.Column(db.String(30))
@@ -141,7 +140,7 @@ class SearchWare(FlaskForm):
 class DailySearch(FlaskForm):
     shopid = StringField(label="店铺ID", validators=[DataRequired("请输入店铺ID")])
     date = StringField(label="日期", validators=[DataRequired("请选择日期")])
-    submit = SubmitField(label="添加")
+    submit = SubmitField(label="查询")
 
 class AddWorker(FlaskForm):
     shopid = StringField(label="店铺ID", validators=[DataRequired("请输入店铺ID")])
@@ -369,6 +368,7 @@ def invest():
         now_money +=int(add_money)
         card.money =str(now_money)
         db.session.commit()
+        flash("充值成功！")
         return render_template(
             'Invest.html',
             title='Comsumers',
@@ -468,16 +468,16 @@ def mock_consume():
 @app.route('/search_sales',methods=["get", "post"])
 def search_sales():
     form1 = DailySearch()
-    if(form1.validate_on_submit()):
+    if form1.validate_on_submit():
         shopid = form1.shopid.data
         date = form1.date.data
-        ans = Cost.query.filter(Cost.date==date and Cost.shopno==shopid)
+        ans = Cost.query.filter( Cost.shopno==shopid).all()
         return render_template(
             'search_sales.html',
             title='Canteen',
             year=datetime.now().year,
             message='Your application description page.',
-            from1=form1,
+            form1=form1,
             ans=ans
         )
     return render_template(
@@ -500,6 +500,7 @@ def worker_manage():
     form2 = AddWorker()
     form3 = SearchWorker()
     form4 = DeleteWorker()
+    form2.workerid.data='50'
     if form2.validate_on_submit():
         shopid = form2.shopid.data
         workername = form2.workername.data
@@ -684,8 +685,8 @@ def shop():
 
 
 if __name__ == '__main__':
-    db.drop_all()
-    db.create_all()
+    # db.drop_all()
+    # db.create_all()
     url = "http://127.0.0.1:5000"
     webbrowser.open_new(url)
     app.run(debug=True)

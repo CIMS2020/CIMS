@@ -144,15 +144,15 @@ class DailySearch(FlaskForm):
     submit = SubmitField(label="添加")
 
 class AddWorker(FlaskForm):
-    shopid = StringField(label="店铺ID", validators=[DataRequired("请输入店铺ID")])
-    workername = StringField(label="员工姓名", validators=[DataRequired("请输入员工姓名")])
-    workerid = StringField(label="员工ID", validators=[DataRequired("请输入员工ID")])
-    workertel = StringField(label="员工电话", validators=[DataRequired("请输入员工电话")])
-    workersal = StringField(label="员工工资", validators=[DataRequired("请输入员工工资")])
+    shopid2 = StringField(label="店铺ID", validators=[DataRequired("请输入店铺ID")])
+    workername2 = StringField(label="员工姓名", validators=[DataRequired("请输入员工姓名")])
+    workerid2 = StringField(label="员工ID", validators=[DataRequired("请输入员工ID")])
+    workertel2 = StringField(label="员工电话", validators=[DataRequired("请输入员工电话")])
+    workersal2 = StringField(label="员工工资", validators=[DataRequired("请输入员工工资")])
     submit2 = SubmitField(label="添加")
 
 class SearchWorker(FlaskForm):
-    workerid = StringField(label="员工ID", validators=[DataRequired("请输入员工ID")])
+    workerid3 = StringField(label="员工ID", validators=[DataRequired("请输入员工ID")])
     submit3 = SubmitField(label="查询")
 
 class DeleteWorker(FlaskForm):
@@ -161,12 +161,12 @@ class DeleteWorker(FlaskForm):
     submit4 = SubmitField(label="删除")
 
 class UpdateWorker(FlaskForm):
-    shopid = StringField(label="店铺ID", validators=[DataRequired("请输入店铺ID")])
-    workerid = StringField(label="员工ID", validators=[DataRequired("请输入员工ID")])
-    workername = StringField(label="员工姓名", validators=[DataRequired("请输入员工姓名")])
-    workertel = StringField(label="员工电话", validators=[DataRequired("请输入员工电话")])
-    workersal = StringField(label="员工工资", validators=[DataRequired("请输入员工工资")])
-    submit = SubmitField(label="添加")
+    shopid5 = StringField(label="店铺ID", validators=[DataRequired("请输入店铺ID")])
+    workerid5 = StringField(label="员工ID", validators=[DataRequired("请输入员工ID")])
+    workername5 = StringField(label="员工姓名", validators=[DataRequired("请输入员工姓名")])
+    workertel5 = StringField(label="员工电话", validators=[DataRequired("请输入员工电话")])
+    workersal5 = StringField(label="员工工资", validators=[DataRequired("请输入员工工资")])
+    submit5 = SubmitField(label="添加")
 
 class GetStuff(FlaskForm):
     shopid = StringField(label="店铺ID", validators=[DataRequired("请输入店铺ID")])
@@ -501,11 +501,11 @@ def worker_manage():
     form3 = SearchWorker()
     form4 = DeleteWorker()
     if form2.validate_on_submit():
-        shopid = form2.shopid.data
-        workername = form2.workername.data
-        workid = form2.workerid.data
-        workertel = form2.workertel.data
-        workersal = form2.workersal.data
+        shopid = form2.shopid2.data
+        workername = form2.workername2.data
+        workid = form2.workerid2.data
+        workertel = form2.workertel2.data
+        workersal = form2.workersal2.data
         worker = Worker(wno=workid,sal=workersal,shopno=shopid,wname=workername,wtel=workertel)
         # print(shopid,workername,workertel,workersal)
         db.session.add(worker)
@@ -521,7 +521,7 @@ def worker_manage():
             form4=form4,
         )
     if form3.validate_on_submit():
-        workid = form3.workerid.data
+        workid = form3.workerid3.data
         ans = Worker.query.filter(Worker.wno==workid).first()
         # print(ans.wno)
         flash("查询员工成功！")

@@ -135,10 +135,11 @@ form1--form9
                         </form>
                   </div>
                 <div>
-                <br>
+
+                    {% if ans %}
+                        <br>
                     <h3>查询结果</h3>
                 <br>
-                    {% if ans %}
                        <div class="row-fluid">
 		<div class="span12">
 			<table class="table">
